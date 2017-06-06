@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_time"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="1dp"
+    android:paddingLeft="1dp"
+    android:paddingRight="1dp"
+    android:paddingTop="1dp"
+    tools:context="com.example.mypc.timetable.TimeActivity">
+
+    <TableLayout
+        android:id="@+id/timetable"
+        android:layout_width="fill_parent"
+        android:layout_marginRight="0.01dp"
+        android:layout_marginLeft="0.01dp"
+        android:layout_height="320dp"
+        android:background="@android:color/white">
+
+
+        <TableRow>
+            <TextView
+                android:textColor="#ff0000ff"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="1.5"
+                android:layout_height="50dp"
+                android:background="#ff0000ff"
+                android:text="" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:background="#ff0000ff"
+                android:text="월" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:background="#ff0000ff"
+                android:text="화" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:background="#ff0000ff"
+                android:text="수" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:background="#ff0000ff"
+                android:text="목" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:background="#ff0000ff"
+                android:text="금" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:background="#ff0000ff"
+                android:text="토" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:background="#ff0000ff"
+                android:text="일" />
+
+
+
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="1.5"
+                android:layout_height="90dp"
+                android:background="#ff0000ff"
+                android:text="오전" />
+            <TextView
+                android:textColor="@android:color/black"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText1" />
+
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:id="@+id/TableText2" />
+
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText3" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText4" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText5" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText6" />
+            <TextView
+                android:textColor="@android:color/black"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText7" />
+
+
+
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="1.5"
+                android:layout_height="90dp"
+                android:background="#ff0000ff"
+                android:text="오후" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText8" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText9" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText10" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText11" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText12" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText13" />
+            <TextView
+                android:textColor="@android:color/black"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText14" />
+
+
+
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="1.5"
+                android:layout_height="90dp"
+                android:background="#ff0000ff"
+                android:text="저녁" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText15" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText16" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText17" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText18" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText19" />
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText20" />
+            <TextView
+                android:textColor="@android:color/black"
+                android:layout_margin="0.3dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_weight="2"
+                android:layout_height="90dp"
+                android:background="@drawable/shape"
+                android:text=""
+                android:id="@+id/TableText21" />
+
+
+
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:text="약속시간:"
+        android:layout_alignLeft="@+id/timetable"
+        android:layout_alignStart="@+id/timetable"
+        android:id="@+id/textTime"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="40dp" />
+
+    <TextView
+        android:text="약속장소:"
+        android:layout_height="35dp"
+        android:id="@+id/textView3"
+        android:layout_width="100dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/textTime"
+        android:layout_alignLeft="@+id/textTime"
+        android:layout_alignStart="@+id/textTime" />
+
+    <TextView
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/textTime"
+        android:layout_toEndOf="@+id/textTime"
+        android:id="@+id/textViewTimeOk"
+        android:layout_width="150dp"
+        android:gravity="center_vertical|center_horizontal" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3"
+        android:id="@+id/textViewPlaceOk"
+        android:gravity="center_vertical|center_horizontal" />
+
+    <Button
+        android:text="시간결정"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TimeSelectButton"
+        android:layout_above="@+id/textViewTimeOk"
+        android:layout_toLeftOf="@+id/textViewTimeOk"
+        android:layout_toStartOf="@+id/textViewTimeOk"
+        android:layout_marginBottom="14dp" />
+
+    <Button
+        android:text="장소결정"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="52dp"
+        android:layout_marginEnd="52dp"
+        android:id="@+id/PlaceSelectButton"
+        android:layout_alignBaseline="@+id/TimeSelectButton"
+        android:layout_alignBottom="@+id/TimeSelectButton"
+        android:layout_alignRight="@+id/timetable"
+        android:layout_alignEnd="@+id/timetable" />
+
+
+</RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="#515050"
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:contentPadding="5dp">
+
+        <Button
+            android:id="@+id/btn_enter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:background="#7b91b5"
+            android:text="enter"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/roomName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="roomName"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/managerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            android:text="managerName"
+            android:textSize="15sp" />
+
+
+    </android.support.v7.widget.CardView>
+
+
+</FrameLayout>

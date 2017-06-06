@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TeamApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open_drawer">Open the DrawerLayout</string>
+    <string name="close_drawer">Close the DrawerLayout</string>
+    <string name="title_activity_main">MainActivity</string>
+</resources>

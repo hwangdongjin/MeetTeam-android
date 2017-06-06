@@ -1,0 +1,113 @@
+package com.example.inyoung.teamapp;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.example.inyoung.teamapp.adapter.MainPagerAdapter;
+
+public class ViewPagerActivity extends AppCompatActivity {
+
+    private ViewPager mainViewPagerActivity;
+    private TabLayout tabs;
+    private MainPagerAdapter mainPagerAdapter;
+    private Toolbar toolbar;
+    private AlertDialog.Builder dlg;
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_pager);
+        initViewPaging();
+        initToolBar();
+    }
+
+    private void initToolBar() {
+        toolbar =(Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("CADI");
+        toolbar.setTitleMarginStart(30);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.op_bookmark:
+                Toast.makeText(ViewPagerActivity.this,"즐겨찾기", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.op_time:
+                Toast.makeText(ViewPagerActivity.this,"최근", Toast.LENGTH_SHORT).show();
+                break;
+
+
+
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.option_menu_items, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        return super.onPrepareOptionsMenu(menu);
+//    }
+
+
+
+    private void initViewPaging(){
+        mainViewPagerActivity = (ViewPager)findViewById(R.id.mainViewPager);
+        tabs = (TabLayout)findViewById(R.id.tabs);
+        tabs.addTab(tabs.newTab().setText("그룹").setIcon(android.R.drawable.ic_dialog_info));
+        tabs.addTab(tabs.newTab().setText("모임"));
+        tabs.addTab(tabs.newTab().setText("진행률"));
+        tabs.addTab(tabs.newTab().setText("설정"));
+        tabs.setSelectedTabIndicatorColor(Color.BLACK);
+
+        mainViewPagerActivity.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
+
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mainViewPagerActivity.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+        initAdapter();
+    }
+
+    private void initAdapter() {
+        mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tabs.getTabCount());
+        mainViewPagerActivity.setAdapter(mainPagerAdapter);
+
+    }
+
+}
