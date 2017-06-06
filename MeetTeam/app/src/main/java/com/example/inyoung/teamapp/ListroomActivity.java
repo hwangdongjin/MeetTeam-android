@@ -43,7 +43,8 @@ public class ListroomActivity extends AppCompatActivity {
     private RecyclerView chatView;
     private Retrofit retrofit;
     //public ArrayList<String> listRoomName,listRoomCheif;
-    private ArrayList<RoomDTO> chatList;
+    private ArrayList<String> chatList;
+    private RoomDTO roomDTO;
     private RoomRecyclerViewAdapter roAdapter;
     private RecyclerView.LayoutManager manager;
     private Button btnAdd;
@@ -56,10 +57,11 @@ public class ListroomActivity extends AppCompatActivity {
     private NetworkService networkService;
     private ApplicationController application;
     int number =0;
-    JSONArray jsonArray;
-    JSONObject jsonObject;
+    public JSONArray jsonArray;
+    public JSONObject jsonObject;
     SharedPreferences sessDB;
-    String Room;
+    public String RoomName;
+    public String cheifName;
 
 
 
@@ -78,7 +80,7 @@ public class ListroomActivity extends AppCompatActivity {
 
     }
 
-    private void initRecyclerView(View view) {
+    private void initRecyclerView(View view)  {
         application = ApplicationController.getInstance();
         application.buildNetworkService("52.78.39.253", 7530);
         networkService = ApplicationController.getInstance().getNetworkService();
@@ -103,28 +105,32 @@ public class ListroomActivity extends AppCompatActivity {
                         //jsonObject = new JSONObject(response.body().string());
                         //Room=jsonObject.get("name").toString();
                         jsonArray= new JSONArray(response.body().string());
-
                         //listRoomName = new ArrayList<>();
                         //listRoomCheif = new ArrayList<>();
-                        chatList = new ArrayList<>();
-
-
-
 
                         //listRoomCheif= new ArrayList<String>();
                         //listRoomName= new ArrayList<String>();
-
-                       for (int i=0;i<jsonArray.length();i++){
+                       /* for (int i=0;i<jsonArray.length();i++){
 
                             jsonObject= jsonArray.getJSONObject(i);
-                           chatList.add(new RoomDTO(jsonObject.getString("name"),jsonObject.getString("chiefName")));
+                            //chatList.add(new RoomDTO(jsonObject.getString("name"),jsonObject.getString("chiefName")));
+
 
                            //listRoomName.add(i,jsonObject.getString("name"));
                            //listRoomCheif.add(i,jsonObject.getString("chiefName"));
                            number ++;
 
 
-                        }
+                        }*/
+                        jsonObject = jsonArray.getJSONObject(0);
+                        Log.i("Mytag","bodybody:"+jsonObject.get("name"));
+                        Log.i("Mytag","bodybody:"+jsonObject.get("chiefName"));
+                        RoomName = jsonObject.get("name").toString();
+                        cheifName= jsonObject.get("chiefName").toString();
+                        Log.i("Mytag","Roomnametag:"+RoomName);
+                        Log.i("Mytag","cheifName"+cheifName);
+
+
 
 
 
@@ -151,9 +157,13 @@ public class ListroomActivity extends AppCompatActivity {
 
         chatView = (RecyclerView) view.findViewById(R.id.chatView);
         chatView.setHasFixedSize(true);
-        iniiLayoutManager(view);
+        //roomDTO = new RoomDTO(RoomName,cheifName);
 
-        roAdapter = new RoomRecyclerViewAdapter(chatList,getApplicationContext(),number);
+        chatList = new ArrayList<>();
+        chatList.add(0,RoomName);
+        Log.i("Mytag","chatlistVI:"+chatList.get(0));
+        iniiLayoutManager(view);
+        roAdapter = new RoomRecyclerViewAdapter(chatList,getApplicationContext());
         chatView.setAdapter(roAdapter);
 
 

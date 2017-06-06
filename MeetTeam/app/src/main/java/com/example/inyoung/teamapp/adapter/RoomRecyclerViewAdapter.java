@@ -3,6 +3,7 @@ package com.example.inyoung.teamapp.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.ViewPagerActivity;
-import com.example.inyoung.teamapp.dto.RoomDTO;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
 
-    private ArrayList<RoomDTO> roomList;
+    private ArrayList<String> roomList;
     //private ArrayList<String> roomListName,roomListCheif;
     private Context context;
     private int number;
@@ -30,10 +30,10 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
 
 
 
-    public RoomRecyclerViewAdapter(ArrayList<RoomDTO> roomList,Context context,int number) {
-        this.roomList = roomList;
+    public RoomRecyclerViewAdapter(ArrayList<String> roomList,Context context) {
+        this.roomList =roomList;
         this.context = context;
-        this.number= number;
+
 
     }
 
@@ -68,12 +68,15 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
                //holder.roomName.setText(roomListName.get(0).toString());
                //holder.chiefName.setText(roomListCheif.get(0).toString());
         //Log.i("Mytag","dkdkdk:"+roomListName.get(0).toString());
-                  holder.roomName.setText(roomList.get(0).getRoom_Name());
+                  //holder.roomName.setText(roomList.get(0).getRoom_Name());
 
 
                  //holder.roomName.setText(roomList.get(0).);
 
         //holder.chiefName.setText(roomList.get(0).getChiefName());
+        holder.roomName.setText(roomList.get(position));
+        //holder.chiefName.setText(roomList.get(position).getManager_Name());
+        Log.i("Mytag","testbody:"+roomList.get(0));
                    holder.btnAdd.setOnClickListener(this);
 
 
@@ -86,8 +89,8 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
 
     @Override
     public int getItemCount() {
-        //return roomListName.size();
-        return 3;
+
+        return roomList.size();
     }
 
     @Override
