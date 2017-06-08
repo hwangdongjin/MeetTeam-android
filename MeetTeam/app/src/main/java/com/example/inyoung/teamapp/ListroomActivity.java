@@ -1,6 +1,7 @@
 package com.example.inyoung.teamapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
@@ -42,8 +44,7 @@ public class ListroomActivity extends AppCompatActivity {
 
     private RecyclerView chatView;
     private Retrofit retrofit;
-    //public ArrayList<String> listRoomName,listRoomCheif;
-    private ArrayList<String> chatList;
+    private ArrayList<RoomDTO> chatList;
     private RoomDTO roomDTO;
     private RoomRecyclerViewAdapter roAdapter;
     private RecyclerView.LayoutManager manager;
@@ -54,14 +55,17 @@ public class ListroomActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mainTogle;
     private DrawerLayout drawer;
     private NavigationView nav_view;
-    private NetworkService networkService;
-    private ApplicationController application;
-    int number =0;
+    private NetworkService networkService,networkService1;
+    private ApplicationController application,application1;
     public JSONArray jsonArray;
     public JSONObject jsonObject;
+    private AlertDialog.Builder dig;
     SharedPreferences sessDB;
-    public String RoomName;
     public String cheifName;
+    public EditText roomName,roomSubject;
+    View view;
+    LayoutInflater inflater;
+
 
 
 
@@ -72,15 +76,27 @@ public class ListroomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.i("태그","onCreate");
         LayoutInflater inflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.activity_listroom, null, false);
-        initRecyclerView(view);
+        view = inflater.inflate(R.layout.activity_listroom, null, false);
+        Intent intent2 = getIntent();
+
         initButton(view);
+        initRecyclerView(view);
         setContentView(view);
         initToolBar();
+        boolean respone=intent2.getBooleanExtra("value",false);
+        if(respone=true){
+
+
+            initRecyclerView(view);
+
+
+
+
+        }
 
     }
 
-    private void initRecyclerView(View view)  {
+    private void initRecyclerView(final View view)  {
         application = ApplicationController.getInstance();
         application.buildNetworkService("52.78.39.253", 7530);
         networkService = ApplicationController.getInstance().getNetworkService();
@@ -98,48 +114,28 @@ public class ListroomActivity extends AppCompatActivity {
                 if (response.isSuccess()){
 
                     try {
-                        //roomDTO.setRoomName(response.body().string());
-                        //roomDTO.setChiefName(response.body().string());
-                        //listRoom = new ArrayList();
-                        //listRoom.add(0,roomDTO);
-                        //jsonObject = new JSONObject(response.body().string());
-                        //Room=jsonObject.get("name").toString();
+
                         jsonArray= new JSONArray(response.body().string());
-                        //listRoomName = new ArrayList<>();
-                        //listRoomCheif = new ArrayList<>();
-
-                        //listRoomCheif= new ArrayList<String>();
-                        //listRoomName= new ArrayList<String>();
-                       /* for (int i=0;i<jsonArray.length();i++){
-
-                            jsonObject= jsonArray.getJSONObject(i);
-                            //chatList.add(new RoomDTO(jsonObject.getString("name"),jsonObject.getString("chiefName")));
+                        chatList= new ArrayList<>();
+                        for(int i=0;i<jsonArray.length();i++){
 
 
-                           //listRoomName.add(i,jsonObject.getString("name"));
-                           //listRoomCheif.add(i,jsonObject.getString("chiefName"));
-                           number ++;
+                            jsonObject = jsonArray.getJSONObject(i);
+                            chatList.add(new RoomDTO((String) jsonObject.get("name"), (String) jsonObject.get("chiefName")));
+
+                        }
+                        chatView = (RecyclerView) view.findViewById(R.id.chatView);
+                        chatView.setHasFixedSize(true);
+                        iniiLayoutManager(view);
+                        roAdapter = new RoomRecyclerViewAdapter(chatList,getApplicationContext());
+                        chatView.setAdapter(roAdapter);
 
 
-                        }*/
-                        jsonObject = jsonArray.getJSONObject(0);
-                        Log.i("Mytag","bodybody:"+jsonObject.get("name"));
-                        Log.i("Mytag","bodybody:"+jsonObject.get("chiefName"));
-                        RoomName = jsonObject.get("name").toString();
-                        cheifName= jsonObject.get("chiefName").toString();
-                        Log.i("Mytag","Roomnametag:"+RoomName);
-                        Log.i("Mytag","cheifName"+cheifName);
-
-
-
-
-
-
-
-
-                    } catch (IOException e) {
+                    }
+                    catch (IOException e) {
                         e.printStackTrace();
-                    } catch (JSONException e) {
+                    }
+                    catch (JSONException e) {
                         e.printStackTrace();
                     }
 
@@ -155,20 +151,8 @@ public class ListroomActivity extends AppCompatActivity {
         });
 
 
-        chatView = (RecyclerView) view.findViewById(R.id.chatView);
-        chatView.setHasFixedSize(true);
-        //roomDTO = new RoomDTO(RoomName,cheifName);
-
-        chatList = new ArrayList<>();
-        chatList.add(0,RoomName);
-        Log.i("Mytag","chatlistVI:"+chatList.get(0));
-        iniiLayoutManager(view);
-        roAdapter = new RoomRecyclerViewAdapter(chatList,getApplicationContext());
-        chatView.setAdapter(roAdapter);
-
 
     }
-
     private void iniiLayoutManager(View view) {
         Log.i("태그","iniiLayoutManager");
         manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -180,29 +164,43 @@ public class ListroomActivity extends AppCompatActivity {
     private void initButton(View view) {
         Log.i("태그","initAddRoom");
         btnAdd = (Button)view.findViewById(R.id.btn_add);
-
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //chatList.add(0, new RoomDTO());
 
-                roAdapter.notifyItemInserted(0);
-                roAdapter.notifyDataSetChanged();
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(),RoomAddActivity.class);
+                startActivity(intent);
+
+
+
+
+
+
+
 
 
             }
         });
 
 
+
+
+
+
+
+
+
+
     }
 
-    private void initDialogBox(){
+    /*private void initDialogBox(){
         dlg = new AlertDialog.Builder(this);
         LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.item_searchbox,null, false);
+        View view = inflater.inflate(R.layout.item_adduser,null, false);
         dlg.setView(view);
 
-    }
+    }*/
 
     private void initToolBar() {
         toolbar =(Toolbar)findViewById(R.id.toolbar);

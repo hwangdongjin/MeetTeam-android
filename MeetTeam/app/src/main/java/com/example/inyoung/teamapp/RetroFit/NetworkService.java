@@ -20,11 +20,14 @@ public interface NetworkService {
     @POST("/user/add")
     Call<UserDTO> post_food(@Body UserDTO userDTO);
     @FormUrlEncoded
-    @POST("/user/login")
+    @POST("/user/login/")
     Call<ResponseBody> post_login(@Field("id")String id,@Field("password")String password);
     @FormUrlEncoded
     @POST("/room/list/")
     Call<ResponseBody> post_room(@Field("sess")String sess);
+    @FormUrlEncoded
+    @POST("/room/add/")
+    Call<ResponseBody> post_add(@Field("sess")String sess,@Field("name")String roomName,@Field("subject")String subject);
 
 
 

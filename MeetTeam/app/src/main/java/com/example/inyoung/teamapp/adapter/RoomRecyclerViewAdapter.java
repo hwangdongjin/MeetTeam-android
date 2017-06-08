@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.ViewPagerActivity;
+import com.example.inyoung.teamapp.dto.RoomDTO;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 
 public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
 
-    private ArrayList<String> roomList;
+    private ArrayList<RoomDTO> roomList;
     //private ArrayList<String> roomListName,roomListCheif;
     private Context context;
     private int number;
@@ -30,7 +31,7 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
 
 
 
-    public RoomRecyclerViewAdapter(ArrayList<String> roomList,Context context) {
+    public RoomRecyclerViewAdapter(ArrayList<RoomDTO> roomList,Context context) {
         this.roomList =roomList;
         this.context = context;
 
@@ -74,7 +75,8 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
                  //holder.roomName.setText(roomList.get(0).);
 
         //holder.chiefName.setText(roomList.get(0).getChiefName());
-        holder.roomName.setText(roomList.get(position));
+        holder.roomName.setText(roomList.get(position).getRoom_Name());
+        holder.chiefName.setText(roomList.get(position).getManager_Name());
         //holder.chiefName.setText(roomList.get(position).getManager_Name());
         Log.i("Mytag","testbody:"+roomList.get(0));
                    holder.btnAdd.setOnClickListener(this);
