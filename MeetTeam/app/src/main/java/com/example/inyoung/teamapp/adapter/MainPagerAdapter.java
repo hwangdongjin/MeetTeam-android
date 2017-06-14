@@ -4,21 +4,29 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.inyoung.teamapp.dto.UserListDTO;
 import com.example.inyoung.teamapp.fragment.CheckListFragment;
 import com.example.inyoung.teamapp.fragment.ConfigureFragment;
 import com.example.inyoung.teamapp.fragment.MemberlistFragment;
 import com.example.inyoung.teamapp.fragment.TimeTableFragment;
+
+import java.util.ArrayList;
 
 /**
  * Created by inyoung on 2017-02-22.
  */
 
 public class MainPagerAdapter extends FragmentStatePagerAdapter {
+    private static ArrayList<UserListDTO> userList = null;
+    private static int Num = 0;
     private int pagerNum;
 
-    public MainPagerAdapter(FragmentManager fm, int pagerNum) {
+
+    public MainPagerAdapter(FragmentManager fm, int pagerNum, ArrayList<UserListDTO> userList,int Num) {
         super(fm);
         this.pagerNum = pagerNum;
+        this.userList=userList;
+        this.Num=Num;
     }
 
     public static Fragment getFragmentInstance(int pageNum){
@@ -26,10 +34,11 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
         //pageNum은 ViewPagerActivity에서 tabs.getCount();
         switch (pageNum){
             case 0:
-                fragment = MemberlistFragment.newInstance("first", "Memberlist");
+                fragment = MemberlistFragment.newInstance(userList,Num);
                 break;
             case 1:
                 fragment = new TimeTableFragment();
+
 
                 break;
             case 2:
@@ -45,10 +54,7 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
         return fragment;
     }
 
-    public MainPagerAdapter(FragmentManager fm) {
 
-        super(fm);
-    }
 
     //포지션에따라서 프래그먼트가 바뀌도록
     @Override

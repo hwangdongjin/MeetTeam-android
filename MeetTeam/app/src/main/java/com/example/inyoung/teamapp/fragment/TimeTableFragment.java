@@ -28,6 +28,7 @@ public class TimeTableFragment extends Fragment {
     TextView text1,timeText,placeText;
     View view;
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_time_table, container, false);

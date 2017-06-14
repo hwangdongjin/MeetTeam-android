@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.adapter.ProfileAdapter;
 import com.example.inyoung.teamapp.dto.MemberDTO;
+import com.example.inyoung.teamapp.dto.UserListDTO;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,7 @@ public class MemberlistFragment extends Fragment {
 
     private ListView fListView;
     private ArrayList<MemberDTO> profileList;
+    private static ArrayList<UserListDTO> userList = null;
     private ProfileAdapter pAdapter;
     private AlertDialog.Builder dlg;
     private RadioButton user_faceBook, user_PhoneNumber;
@@ -50,6 +52,7 @@ public class MemberlistFragment extends Fragment {
     Intent itemIntent;
     String faceBookUrl;
     View view;
+    static int number = 0;
     public MemberlistFragment() {
         // Required empty public constructor
     }
@@ -63,11 +66,11 @@ public class MemberlistFragment extends Fragment {
      * @return A new instance of fragment GalleryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MemberlistFragment newInstance(String param1, String param2) {
+    public static MemberlistFragment newInstance(ArrayList<UserListDTO> userList,int num) {
         MemberlistFragment fragment = new MemberlistFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable("userlist",userList);
+        args.putInt("listSize",num);
         fragment.setArguments(args);
         return fragment;
     }
@@ -76,8 +79,11 @@ public class MemberlistFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+            userList = (ArrayList<UserListDTO>) getArguments().get("userlist");
+            number= (int) getArguments().get("listSize");
+
+
         }
     }
 
@@ -106,6 +112,8 @@ public class MemberlistFragment extends Fragment {
         mListener = null;
     }
 
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -131,14 +139,19 @@ public class MemberlistFragment extends Fragment {
     private void initListView(View view) {
         fListView = (ListView)view.findViewById(R.id.listView_profile);
         profileList = new ArrayList<>();
+        for(int i=0;i<number;i++){
+
+            profileList.add(new MemberDTO("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2000px-Facebook_icon.svg.png", userList.get(i).getName(), "서울지부 총괄 GM"));
 
 
-        profileList.add(new MemberDTO("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2000px-Facebook_icon.svg.png", "함성호", "서울지부 총괄 GM"));
+
+        }
+       /* profileList.add(new MemberDTO("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2000px-Facebook_icon.svg.png", "함성호", "서울지부 총괄 GM"));
         profileList.add(new MemberDTO("https://en.facebookbrand.com/wp-content/themes/fb-branding/prj-fb-branding/assets/images/thumb-drawn.svg", "김우영", "안드로이드 개발 팀장"));
         profileList.add(new MemberDTO("https://www.wired.com/wp-content/uploads/2015/06/FEATURED-facebook-open-source.jpg", "박종민", "안드로이드 개발 파트장"));
         profileList.add(new MemberDTO("http://www.cfz.org.uk/images/facebook.png", "한채연", "웹 개발 파트장"));
         profileList.add(new MemberDTO("https://tctechcrunch2011.files.wordpress.com/2014/09/facebook-trending.png?w=738", "정성일", "기획 마케팅 파트장"));
-        profileList.add(new MemberDTO("https://cdn2.tnwcdn.com/wp-content/blogs.dir/1/files/2016/07/facebook-disconnect-796x398.jpg", "김나경", "디자인 총괄 팀장"));
+        profileList.add(new MemberDTO("https://cdn2.tnwcdn.com/wp-content/blogs.dir/1/files/2016/07/facebook-disconnect-796x398.jpg", "김나경", "디자인 총괄 팀장"));*/
 
         pAdapter = new ProfileAdapter(profileList, getContext());
 
