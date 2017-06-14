@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.inyoung.teamapp.MapActivity">
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        class="com.google.android.gms.maps.SupportMapFragment"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_margin="5dp"
+            android:layout_height="40dp"
+            android:id="@+id/mapfr_find"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/mapfr_plus"
+            android:layout_below="@+id/mapfr_find"
+            android:layout_alignLeft="@+id/mapfr_find"
+            android:layout_alignStart="@+id/mapfr_find"/>
+
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/mapfr_minus"
+            android:layout_below="@+id/mapfr_plus"
+            android:layout_alignLeft="@+id/mapfr_plus"
+            android:layout_alignStart="@+id/mapfr_plus" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
