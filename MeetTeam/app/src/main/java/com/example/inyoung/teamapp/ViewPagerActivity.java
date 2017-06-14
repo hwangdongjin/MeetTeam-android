@@ -1,5 +1,6 @@
 package com.example.inyoung.teamapp;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,17 +8,23 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.inyoung.teamapp.adapter.MainPagerAdapter;
+import com.example.inyoung.teamapp.dto.UserListDTO;
 
-public class ViewPagerActivity extends AppCompatActivity {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class ViewPagerActivity extends AppCompatActivity implements Serializable{
 
     private ViewPager mainViewPagerActivity;
     private TabLayout tabs;
     private MainPagerAdapter mainPagerAdapter;
+    ArrayList<UserListDTO> userDTO;
     private Toolbar toolbar;
     private AlertDialog.Builder dlg;
 
@@ -27,6 +34,14 @@ public class ViewPagerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
+        Intent intent = getIntent();
+        userDTO= (ArrayList<UserListDTO>) intent.getSerializableExtra("test");
+
+
+
+        //String test = userList.get(0).getName();
+       Log.i("mytag","test"+userDTO.get(0).getName());
+
         initViewPaging();
         initToolBar();
     }
@@ -105,7 +120,7 @@ public class ViewPagerActivity extends AppCompatActivity {
     }
 
     private void initAdapter() {
-        mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tabs.getTabCount());
+        mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tabs.getTabCount(),userDTO,Integer.valueOf(userDTO.size()));
         mainViewPagerActivity.setAdapter(mainPagerAdapter);
 
     }

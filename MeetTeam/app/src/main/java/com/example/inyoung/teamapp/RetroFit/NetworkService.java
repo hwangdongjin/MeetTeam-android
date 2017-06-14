@@ -28,6 +28,13 @@ public interface NetworkService {
     @FormUrlEncoded
     @POST("/room/add/")
     Call<ResponseBody> post_add(@Field("sess")String sess,@Field("name")String roomName,@Field("subject")String subject);
+    @FormUrlEncoded
+    @POST("/room/addUser")
+    Call<ResponseBody> post_addUser(@Field("sess")String sess,@Field("roomName")String roomName);
+    @FormUrlEncoded
+    @POST("/user/list")
+    Call<ResponseBody> post_userList(@Field("roomName")String roomName);
+
 
 
 

@@ -55,8 +55,8 @@ public class ListroomActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mainTogle;
     private DrawerLayout drawer;
     private NavigationView nav_view;
-    private NetworkService networkService,networkService1;
-    private ApplicationController application,application1;
+    private NetworkService networkService;
+    private ApplicationController application;
     public JSONArray jsonArray;
     public JSONObject jsonObject;
     private AlertDialog.Builder dig;
@@ -83,16 +83,21 @@ public class ListroomActivity extends AppCompatActivity {
         initRecyclerView(view);
         setContentView(view);
         initToolBar();
-        boolean respone=intent2.getBooleanExtra("value",false);
-        if(respone=true){
-
-
+        boolean respone_add=intent2.getBooleanExtra("add",false);
+        boolean respone_search=intent2.getBooleanExtra("search",false);
+        if(respone_add=true){
             initRecyclerView(view);
-
-
-
-
         }
+        else{
+            Toast.makeText(application, "방 만들기 실패", Toast.LENGTH_SHORT).show();
+        }
+        if (respone_search = true) {
+            initRecyclerView(view);
+        }
+        else{
+            Toast.makeText(application, "방 찾기 실패", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
@@ -121,9 +126,11 @@ public class ListroomActivity extends AppCompatActivity {
 
 
                             jsonObject = jsonArray.getJSONObject(i);
-                            chatList.add(new RoomDTO((String) jsonObject.get("name"), (String) jsonObject.get("chiefName")));
+                            chatList.add(new RoomDTO((String) jsonObject.get("name"), (String) jsonObject.get("chiefName"),i));
+
 
                         }
+                        Log.i("mytag","responseBody:"+jsonArray.getJSONObject(0));
                         chatView = (RecyclerView) view.findViewById(R.id.chatView);
                         chatView.setHasFixedSize(true);
                         iniiLayoutManager(view);
@@ -164,6 +171,7 @@ public class ListroomActivity extends AppCompatActivity {
     private void initButton(View view) {
         Log.i("태그","initAddRoom");
         btnAdd = (Button)view.findViewById(R.id.btn_add);
+        btnSearch=(Button)view.findViewById(R.id.btn_search);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,12 +180,17 @@ public class ListroomActivity extends AppCompatActivity {
                 intent.setClass(getApplicationContext(),RoomAddActivity.class);
                 startActivity(intent);
 
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
-
-
-
-
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(),RoomSearchActivity.class);
+                startActivity(intent);
 
 
             }
