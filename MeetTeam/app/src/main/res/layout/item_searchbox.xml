@@ -14,7 +14,7 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp">
                 <TextView
-                    android:id="@+id/tv_roomNum"
+                    android:id="@+id/addUser_roomName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -25,7 +25,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
-                    android:layout_alignBaseline="@+id/tv_roomNum"
+                    android:layout_alignBaseline="@+id/addUser_roomName"
                     android:layout_marginLeft="20dp"
                     android:ems="5"
                     android:hint="방 번호 입력" />

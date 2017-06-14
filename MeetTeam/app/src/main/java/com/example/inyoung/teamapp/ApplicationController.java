@@ -13,6 +13,7 @@ import retrofit.Retrofit;
  * Created by MYpc on 2017-05-14.
  */
 
+
 public class ApplicationController extends Application{
 
     private static ApplicationController instance;

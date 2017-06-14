@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
     package="com.example.inyoung.teamapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,11 +26,16 @@
         <activity android:name=".ListroomActivity" />
         <activity android:name=".ViewPagerActivity" />
         <activity android:name=".JoinActivity" />
-        <activity android:name=".NaverMapActivity" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-    </application>
+        <activity android:name=".MapActivity"/>
+        <activity android:name=".RoomAddActivity" />
+        <activity android:name=".RoomSearchActivity"/>
+
+    <meta-data
+        android:name="com.google.android.maps.v2.API_KEY"
+        android:value="AIzaSyBgBfYp0hgqG47S2miwNkQm3iWbLNxLaKk"/>
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version"/>
+</application>
 
 </manifest>

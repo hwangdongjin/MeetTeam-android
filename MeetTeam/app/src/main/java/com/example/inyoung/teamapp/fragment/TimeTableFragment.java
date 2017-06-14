@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.inyoung.teamapp.NaverMapActivity;
+import com.example.inyoung.teamapp.MapActivity;
 import com.example.inyoung.teamapp.R;
 
 /**
@@ -27,6 +27,7 @@ public class TimeTableFragment extends Fragment {
     Button TimeSelectButton,PlaceSelectButton;
     TextView text1,timeText,placeText;
     View view;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -109,7 +110,7 @@ public class TimeTableFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 Intent intent2 = new Intent();
-                intent2.setClass(getContext(), NaverMapActivity.class);
+                intent2.setClass(getContext(), MapActivity.class);
                 startActivity(intent2);
                 return true;
             }

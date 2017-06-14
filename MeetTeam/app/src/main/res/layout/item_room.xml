@@ -23,7 +23,7 @@
             android:textSize="10sp" />
 
         <TextView
-            android:id="@+id/roomName"
+            android:id="@+id/roomName123456"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
