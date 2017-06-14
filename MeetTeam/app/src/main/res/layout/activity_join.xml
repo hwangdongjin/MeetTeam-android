@@ -104,9 +104,34 @@
         android:textColorHint="#a7a9ad"
         android:hint="Proffesor" />
 
+    <EditText
+        android:id="@+id/edt_idNum"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/viewstyle"
+        android:maxLines="1"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:textColorHint="#a7a9ad"
+        android:hint="idNum" />
+
+    <EditText
+        android:id="@+id/edt_addr"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/viewstyle"
+        android:maxLines="1"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:textColorHint="#a7a9ad"
+        android:hint="Address" />
+
     <Button
         android:id="@+id/btn_register"
-        style="@style/Widget.AppCompat.Button"
         android:layout_width="110dp"
         android:layout_height="30dp"
         android:text="가입하기"
