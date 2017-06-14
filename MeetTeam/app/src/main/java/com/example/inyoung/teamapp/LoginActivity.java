@@ -30,7 +30,7 @@ import retrofit.Retrofit;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-
+    //테스트
     private Intent fIntent;
     EditText edt_id, edt_pw;
     private NetworkService networkService;
