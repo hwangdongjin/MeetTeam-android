@@ -13,7 +13,10 @@ public class UserDTO {
     private String addr;
     private String email;
     private boolean isProfessor;
-    public  UserDTO(){}
+
+    public  UserDTO(){
+
+    }
 
     public UserDTO(String id, boolean isProfessor, String email, String addr, String phoneNum, int idNum, String name, String password) {
         this.id = id;

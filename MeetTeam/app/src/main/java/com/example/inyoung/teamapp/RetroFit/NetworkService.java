@@ -16,7 +16,7 @@ import retrofit.http.POST;
 
 public interface NetworkService {
     @POST("/user/add")
-    Call<UserDTO> post_food(@Body UserDTO userDTO);
+    Call<UserDTO> post_userAdd(@Body UserDTO userDTO);
     @FormUrlEncoded
     @POST("/user/login/")
     Call<ResponseBody> post_login(@Field("id")String id,@Field("password")String password);
