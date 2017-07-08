@@ -9,9 +9,6 @@ public class CheckListDTO {
     private String manager_Name;
     private String manager_Do;
 
-
-
-
     public CheckListDTO(String checkRoom_Name, String manager_Name,String manager_Do) {
         this.checkRoom_Name = checkRoom_Name;
         this.manager_Name = manager_Name;
@@ -25,5 +22,4 @@ public class CheckListDTO {
     }
 
     public  String getManager_Do(){return  manager_Do; }
-
 }

@@ -15,7 +15,6 @@ import retrofit.Retrofit;
 
 
 public class ApplicationController extends Application{
-
     private static ApplicationController instance;
     public static ApplicationController getInstance(){return instance;}
 

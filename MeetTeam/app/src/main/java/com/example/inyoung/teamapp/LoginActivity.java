@@ -72,7 +72,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         fIntent.putExtra("HI", "123");
     }
 
-
     @Override
     protected void onStart() {
         setResult(RESULT_OK, fIntent);
@@ -87,7 +86,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-
                 application = ApplicationController.getInstance();
                 application.buildNetworkService("52.78.39.253", 7530);
                 networkService = ApplicationController.getInstance().getNetworkService();
@@ -100,49 +98,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                         if (response.isSuccess()) {
-
-
                             try {
-
                                 jsonObject= new JSONObject(response.body().string());
                                 result=jsonObject.get("sess").toString();
                                 editor.putString("session",result);
                                 editor.commit();
                                 Log.i("Mytag","testsess:"+result);
                                 Log.i("Mytag", "testroom:" + result);
-
-
-
-
-
                             } catch (IOException e) {
                                 e.printStackTrace();
-
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
-
                             Intent intent = new Intent();
                             intent.setClass(getApplicationContext(), ListroomActivity.class);
                             startActivity(intent);
-
                         } else {
                             int statusCode = response.code();
                             Log.i("MyTag", "응답코드:" + statusCode);
-
                         }
                     }
 
                     @Override
                     public void onFailure(Throwable t) {
                         Log.i("MyTag", "서버 onFailure 에러내용 : " + t.getMessage());
-
                     }
                 });
-
-
                 break;
             case R.id.btn_join:
                 Intent intent2 = new Intent();
@@ -171,7 +152,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onStop() {
         super.onStop();
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());

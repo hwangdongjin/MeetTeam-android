@@ -85,27 +85,7 @@ public class JoinActivity extends AppCompatActivity {
                         //서버에 아얘 연결이 안된경우
                     }
                 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
         });
-
-
-
-
     }
 }

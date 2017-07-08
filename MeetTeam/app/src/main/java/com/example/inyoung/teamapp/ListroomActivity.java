@@ -66,11 +66,6 @@ public class ListroomActivity extends AppCompatActivity {
     View view;
     LayoutInflater inflater;
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,21 +109,13 @@ public class ListroomActivity extends AppCompatActivity {
         thumbnailCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-
-
                 if (response.isSuccess()){
-
                     try {
-
                         jsonArray= new JSONArray(response.body().string());
                         chatList= new ArrayList<>();
                         for(int i=0;i<jsonArray.length();i++){
-
-
                             jsonObject = jsonArray.getJSONObject(i);
                             chatList.add(new RoomDTO((String) jsonObject.get("name"), (String) jsonObject.get("chiefName"),i));
-
-
                         }
                         Log.i("mytag","responseBody:"+jsonArray.getJSONObject(0));
                         chatView = (RecyclerView) view.findViewById(R.id.chatView);
@@ -136,8 +123,6 @@ public class ListroomActivity extends AppCompatActivity {
                         iniiLayoutManager(view);
                         roAdapter = new RoomRecyclerViewAdapter(chatList,getApplicationContext());
                         chatView.setAdapter(roAdapter);
-
-
                     }
                     catch (IOException e) {
                         e.printStackTrace();
@@ -145,27 +130,18 @@ public class ListroomActivity extends AppCompatActivity {
                     catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                 }
 
             }
-
             @Override
             public void onFailure(Throwable t) {
-
             }
         });
-
-
-
     }
     private void iniiLayoutManager(View view) {
         Log.i("태그","iniiLayoutManager");
         manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         chatView.setLayoutManager(manager);
-
-
     }
 
     private void initButton(View view) {
@@ -175,36 +151,20 @@ public class ListroomActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(),RoomAddActivity.class);
                 startActivity(intent);
-
             }
         });
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(),RoomSearchActivity.class);
                 startActivity(intent);
-
-
             }
         });
-
-
-
-
-
-
-
-
-
-
     }
 
     /*private void initDialogBox(){
@@ -212,7 +172,6 @@ public class ListroomActivity extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_adduser,null, false);
         dlg.setView(view);
-
     }*/
 
     private void initToolBar() {
@@ -258,13 +217,11 @@ public class ListroomActivity extends AppCompatActivity {
         drawer =(DrawerLayout)findViewById(R.id.drawer);
         nav_view =(NavigationView)findViewById(R.id.nav_view);
         mainTogle = new ActionBarDrawerToggle(ListroomActivity.this, drawer, R.string.open_drawer, R.string.close_drawer);
-
         drawer.addDrawerListener(mainTogle);
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 drawer.closeDrawer(Gravity.LEFT);
-
                 switch (item.getItemId()){
                     case R.id.nav_map:
                         Toast.makeText(ListroomActivity.this,"지도", Toast.LENGTH_SHORT).show();
@@ -286,5 +243,4 @@ public class ListroomActivity extends AppCompatActivity {
         super.onPostCreate(savedInstanceState);
         mainTogle.syncState();
     }
-
 }

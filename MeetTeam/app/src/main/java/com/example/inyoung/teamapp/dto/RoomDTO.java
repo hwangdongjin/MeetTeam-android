@@ -13,7 +13,6 @@ public class RoomDTO {
         this.room_Name = room_Name;
         this.manager_Name = manager_Name;
         this.postion=position;
-
     }
 
     public String getRoom_Name() {
@@ -25,5 +24,4 @@ public class RoomDTO {
     }
 
     public int getPostion(){return postion;}
-
 }

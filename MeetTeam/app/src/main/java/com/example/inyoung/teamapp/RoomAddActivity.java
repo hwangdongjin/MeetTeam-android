@@ -27,7 +27,6 @@ public class RoomAddActivity extends AppCompatActivity {
     SharedPreferences sessDB;
     Intent intent;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,20 +62,9 @@ public class RoomAddActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Throwable t) {
-
                     }
                 });
-
-
-
-
-
             }
         });
     }
-
-
-
-
-
 }

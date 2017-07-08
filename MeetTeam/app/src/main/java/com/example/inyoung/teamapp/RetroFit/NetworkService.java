@@ -15,8 +15,6 @@ import retrofit.http.POST;
  */
 
 public interface NetworkService {
-
-
     @POST("/user/add")
     Call<UserDTO> post_food(@Body UserDTO userDTO);
     @FormUrlEncoded
@@ -34,8 +32,4 @@ public interface NetworkService {
     @FormUrlEncoded
     @POST("/user/list")
     Call<ResponseBody> post_userList(@Field("roomName")String roomName);
-
-
-
-
 }

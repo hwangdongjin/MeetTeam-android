@@ -19,7 +19,6 @@ import retrofit.Response;
 import retrofit.Retrofit;
 
 public class RoomSearchActivity extends AppCompatActivity {
-
     EditText edt_roomName,edt_password;
     String roomName,password;
     Button btn_search;
@@ -51,43 +50,21 @@ public class RoomSearchActivity extends AppCompatActivity {
                 thum.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-
-
                         if(response.isSuccess()){
-
                             intent = new Intent();
                             intent.setClass(getApplicationContext(),ListroomActivity.class);
                             intent.putExtra("search",true);
                             startActivity(intent);
-
-
                         }
-
                         Log.i("Mytag","getsess"+response.body());
-
-
-
                             Toast.makeText(application, "찾는 방이 없습니다", Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
-
-
-
-
                     }
 
                     @Override
                     public void onFailure(Throwable t) {
-
                     }
                 });
-
             }
         });
-
     }
 }

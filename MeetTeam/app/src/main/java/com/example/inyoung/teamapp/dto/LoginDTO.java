@@ -6,7 +6,6 @@ package com.example.inyoung.teamapp.dto;
 
 public class LoginDTO {
 
-
     //@SerializedName("id")
     private String id;
     private  String password;
@@ -37,8 +36,4 @@ public class LoginDTO {
         this.sess = sess;
     }
 */
-
-
-
-
 }
