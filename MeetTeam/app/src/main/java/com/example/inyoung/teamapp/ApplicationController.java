@@ -27,12 +27,14 @@ public class ApplicationController extends Application{
     private NetworkService networkService;
     public NetworkService getNetworkService(){return networkService;}
 
+    private String ip = "52.78.39.253";
+    private int port = 7530;
     private String baseUrl;
 
-    public void buildNetworkService(String ip,int port){
+    public void buildNetworkService(){
         synchronized (ApplicationController.class){
             if(networkService==null){
-                baseUrl = String.format("http://%s:%d",ip,port);
+                baseUrl = String.format("http://%s:%d", ip, port);
                 Gson gson = new GsonBuilder().create();
 
                 GsonConverterFactory factory = GsonConverterFactory.create(gson);

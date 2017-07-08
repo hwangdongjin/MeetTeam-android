@@ -38,7 +38,7 @@ public class RoomSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 application = ApplicationController.getInstance();
-                application.buildNetworkService("52.78.39.253", 7530);
+                application.buildNetworkService();
                 networkService = ApplicationController.getInstance().getNetworkService();
                 roomName=edt_roomName.getText().toString();
                 password=edt_password.getText().toString();

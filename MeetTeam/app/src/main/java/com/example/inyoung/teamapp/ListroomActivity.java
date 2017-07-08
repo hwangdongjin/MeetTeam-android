@@ -98,7 +98,7 @@ public class ListroomActivity extends AppCompatActivity {
 
     private void initRecyclerView(final View view)  {
         application = ApplicationController.getInstance();
-        application.buildNetworkService("52.78.39.253", 7530);
+        application.buildNetworkService();
         networkService = ApplicationController.getInstance().getNetworkService();
         Log.i("태그","initRecyclerView");
         sessDB = getSharedPreferences("sessDB",MODE_PRIVATE);

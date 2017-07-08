@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_login:
                 application = ApplicationController.getInstance();
-                application.buildNetworkService("52.78.39.253", 7530);
+                application.buildNetworkService();
                 networkService = ApplicationController.getInstance().getNetworkService();
                 final String id = edt_id.getText().toString();
                 String pw = edt_pw.getText().toString();

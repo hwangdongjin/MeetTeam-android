@@ -101,7 +101,7 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
                 tv_roomName = (TextView) v.findViewById(R.id.roomName123456);
                 //roomName12 = tv_roomName.getText().toString();
                 application = ApplicationController.getInstance();
-                application.buildNetworkService("52.78.39.253", 7530);
+                application.buildNetworkService();
                 networkService = ApplicationController.getInstance().getNetworkService();
                 Call<ResponseBody> thumbnailCall = networkService.post_userList("공설팀플");
                 thumbnailCall.enqueue(new Callback<ResponseBody>() {
