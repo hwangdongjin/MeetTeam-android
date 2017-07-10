@@ -25,9 +25,8 @@
         <activity android:name=".ViewPagerActivity" />
         <activity android:name=".JoinActivity" />
         <activity android:name=".MapActivity"/>
-        <activity android:name=".RoomAddActivity" />
-        <activity android:name=".RoomSearchActivity"/>
-    <meta-data
+
+        <meta-data
         android:name="com.google.android.maps.v2.API_KEY"
         android:value="AIzaSyBgBfYp0hgqG47S2miwNkQm3iWbLNxLaKk"/>
     <meta-data

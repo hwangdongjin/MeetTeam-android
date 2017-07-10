@@ -35,7 +35,7 @@
                 android:layout_width="20dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:text="방 추가"
+                android:text="방 만들기"
                 android:textSize="20sp"
                 />
 
@@ -44,7 +44,7 @@
                 android:layout_width="20dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:text="방 찾기"
+                android:text="방 들어가기"
                 android:textSize="20sp"
                 />
         </LinearLayout>

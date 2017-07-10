@@ -85,7 +85,7 @@ public class CheckListFragment extends Fragment {
             public void onClick(View v) {
                 dlg = new AlertDialog.Builder(v.getContext());
                 LayoutInflater inflater = (LayoutInflater)v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View view1 = inflater.inflate(R.layout.item_searchbox,null, false);
+                View view1 = inflater.inflate(R.layout.item_room_enter,null, false);
 
                 dlg.setView(view1);
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
