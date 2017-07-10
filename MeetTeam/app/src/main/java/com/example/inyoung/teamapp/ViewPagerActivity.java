@@ -26,7 +26,6 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
     private MainPagerAdapter mainPagerAdapter;
     ArrayList<UserListDTO> userDTO;
     private Toolbar toolbar;
-    private AlertDialog.Builder dlg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -34,10 +34,6 @@ import retrofit.Retrofit;
 
 import static com.example.inyoung.teamapp.R.id.btn_enter;
 
-/**
- * Created by inyoung on 2017-02-02.
- */
-
 public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
 
     private ArrayList<RoomDTO> roomList;

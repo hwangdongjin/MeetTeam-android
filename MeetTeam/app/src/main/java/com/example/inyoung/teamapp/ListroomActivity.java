@@ -44,72 +44,65 @@ import retrofit.Retrofit;
 public class ListroomActivity extends AppCompatActivity {
 
     private RecyclerView chatView;
-    private Retrofit retrofit;
     private ArrayList<RoomDTO> chatList;
-    private RoomDTO roomDTO;
     private RoomRecyclerViewAdapter roAdapter;
     private RecyclerView.LayoutManager manager;
 
-    private Button btnAdd;
-    private Button btnSearch;
+    private Button btnAdd, btnSearch;
     private Toolbar toolbar;
     private ActionBarDrawerToggle mainTogle;
     private DrawerLayout drawer;
     private NavigationView nav_view;
+    private AlertDialog.Builder dlg;
+    EditText edt_roomName, edt_subject;
+    View view;
+    String name, subject;
 
+    Intent intent;
+
+    SharedPreferences sessDB;
     private NetworkService networkService;
     private ApplicationController application;
     public JSONArray jsonArray;
     public JSONObject jsonObject;
 
-    private AlertDialog.Builder dig;
-    SharedPreferences sessDB;
-    public String cheifName;
-    EditText edt_roomName, edt_subject;
-    View view;
-    LayoutInflater inflater;
-
-    private AlertDialog.Builder dlg;
-
-    Intent intent;
-
-    String name;
-    String subject;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("태그","onCreate");
+
+        application = ApplicationController.getInstance();
+        application.buildNetworkService();
+        networkService = ApplicationController.getInstance().getNetworkService();
+
         LayoutInflater inflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.activity_listroom, null, false);
-        Intent intent2 = getIntent();
+        //Intent intent2 = getIntent();
 
         initButton(view);
         initRecyclerView(view);
         setContentView(view);
         initToolBar();
 
-        boolean respone_add=intent2.getBooleanExtra("add",false);
-        boolean respone_search=intent2.getBooleanExtra("search",false);
-
-        if(respone_add=true){
-            initRecyclerView(view);
-        }
-        else{
-            Toast.makeText(application, "방 만들기 실패", Toast.LENGTH_SHORT).show();
-        }
-        if (respone_search = true) {
-            initRecyclerView(view);
-        }
-        else{
-            Toast.makeText(application, "방 찾기 실패", Toast.LENGTH_SHORT).show();
-        }
+//        boolean respone_add=intent2.getBooleanExtra("add",false);
+//        boolean respone_search=intent2.getBooleanExtra("search",false);
+//
+//        if(respone_add=true){
+//            initRecyclerView(view);
+//        }
+//        else{
+//            Toast.makeText(application, "방 만들기 실패", Toast.LENGTH_SHORT).show();
+//        }
+//
+//        if (respone_search = true) {
+//            initRecyclerView(view);
+//        }
+//        else{
+//            Toast.makeText(application, "방 찾기 실패", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private void initRecyclerView(final View view)  {
-        application = ApplicationController.getInstance();
-        application.buildNetworkService();
-        networkService = ApplicationController.getInstance().getNetworkService();
+
 
         sessDB = getSharedPreferences("sessDB",MODE_PRIVATE);
 
@@ -171,9 +164,6 @@ public class ListroomActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        application = ApplicationController.getInstance();
-                        application.buildNetworkService();
-                        networkService = ApplicationController.getInstance().getNetworkService();
 
                         name = edt_roomName.getText().toString();
                         subject = edt_subject.getText().toString();
@@ -195,8 +185,6 @@ public class ListroomActivity extends AppCompatActivity {
                             public void onFailure(Throwable t) {
                             }
                         });
-
-
                     }
                 });
                 dlg.setNegativeButton("취소", null);
@@ -212,10 +200,6 @@ public class ListroomActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        application = ApplicationController.getInstance();
-                        application.buildNetworkService();
-                        networkService = ApplicationController.getInstance().getNetworkService();
-
                         name = edt_roomName.getText().toString();
                         sessDB = getSharedPreferences("sessDB",MODE_PRIVATE);
 
@@ -230,13 +214,10 @@ public class ListroomActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                             }
-
                             @Override
                             public void onFailure(Throwable t) {
                             }
                         });
-
-
                     }
                 });
                 dlg.setNegativeButton("취소", null);

@@ -2,19 +2,13 @@ package com.example.inyoung.teamapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
-import com.example.inyoung.teamapp.dto.LoginDTO;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
 import com.squareup.okhttp.ResponseBody;
 
 import org.json.JSONException;
@@ -29,16 +23,15 @@ import retrofit.Retrofit;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Intent fIntent;
+    private Intent intent;
     EditText edt_id, edt_pw;
-    private NetworkService networkService;
-    LoginDTO login;
+
     SharedPreferences sessDB;
-    Retrofit retrofit;
+    String result;
+
+    private NetworkService networkService;
     ApplicationController application;
     JSONObject jsonObject;
-
-    String result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,11 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-//                            Intent intent = new Intent();
-//                            intent.setClass(getApplicationContext(), ListroomActivity.class);
-//                            startActivity(intent);
-
-                            Intent intent = new Intent(getApplicationContext(), ListroomActivity.class);
+                            intent = new Intent(getApplicationContext(), ListroomActivity.class);
                             startActivity(intent);
                         } else {
                             int statusCode = response.code();
@@ -103,13 +92,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
                 break;
-            case R.id.btn_join:
-//                Intent intent2 = new Intent();
-//                intent2.setClass(this, JoinActivity.class);
-//                startActivity(intent2);
 
-                Intent intent3 = new Intent(getApplicationContext(), JoinActivity.class);
-                startActivity(intent3);
+            case R.id.btn_join:
+                intent = new Intent(getApplicationContext(), JoinActivity.class);
+                startActivity(intent);
                 break;
         }
     }

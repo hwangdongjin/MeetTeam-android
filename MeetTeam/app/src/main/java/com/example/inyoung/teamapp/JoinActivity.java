@@ -19,8 +19,8 @@ import retrofit.Retrofit;
 public class JoinActivity extends AppCompatActivity {
     EditText edt_id,edt_pw,edt_name,edt_idNum,edt_phoneNum,edt_addr,edt_email,edt_professor;
     Button btn_register;
+
     private NetworkService networkService;
-    Integer idNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

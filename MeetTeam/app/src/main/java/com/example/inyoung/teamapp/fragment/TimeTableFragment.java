@@ -104,27 +104,6 @@ public class TimeTableFragment extends Fragment {
                 return true;
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
         return  view;
-
-
-
     }
-
-
-
-
-
-
 }
