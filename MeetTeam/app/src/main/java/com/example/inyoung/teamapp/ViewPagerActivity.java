@@ -1,11 +1,9 @@
 package com.example.inyoung.teamapp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -80,11 +78,12 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
     private void initViewPaging(){
         mainViewPagerActivity = (ViewPager)findViewById(R.id.mainViewPager);
         tabs = (TabLayout)findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("그룹").setIcon(android.R.drawable.ic_dialog_info));
-        tabs.addTab(tabs.newTab().setText("모임"));
-        tabs.addTab(tabs.newTab().setText("진행률"));
-        tabs.addTab(tabs.newTab().setText("설정"));
-        tabs.setSelectedTabIndicatorColor(Color.BLACK);
+        tabs.addTab(tabs.newTab().setText("그룹").setIcon(R.drawable.memberiicon_black));
+        tabs.addTab(tabs.newTab().setText("모임").setIcon(R.drawable.meetingicon_black));
+        tabs.addTab(tabs.newTab().setText("진행률").setIcon(R.drawable.checklisticon_black));
+        tabs.addTab(tabs.newTab().setText("설정").setIcon(R.drawable.settingicon_black));
+        
+        //tabs.setSelectedTabIndicatorColor(Color.BLACK);
 
         mainViewPagerActivity.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
