@@ -54,9 +54,9 @@ public class ListroomActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private NavigationView nav_view;
     private AlertDialog.Builder dlg;
-    EditText edt_roomName, edt_subject;
+    EditText edt_title, edt_subject;
     View view;
-    String name, subject;
+    String title, subject;
 
     Intent intent;
 
@@ -117,7 +117,7 @@ public class ListroomActivity extends AppCompatActivity {
 
                         for(int i=0; i<jsonArray.length(); i++){
                             jsonObject = jsonArray.getJSONObject(i);
-                            chatList.add(new RoomDTO((String) jsonObject.get("name"), (String) jsonObject.get("chiefName"),i));
+                            chatList.add(new RoomDTO((String) jsonObject.get("title"), (String) jsonObject.get("chiefName"),i));
                         }
 
                         chatView = (RecyclerView) view.findViewById(R.id.chatView);
@@ -165,11 +165,11 @@ public class ListroomActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
 
-                        name = edt_roomName.getText().toString();
+                        title = edt_title.getText().toString();
                         subject = edt_subject.getText().toString();
                         sessDB = getSharedPreferences("sessDB",MODE_PRIVATE);
 
-                        Call<ResponseBody> thum= networkService.post_roomAdd(sessDB.getString("session","error"),name, subject);
+                        Call<ResponseBody> thum= networkService.post_roomAdd(sessDB.getString("session","error"),title, subject);
                         thum.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -200,10 +200,10 @@ public class ListroomActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        name = edt_roomName.getText().toString();
+                        title = edt_title.getText().toString();
                         sessDB = getSharedPreferences("sessDB",MODE_PRIVATE);
 
-                        Call<ResponseBody> thum= networkService.post_roomAddUser(sessDB.getString("session","error"),name);
+                        Call<ResponseBody> thum= networkService.post_roomAddUser(sessDB.getString("session","error"),title);
                         thum.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -230,7 +230,7 @@ public class ListroomActivity extends AppCompatActivity {
         dlg = new AlertDialog.Builder(this);
         LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_room_add, null, false);
-        edt_roomName = (EditText)view.findViewById(R.id.edt_roomName);
+        edt_title = (EditText)view.findViewById(R.id.edt_title);
         edt_subject = (EditText)view.findViewById(R.id.edt_subject);
         dlg.setView(view);
     }
@@ -239,7 +239,7 @@ public class ListroomActivity extends AppCompatActivity {
         dlg = new AlertDialog.Builder(this);
         LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_room_enter, null, false);
-        edt_roomName = (EditText)view.findViewById(R.id.edt_roomName);
+        edt_title = (EditText)view.findViewById(R.id.edt_title);
         dlg.setView(view);
     }
 

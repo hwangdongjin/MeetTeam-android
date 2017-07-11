@@ -42,9 +42,7 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
     private Context context;
     private NetworkService networkService;
     private ApplicationController application;
-    TextView tv_roomName;
-    String roomName12;
-    SharedPreferenceUtil roomDB;
+    TextView tv_title;
     JSONArray jsonArray1;
     JSONObject jsonObject1;
     static int itemNum;
@@ -55,17 +53,15 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements Serializable {
-        private TextView roomName;
+        private TextView title;
         private TextView chiefName;
         private Button btnAdd;
-        RecyclerView recyclerView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            roomName = (TextView) itemView.findViewById(R.id.roomName123456);
-            chiefName = (TextView) itemView.findViewById(R.id.managerName);
+            title = (TextView) itemView.findViewById(R.id.tv_title);
+            chiefName = (TextView) itemView.findViewById(R.id.tv_managerName);
             btnAdd = (Button) itemView.findViewById(btn_enter);
-
         }
     }
 
@@ -78,7 +74,7 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
 
     @Override
     public void onBindViewHolder(RoomRecyclerViewAdapter.ViewHolder holder,final int position) {
-        holder.roomName.setText(roomList.get(holder.getAdapterPosition()).getRoom_Name());
+        holder.title.setText(roomList.get(holder.getAdapterPosition()).getRoom_Title());
         holder.chiefName.setText(roomList.get(holder.getAdapterPosition()).getManager_Name());
         Log.i("Mytag", "testbody:" + roomList.get(0));
         holder.btnAdd.setOnClickListener(this);
@@ -94,7 +90,7 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
     public void onClick(View v) {
         switch (v.getId()) {
             case btn_enter:
-                tv_roomName = (TextView) v.findViewById(R.id.roomName123456);
+                tv_title = (TextView) v.findViewById(R.id.tv_title);
                 //roomName12 = tv_roomName.getText().toString();
                 application = ApplicationController.getInstance();
                 application.buildNetworkService();

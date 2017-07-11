@@ -23,15 +23,15 @@
             android:textSize="10sp" />
 
         <TextView
-            android:id="@+id/roomName123456"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="roomName"
+            android:text="title"
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/managerName"
+            android:id="@+id/tv_managerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"

@@ -25,11 +25,11 @@ public interface NetworkService {
     Call<ResponseBody> post_roomList(@Field("sess")String sess);
     @FormUrlEncoded
     @POST("/room/add/")
-    Call<ResponseBody> post_roomAdd(@Field("sess")String sess,@Field("name")String roomName,@Field("subject")String subject);
+    Call<ResponseBody> post_roomAdd(@Field("sess")String sess,@Field("title")String title,@Field("subject")String subject);
     @FormUrlEncoded
     @POST("/room/addUser")
-    Call<ResponseBody> post_roomAddUser(@Field("sess")String sess,@Field("roomName")String roomName);
+    Call<ResponseBody> post_roomAddUser(@Field("sess")String sess,@Field("title")String title);
     @FormUrlEncoded
     @POST("/user/list")
-    Call<ResponseBody> post_userList(@Field("roomName")String roomName);
+    Call<ResponseBody> post_userList(@Field("title")String title);
 }
