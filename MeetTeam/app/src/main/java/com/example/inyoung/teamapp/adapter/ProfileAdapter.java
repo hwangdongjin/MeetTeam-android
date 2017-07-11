@@ -53,7 +53,6 @@ public class ProfileAdapter extends BaseAdapter {
         TextView mContent;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 

@@ -34,10 +34,6 @@ import retrofit.Retrofit;
 
 import static com.example.inyoung.teamapp.R.id.btn_enter;
 
-/**
- * Created by inyoung on 2017-02-02.
- */
-
 public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
 
     private ArrayList<RoomDTO> roomList;
@@ -46,36 +42,26 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
     private Context context;
     private NetworkService networkService;
     private ApplicationController application;
-    TextView tv_roomName;
-    String roomName12;
-    SharedPreferenceUtil roomDB;
+    TextView tv_title;
     JSONArray jsonArray1;
     JSONObject jsonObject1;
     static int itemNum;
 
-
     public RoomRecyclerViewAdapter(ArrayList<RoomDTO> roomList, Context context) {
-
         this.roomList = roomList;
         this.context = context;
-
-
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements Serializable {
-
-        private TextView roomName;
+        private TextView title;
         private TextView chiefName;
         private Button btnAdd;
-        RecyclerView recyclerView;
-
 
         public ViewHolder(View itemView) {
             super(itemView);
-            roomName = (TextView) itemView.findViewById(R.id.roomName123456);
-            chiefName = (TextView) itemView.findViewById(R.id.managerName);
+            title = (TextView) itemView.findViewById(R.id.tv_title);
+            chiefName = (TextView) itemView.findViewById(R.id.tv_managerName);
             btnAdd = (Button) itemView.findViewById(btn_enter);
-
         }
     }
 
@@ -88,79 +74,47 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
 
     @Override
     public void onBindViewHolder(RoomRecyclerViewAdapter.ViewHolder holder,final int position) {
-
-
-
-        holder.roomName.setText(roomList.get(holder.getAdapterPosition()).getRoom_Name());
+        holder.title.setText(roomList.get(holder.getAdapterPosition()).getRoom_Title());
         holder.chiefName.setText(roomList.get(holder.getAdapterPosition()).getManager_Name());
         Log.i("Mytag", "testbody:" + roomList.get(0));
         holder.btnAdd.setOnClickListener(this);
         itemNum = holder.btnAdd.getId();
-
     }
 
     @Override
     public int getItemCount() {
-
         return roomList.size();
- }
-
-
+     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case btn_enter:
-
-
-                tv_roomName = (TextView) v.findViewById(R.id.roomName123456);
+                tv_title = (TextView) v.findViewById(R.id.tv_title);
                 //roomName12 = tv_roomName.getText().toString();
                 application = ApplicationController.getInstance();
-                application.buildNetworkService("52.78.39.253", 7530);
+                application.buildNetworkService();
                 networkService = ApplicationController.getInstance().getNetworkService();
                 Call<ResponseBody> thumbnailCall = networkService.post_userList("공설팀플");
                 thumbnailCall.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-
-
                         if (response.isSuccess()){
-
                             try {
-
                                 jsonArray1= new JSONArray(response.body().string());
                                 userList = new ArrayList<>();
-
                                 for(int i=0;i<jsonArray1.length();i++){
-
-
                                     jsonObject1 = jsonArray1.getJSONObject(i);
                                     userList.add(new UserListDTO((String) jsonObject1.get("name")));
-
-
-
-
                                 }
-
-
-
                                 Intent intent = new Intent();
                                 intent.setClass(context, ViewPagerActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
                                 intent.putExtra("test",userList);
                                 context.startActivity(intent);
 
-
-
-
-
-
-
-
                                     Log.i("my","userlist:"+userList.get(0).getName());
                                     Log.i("mt","temp"+temp);
-
                             }
                             catch (IOException e) {
                                 e.printStackTrace();
@@ -168,29 +122,15 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
                             catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
-
                         }
-
                     }
 
                     @Override
                     public void onFailure(Throwable t) {
-
                     }
                 });
-
-
-
-
-
                 break;
 
-
         }
-
-
     }
-
-
 }

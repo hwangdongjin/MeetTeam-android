@@ -15,27 +15,21 @@ import retrofit.http.POST;
  */
 
 public interface NetworkService {
-
-
     @POST("/user/add")
-    Call<UserDTO> post_food(@Body UserDTO userDTO);
+    Call<UserDTO> post_userAdd(@Body UserDTO userDTO);
     @FormUrlEncoded
     @POST("/user/login/")
     Call<ResponseBody> post_login(@Field("id")String id,@Field("password")String password);
     @FormUrlEncoded
     @POST("/room/list/")
-    Call<ResponseBody> post_room(@Field("sess")String sess);
+    Call<ResponseBody> post_roomList(@Field("sess")String sess);
     @FormUrlEncoded
     @POST("/room/add/")
-    Call<ResponseBody> post_add(@Field("sess")String sess,@Field("name")String roomName,@Field("subject")String subject);
+    Call<ResponseBody> post_roomAdd(@Field("sess")String sess,@Field("title")String title,@Field("subject")String subject);
     @FormUrlEncoded
     @POST("/room/addUser")
-    Call<ResponseBody> post_addUser(@Field("sess")String sess,@Field("roomName")String roomName);
+    Call<ResponseBody> post_roomAddUser(@Field("sess")String sess,@Field("title")String title);
     @FormUrlEncoded
     @POST("/user/list")
-    Call<ResponseBody> post_userList(@Field("roomName")String roomName);
-
-
-
-
+    Call<ResponseBody> post_userList(@Field("title")String title);
 }

@@ -5,19 +5,18 @@ package com.example.inyoung.teamapp.dto;
  */
 
 public class RoomDTO {
-    private String room_Name;
+    private String room_Title;
     private String manager_Name;
     private int postion;
 
-    public RoomDTO(String room_Name, String manager_Name,int position) {
-        this.room_Name = room_Name;
+    public RoomDTO(String room_Title, String manager_Name,int position) {
+        this.room_Title = room_Title;
         this.manager_Name = manager_Name;
         this.postion=position;
-
     }
 
-    public String getRoom_Name() {
-        return room_Name;
+    public String getRoom_Title() {
+        return room_Title;
     }
 
     public String getManager_Name() {
@@ -25,5 +24,4 @@ public class RoomDTO {
     }
 
     public int getPostion(){return postion;}
-
 }

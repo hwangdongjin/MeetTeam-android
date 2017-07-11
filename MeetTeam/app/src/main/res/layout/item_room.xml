@@ -26,16 +26,16 @@
             android:textSize="10sp" />
 
         <TextView
-            android:id="@+id/roomName123456"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="roomName"
-            android:textSize="30sp"
+            android:text="title"
+            android:textSize="30sp" 
             android:textColor="#5a595b"/>
-
+      
         <TextView
-            android:id="@+id/managerName"
+            android:id="@+id/tv_managerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
