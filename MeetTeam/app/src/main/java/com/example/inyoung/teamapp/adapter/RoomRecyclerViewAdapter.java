@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.example.inyoung.teamapp.ApplicationController;
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
-import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.ViewPagerActivity;
 import com.example.inyoung.teamapp.dto.RoomDTO;
 import com.example.inyoung.teamapp.dto.UserListDTO;

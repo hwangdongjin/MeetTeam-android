@@ -24,36 +24,12 @@
             android:layout_marginLeft="270dp"
             android:textSize="10sp" />
 
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:id="@+id/manager_checkbox"
-            android:gravity="center_vertical|center_horizontal|start"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="60dp" />
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:id="@+id/manager_Name"
-            android:layout_marginLeft="190dp"
-            android:layout_marginTop="67dp"
-            android:layout_width="wrap_content"
-            android:text="manager" />
-
         <TextView
             android:text="CheckRoomName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/CheckRoomName"
             android:gravity="center_vertical|center_horizontal" />
-
-        <TextView
-            android:text="manager_do"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/manager_do"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="67dp" />
 
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
@@ -67,9 +43,9 @@
             android:progress="0"/>
 
         <android.support.v7.widget.RecyclerView
-            android:layout_width="124dp"
-            android:layout_height="77dp"
-            android:layout_marginTop="95dp"
+            android:layout_width="242dp"
+            android:layout_height="113dp"
+            android:layout_marginTop="65dp"
             android:layout_marginLeft="25dp"
             android:id="@+id/checkbox_view"/>
 
