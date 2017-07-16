@@ -2,6 +2,7 @@ package com.example.inyoung.teamapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +42,8 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
         public ViewHolder(View itemView) {
 
             super(itemView);
-            manager_Do=(TextView)itemView.findViewById(R.id.manager_do);
-            manager_Name=(TextView) itemView.findViewById(R.id.manager_Name);
+            manager_Do=(TextView)itemView.findViewById(R.id.manager_do11);
+            manager_Name=(TextView) itemView.findViewById(R.id.manager_Name11);
             checkBox= (CheckBox) itemView.findViewById(R.id.manager_checkbox);
             progressBar= (ProgressBar) itemView.findViewById(R.id.progressBar);
 
@@ -61,9 +62,9 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
     @Override
     public void onBindViewHolder(final CheckListAddRecyclerViewAdapter.ViewHolder holder, int position) {
 
-        CheckAddDTO checkAddDTO =  checkList.get(position);
-        holder.manager_Do.setText(checkAddDTO.getManager_Do());
-        holder.manager_Name.setText(checkAddDTO.getManager_Name());
+        holder.manager_Do.setText(checkList.get(position).getManager_Do());
+        holder.manager_Name.setText(checkList.get(position).getManager_Name());
+        Log.i("mytag","size"+checkList.size());
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +81,6 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
 
     @Override
     public int getItemCount() {
-
 
 
         return checkList.size();

@@ -38,32 +38,35 @@ public class CheckListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragement_check_list, container, false);
+        initRecyclerView(view);
         initButton(view);
-
         return view;
     }
     private void initRecyclerView(View view) {
         Log.i("태그","initRecyclerView");
         chatView = (RecyclerView) view.findViewById(R.id.chatView);
         chatView.setHasFixedSize(true);
+        chatList= new ArrayList<>();
+        chatList.add(new CheckListDTO("야호"));
         roAdapter = new CheckListRecyclerViewAdapter(chatList, getContext());
         chatView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         chatView.setAdapter(roAdapter);
 
     }
 
-    private void initButton(final View view) {
+    private void initButton(View view) {
         Log.i("태그","initAddRoom");
         btnAdd = (Button)view.findViewById(R.id.btn_add);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                checkListDTO = new CheckListDTO();
-                checkListDTO.setCheckRoom_Name("CheckList");
-                chatList=new ArrayList<CheckListDTO>();
-                chatList.add(new CheckListDTO("CheckList"));
-                initRecyclerView(view);
+                chatList.add(0,new CheckListDTO("CheckList"));
+                roAdapter.notifyItemInserted(0);
+                roAdapter.notifyDataSetChanged();
+
+
+
 
 
 
