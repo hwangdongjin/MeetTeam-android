@@ -18,20 +18,27 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ListroomActivity" />
         <activity android:name=".ViewPagerActivity" />
         <activity android:name=".JoinActivity" />
-        <activity android:name=".MapActivity"/>
+        <activity android:name=".MapActivity" />
 
         <meta-data
-        android:name="com.google.android.maps.v2.API_KEY"
-        android:value="AIzaSyBgBfYp0hgqG47S2miwNkQm3iWbLNxLaKk"/>
-    <meta-data
-        android:name="com.google.android.gms.version"
-        android:value="@integer/google_play_services_version"/>
-</application>
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBgBfYp0hgqG47S2miwNkQm3iWbLNxLaKk" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".ListroomActivity1" />
+        <activity android:name=".fragment.ListroomFragment1" />
+        <activity android:name=".fragment.ListroomFragment2" />
+        <activity android:name=".fragment.ListroomFragment3" />
+        <activity android:name=".adapter.ListroomAdapter"></activity>
+    </application>
 
 </manifest>

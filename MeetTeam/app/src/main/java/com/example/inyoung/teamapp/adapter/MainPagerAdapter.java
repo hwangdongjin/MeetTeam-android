@@ -33,13 +33,13 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
         //pageNum은 ViewPagerActivity에서 tabs.getCount();
         switch (pageNum){
             case 0:
-                fragment = MemberlistFragment.newInstance(userList,Num);
+                fragment = new CheckListFragment();
                 break;
             case 1:
                 fragment = new TimeTableFragment();
                 break;
             case 2:
-                fragment = new CheckListFragment();
+                fragment = MemberlistFragment.newInstance(userList,Num);
                 break;
             case 3:
                 fragment = ConfigureFragment.newInstance("forth", "Configure");
