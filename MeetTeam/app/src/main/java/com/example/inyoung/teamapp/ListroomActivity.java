@@ -158,6 +158,7 @@ public class ListroomActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 roomAddDlg();
 
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
