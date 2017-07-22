@@ -1,11 +1,9 @@
 package com.example.inyoung.teamapp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,9 +24,6 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
     private MainPagerAdapter mainPagerAdapter;
     ArrayList<UserListDTO> userDTO;
     private Toolbar toolbar;
-    private AlertDialog.Builder dlg;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +31,6 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
         setContentView(R.layout.activity_view_pager);
         Intent intent = getIntent();
         userDTO= (ArrayList<UserListDTO>) intent.getSerializableExtra("test");
-
-
 
         //String test = userList.get(0).getName();
        Log.i("mytag","test"+userDTO.get(0).getName());
@@ -57,7 +50,6 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()){
             case android.R.id.home:
                 finish();
@@ -68,12 +60,8 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
             case R.id.op_time:
                 Toast.makeText(ViewPagerActivity.this,"최근", Toast.LENGTH_SHORT).show();
                 break;
-
-
-
         }
         return super.onOptionsItemSelected(item);
-
     }
 
     @Override
@@ -87,19 +75,17 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
 //        return super.onPrepareOptionsMenu(menu);
 //    }
 
-
-
     private void initViewPaging(){
         mainViewPagerActivity = (ViewPager)findViewById(R.id.mainViewPager);
         tabs = (TabLayout)findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("그룹").setIcon(android.R.drawable.ic_dialog_info));
-        tabs.addTab(tabs.newTab().setText("모임"));
-        tabs.addTab(tabs.newTab().setText("진행률"));
-        tabs.addTab(tabs.newTab().setText("설정"));
-        tabs.setSelectedTabIndicatorColor(Color.BLACK);
+        tabs.addTab(tabs.newTab().setText("그룹").setIcon(R.drawable.memberiicon_black));
+        tabs.addTab(tabs.newTab().setText("모임").setIcon(R.drawable.meetingicon_black));
+        tabs.addTab(tabs.newTab().setText("진행률").setIcon(R.drawable.checklisticon_black));
+        tabs.addTab(tabs.newTab().setText("설정").setIcon(R.drawable.settingicon_black));
+        
+        //tabs.setSelectedTabIndicatorColor(Color.BLACK);
 
         mainViewPagerActivity.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
-
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -122,7 +108,5 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
     private void initAdapter() {
         mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tabs.getTabCount(),userDTO,Integer.valueOf(userDTO.size()));
         mainViewPagerActivity.setAdapter(mainPagerAdapter);
-
     }
-
 }

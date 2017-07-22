@@ -7,12 +7,12 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
         android:layout_marginBottom="10dp"
         app:cardBackgroundColor="#515050"
         app:cardCornerRadius="10dp"
         app:cardPreventCornerOverlap="true"
-        app:contentPadding="5dp">
+        app:contentPadding="5dp"
+        android:layout_height="268dp">
 
 
         <Button
@@ -24,36 +24,12 @@
             android:layout_marginLeft="270dp"
             android:textSize="10sp" />
 
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:id="@+id/manager_checkbox"
-            android:gravity="center_vertical|center_horizontal|start"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="60dp" />
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:id="@+id/manager_Name"
-            android:layout_marginLeft="190dp"
-            android:layout_marginTop="67dp"
-            android:layout_width="wrap_content"
-            android:text="manager" />
-
         <TextView
             android:text="CheckRoomName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/CheckRoomName"
             android:gravity="center_vertical|center_horizontal" />
-
-        <TextView
-            android:text="manager_do"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/manager_do"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="67dp" />
 
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
@@ -66,13 +42,6 @@
             android:max="100"
             android:progress="0"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="124dp"
-            android:layout_height="77dp"
-            android:layout_marginTop="95dp"
-            android:layout_marginLeft="25dp"
-            android:id="@+id/checkbox_view"/>
-
         <Button
             android:id="@+id/checkbox_add"
             android:layout_width="wrap_content"
@@ -80,6 +49,13 @@
             android:text="체크추가"
             android:layout_marginTop="95dp"
             android:layout_marginLeft="270dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="25dp"
+            android:id="@+id/checkbox_view"
+            android:layout_width="250dp"
+            android:layout_height="195dp" />
 
     </android.support.v7.widget.CardView>
 

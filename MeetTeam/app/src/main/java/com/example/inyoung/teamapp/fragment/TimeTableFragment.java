@@ -1,5 +1,6 @@
 package com.example.inyoung.teamapp.fragment;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,10 +26,14 @@ import com.example.inyoung.teamapp.R;
 public class TimeTableFragment extends Fragment {
     private AlertDialog.Builder dlg;
     EditText name,edtTimeOk,edtPlaceOk;
-    Button TimeSelectButton,PlaceSelectButton;
+    //Button TimeSelectButton,PlaceSelectButton;
     TextView text1,timeText,placeText;
     View view;
 
+    Button DateSelectButton;
+    TextView DateSelectView;
+
+    Button MapSelectButton;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -35,8 +41,18 @@ public class TimeTableFragment extends Fragment {
         text1=(TextView) view.findViewById(R.id.TableText1);
         timeText=(TextView) view.findViewById(R.id.textViewTimeOk);
         placeText=(TextView)view.findViewById(R.id.textViewPlaceOk) ;
-        TimeSelectButton=(Button)view.findViewById(R.id.TimeSelectButton);
-        PlaceSelectButton=(Button) view.findViewById(R.id.PlaceSelectButton);
+        //TimeSelectButton=(Button)view.findViewById(R.id.TimeSelectButton);
+        // PlaceSelectButton=(Button) view.findViewById(R.id.PlaceSelectButton);
+
+
+        DateSelectButton=(Button) view.findViewById(R.id.DateSelectButton);
+        DateSelectView = (TextView) view.findViewById(R.id.DateSelectView);
+
+
+        MapSelectButton = (Button) view.findViewById(R.id.MapSelectButton);
+
+
+        /*
         TimeSelectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +102,8 @@ public class TimeTableFragment extends Fragment {
 
             }
         });
+        */
+
         text1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -106,6 +124,9 @@ public class TimeTableFragment extends Fragment {
                 return true;
             }
         });
+
+
+        /*
         placeText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -114,14 +135,38 @@ public class TimeTableFragment extends Fragment {
                 startActivity(intent2);
                 return true;
             }
+        });*/
+
+
+
+
+        final DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                DateSelectView.setText(year+"년"+month+"월"+dayOfMonth+"일");
+            }
+        };
+
+        DateSelectButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog dialog = new DatePickerDialog(getContext(),listener,2017,07,03);
+                dialog.show();
+            }
+
+
+
         });
 
 
-
-
-
-
-
+        MapSelectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent();
+                intent2.setClass(getContext(), MapActivity.class);
+                startActivity(intent2);
+            }
+        });
 
 
 
