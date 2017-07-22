@@ -1,7 +1,6 @@
 package com.example.inyoung.teamapp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -84,7 +83,7 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
         tabs.addTab(tabs.newTab().setText("그룹"));
         tabs.addTab(tabs.newTab().setText("설정"));
         tabs.setSelectedTabIndicatorColor(Color.BLACK);
-
+      
         mainViewPagerActivity.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
