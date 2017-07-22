@@ -3,12 +3,10 @@ package com.example.inyoung.teamapp.fragment;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,7 +14,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.inyoung.teamapp.MapActivity;
 import com.example.inyoung.teamapp.R;
 
 /**
@@ -25,118 +22,53 @@ import com.example.inyoung.teamapp.R;
 
 public class TimeTableFragment extends Fragment {
     private AlertDialog.Builder dlg;
-    EditText name,edtTimeOk,edtPlaceOk;
-    //Button TimeSelectButton,PlaceSelectButton;
-    TextView text1,timeText,placeText;
+    EditText name,edt_tableName;
+    TextView text1;
+    TextView timeText;
+    TextView placeText;
     View view;
+    static int textId;
 
     Button DateSelectButton;
     TextView DateSelectView;
 
-    Button MapSelectButton;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_time_table, container, false);
-        text1=(TextView) view.findViewById(R.id.TableText1);
         timeText=(TextView) view.findViewById(R.id.textViewTimeOk);
         placeText=(TextView)view.findViewById(R.id.textViewPlaceOk) ;
-        //TimeSelectButton=(Button)view.findViewById(R.id.TimeSelectButton);
-        // PlaceSelectButton=(Button) view.findViewById(R.id.PlaceSelectButton);
-
-
         DateSelectButton=(Button) view.findViewById(R.id.DateSelectButton);
         DateSelectView = (TextView) view.findViewById(R.id.DateSelectView);
-
-
-        MapSelectButton = (Button) view.findViewById(R.id.MapSelectButton);
-
-
-        /*
-        TimeSelectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dlg = new AlertDialog.Builder(view.getContext());
-                LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View view1 = inflater.inflate(R.layout.item_time_ok,null, false);
-                edtTimeOk=(EditText)view1.findViewById(R.id.editTextTimeOk);
-                dlg.setView(view1);
-                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        timeText.setText(edtTimeOk.getText().toString());
-
-
-
-                    }
-                });
-                dlg.setNegativeButton("취소", null);
-                dlg.show();
-
-
-            }
-        });
-        PlaceSelectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dlg = new AlertDialog.Builder(view.getContext());
-                LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View view1 = inflater.inflate(R.layout.item_place_ok,null, false);
-                edtPlaceOk=(EditText)view1.findViewById(R.id.editTextPlaceOk);
-                dlg.setView(view1);
-                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        placeText.setText(edtPlaceOk.getText().toString());
-
-
-
-                    }
-                });
-                dlg.setNegativeButton("취소", null);
-                dlg.show();
-
-
-
-            }
-        });
-        */
-
-        text1.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                dlg = new AlertDialog.Builder(view.getContext());
-                LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View view1 = inflater.inflate(R.layout.item_time_selecter,null, false);
-                name = (EditText) view1.findViewById(R.id.editTextName);
-                dlg.setView(view1);
-                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        text1.setText(name.getText().toString());
-                    }
-                });
-                dlg.setNegativeButton("취소", null);
-                dlg.show();
-                return true;
-            }
-        });
-
-
-        /*
-        placeText.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Intent intent2 = new Intent();
-                intent2.setClass(getContext(), MapActivity.class);
-                startActivity(intent2);
-                return true;
-            }
-        });*/
-
+        view.findViewById(R.id.TableText0).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText1).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText2).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText3).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText4).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText5).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText6).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText7).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText8).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText9).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText10).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText11).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText12).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText13).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText14).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText15).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText16).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText17).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText18).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText19).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText20).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText21).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText22).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText23).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText24).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText25).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText26).setOnClickListener(onClick);
+        view.findViewById(R.id.TableText27).setOnClickListener(onClick);
 
 
 
@@ -158,21 +90,141 @@ public class TimeTableFragment extends Fragment {
 
         });
 
+        return  view;
 
-        MapSelectButton.setOnClickListener(new View.OnClickListener() {
+
+
+    }
+
+    public void initDialog(View view,int textId){
+
+        dlg = new AlertDialog.Builder(view.getContext());
+        text1= (TextView) view.findViewById(textId);
+        LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view1 = inflater.inflate(R.layout.item_time_selecter,null, false);
+        name = (EditText) view1.findViewById(R.id.edt_tableName);
+        dlg.setView(view1);
+        dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent();
-                intent2.setClass(getContext(), MapActivity.class);
-                startActivity(intent2);
+            public void onClick(DialogInterface dialog, int which) {
+
+                text1.append(name.getText().toString()+"\n");
+
             }
         });
 
+        dlg.setNegativeButton("취소", null);
+        dlg.show();
+
+    }
+
+    TextView.OnClickListener onClick =  new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            switch (v.getId()){
+
+                case R.id.TableText0:
+                    textId=R.id.TableText0;
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText1:
+                    textId=R.id.TableText1;
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText2:
+                    textId=R.id.TableText2;
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText3:
+                    textId=R.id.TableText3;
+                    initDialog(view,textId);
+                case R.id.TableText4:
+                    textId=R.id.TableText4;
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText5:
+                    textId=R.id.TableText5;
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText6:
+                    textId=R.id.TableText6;
+                    initDialog(view,textId);
+                case R.id.TableText7:
+                    textId=R.id.TableText7;
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText8:
+                    textId=R.id.TableText8;
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText9:
+                    textId=R.id.TableText9;
+                    initDialog(view,textId);
+                case R.id.TableText10:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText11:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText12:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText13:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText14:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText15:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText16:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText17:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText18:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText19:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText20:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText21:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText22:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText23:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText24:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText25:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText26:
+                    initDialog(view,textId);
+                    break;
+                case R.id.TableText27:
+                    initDialog(view,textId);
+                    break;
+
+
+            }
+
+        }
+    };
 
 
 
 
-        return  view;
 
 
 
@@ -183,4 +235,4 @@ public class TimeTableFragment extends Fragment {
 
 
 
-}
+
