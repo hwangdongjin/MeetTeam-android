@@ -78,10 +78,10 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
     private void initViewPaging(){
         mainViewPagerActivity = (ViewPager)findViewById(R.id.mainViewPager);
         tabs = (TabLayout)findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("그룹").setIcon(R.drawable.memberiicon_black));
-        tabs.addTab(tabs.newTab().setText("모임").setIcon(R.drawable.meetingicon_black));
-        tabs.addTab(tabs.newTab().setText("진행률").setIcon(R.drawable.checklisticon_black));
-        tabs.addTab(tabs.newTab().setText("설정").setIcon(R.drawable.settingicon_black));
+        tabs.addTab(tabs.newTab().setIcon(R.drawable.memberiicon_black));
+        tabs.addTab(tabs.newTab().setIcon(R.drawable.meetingicon_black));
+        tabs.addTab(tabs.newTab().setIcon(R.drawable.checklisticon_black));
+        tabs.addTab(tabs.newTab().setIcon(R.drawable.settingicon_black));
         
         //tabs.setSelectedTabIndicatorColor(Color.BLACK);
 
