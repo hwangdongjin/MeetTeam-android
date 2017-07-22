@@ -21,6 +21,7 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
     private static int Num = 0;
     private int pagerNum;
 
+
     public MainPagerAdapter(FragmentManager fm, int pagerNum, ArrayList<UserListDTO> userList,int Num) {
         super(fm);
         this.pagerNum = pagerNum;
@@ -37,16 +38,23 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
                 break;
             case 1:
                 fragment = new TimeTableFragment();
+
+
                 break;
             case 2:
                 fragment = new CheckListFragment();
                 break;
             case 3:
                 fragment = ConfigureFragment.newInstance("forth", "Configure");
+
                 break;
+
+
         }
         return fragment;
     }
+
+
 
     //포지션에따라서 프래그먼트가 바뀌도록
     @Override

@@ -1,7 +1,6 @@
 package com.example.inyoung.teamapp;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -44,211 +43,185 @@ import retrofit.Retrofit;
 public class ListroomActivity extends AppCompatActivity {
 
     private RecyclerView chatView;
+    private Retrofit retrofit;
     private ArrayList<RoomDTO> chatList;
+    private RoomDTO roomDTO;
     private RoomRecyclerViewAdapter roAdapter;
     private RecyclerView.LayoutManager manager;
-
-    private Button btnAdd, btnSearch;
+    private Button btnAdd;
+    private Button btnSearch;
+    private AlertDialog.Builder dlg;
     private Toolbar toolbar;
     private ActionBarDrawerToggle mainTogle;
     private DrawerLayout drawer;
     private NavigationView nav_view;
-    private AlertDialog.Builder dlg;
-    EditText edt_title, edt_subject;
-    View view;
-    String title, subject;
-
-    Intent intent;
-
-    SharedPreferences sessDB;
     private NetworkService networkService;
     private ApplicationController application;
     public JSONArray jsonArray;
     public JSONObject jsonObject;
+    private AlertDialog.Builder dig;
+    SharedPreferences sessDB;
+    public String cheifName;
+    public EditText roomName,roomSubject;
+    View view;
+    LayoutInflater inflater;
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        application = ApplicationController.getInstance();
-        application.buildNetworkService();
-        networkService = ApplicationController.getInstance().getNetworkService();
-
+        Log.i("태그","onCreate");
         LayoutInflater inflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.activity_listroom, null, false);
-        //Intent intent2 = getIntent();
+        Intent intent2 = getIntent();
 
         initButton(view);
         initRecyclerView(view);
         setContentView(view);
         initToolBar();
+        boolean respone_add=intent2.getBooleanExtra("add",false);
+        boolean respone_search=intent2.getBooleanExtra("search",false);
+        if(respone_add=true){
+            initRecyclerView(view);
+        }
+        else{
+            Toast.makeText(application, "방 만들기 실패", Toast.LENGTH_SHORT).show();
+        }
+        if (respone_search = true) {
+            initRecyclerView(view);
+        }
+        else{
+            Toast.makeText(application, "방 찾기 실패", Toast.LENGTH_SHORT).show();
+        }
 
-//        boolean respone_add=intent2.getBooleanExtra("add",false);
-//        boolean respone_search=intent2.getBooleanExtra("search",false);
-//
-//        if(respone_add=true){
-//            initRecyclerView(view);
-//        }
-//        else{
-//            Toast.makeText(application, "방 만들기 실패", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        if (respone_search = true) {
-//            initRecyclerView(view);
-//        }
-//        else{
-//            Toast.makeText(application, "방 찾기 실패", Toast.LENGTH_SHORT).show();
-//        }
+
     }
 
     private void initRecyclerView(final View view)  {
-
-
+        application = ApplicationController.getInstance();
+        application.buildNetworkService("52.78.39.253", 7530);
+        networkService = ApplicationController.getInstance().getNetworkService();
+        Log.i("태그","initRecyclerView");
         sessDB = getSharedPreferences("sessDB",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sessDB.edit();
 
-        Call<ResponseBody> thumbnailCall = networkService.post_roomList(sessDB.getString("session","error"));
+        Log.i("Mytag","getsess"+sessDB.getString("session","error"));
+        Call<ResponseBody> thumbnailCall = networkService.post_room(sessDB.getString("session","error"));
         thumbnailCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+
+
                 if (response.isSuccess()){
+
                     try {
+
                         jsonArray= new JSONArray(response.body().string());
                         chatList= new ArrayList<>();
+                        for(int i=0;i<jsonArray.length();i++){
 
-                        for(int i=0; i<jsonArray.length(); i++){
+
                             jsonObject = jsonArray.getJSONObject(i);
-                            chatList.add(new RoomDTO((String) jsonObject.get("title"), (String) jsonObject.get("chiefName"),i));
-                        }
+                            chatList.add(new RoomDTO((String) jsonObject.get("name"), (String) jsonObject.get("chiefName"),i));
 
+
+                        }
+                        Log.i("mytag","responseBody:"+jsonArray.getJSONObject(0));
                         chatView = (RecyclerView) view.findViewById(R.id.chatView);
                         chatView.setHasFixedSize(true);
                         iniiLayoutManager(view);
-
                         roAdapter = new RoomRecyclerViewAdapter(chatList,getApplicationContext());
                         chatView.setAdapter(roAdapter);
-                    }
 
+
+                    }
                     catch (IOException e) {
                         e.printStackTrace();
                     }
-
                     catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+
                 }
 
             }
+
             @Override
             public void onFailure(Throwable t) {
-            }
 
+            }
         });
+
+
+
     }
     private void iniiLayoutManager(View view) {
         Log.i("태그","iniiLayoutManager");
         manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         chatView.setLayoutManager(manager);
+
+
     }
 
     private void initButton(View view) {
         Log.i("태그","initAddRoom");
         btnAdd = (Button)view.findViewById(R.id.btn_add);
         btnSearch=(Button)view.findViewById(R.id.btn_search);
-
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                roomAddDlg();
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(),RoomAddActivity.class);
+                startActivity(intent);
 
-                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-
-                        title = edt_title.getText().toString();
-                        subject = edt_subject.getText().toString();
-                        sessDB = getSharedPreferences("sessDB",MODE_PRIVATE);
-
-                        Call<ResponseBody> thum= networkService.post_roomAdd(sessDB.getString("session","error"),title, subject);
-                        thum.enqueue(new Callback<ResponseBody>() {
-                            @Override
-                            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                                if(response.isSuccess()){
-                                    intent = new Intent();
-                                    intent.setClass(getApplicationContext(),ListroomActivity.class);
-                                    intent.putExtra("add",true);
-                                    startActivity(intent);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Throwable t) {
-                            }
-                        });
-                    }
-                });
-                dlg.setNegativeButton("취소", null);
-                dlg.show();
             }
         });
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                roomEnterDlg();
-                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
 
-                        title = edt_title.getText().toString();
-                        sessDB = getSharedPreferences("sessDB",MODE_PRIVATE);
 
-                        Call<ResponseBody> thum= networkService.post_roomAddUser(sessDB.getString("session","error"),title);
-                        thum.enqueue(new Callback<ResponseBody>() {
-                            @Override
-                            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                                if(response.isSuccess()){
-                                    intent = new Intent();
-                                    intent.setClass(getApplicationContext(),ListroomActivity.class);
-                                    intent.putExtra("search",true);
-                                    startActivity(intent);
-                                }
-                            }
-                            @Override
-                            public void onFailure(Throwable t) {
-                            }
-                        });
-                    }
-                });
-                dlg.setNegativeButton("취소", null);
-                dlg.show();
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(),RoomSearchActivity.class);
+                startActivity(intent);
+
+
             }
         });
+
+
+
+
+
+
+
+
+
+
     }
 
-    private void roomAddDlg(){
+    /*private void initDialogBox(){
         dlg = new AlertDialog.Builder(this);
         LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.item_room_add, null, false);
-        edt_title = (EditText)view.findViewById(R.id.edt_title);
-        edt_subject = (EditText)view.findViewById(R.id.edt_subject);
+        View view = inflater.inflate(R.layout.item_adduser,null, false);
         dlg.setView(view);
-    }
 
-    private void roomEnterDlg(){
-        dlg = new AlertDialog.Builder(this);
-        LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.item_room_enter, null, false);
-        edt_title = (EditText)view.findViewById(R.id.edt_title);
-        dlg.setView(view);
-    }
+    }*/
 
     private void initToolBar() {
         toolbar =(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleMarginStart(30);
-        toolbar.setTitle("MeetTeam");
+        toolbar.setTitle("CADI");
+        //getSupportActionBar().setHomeAsUpIndicator(and);
+        //getSupportActionBar().setHomeAsUpIndicator(android.R.drawable.menu_frame);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initTogggleBtn();
@@ -285,11 +258,13 @@ public class ListroomActivity extends AppCompatActivity {
         drawer =(DrawerLayout)findViewById(R.id.drawer);
         nav_view =(NavigationView)findViewById(R.id.nav_view);
         mainTogle = new ActionBarDrawerToggle(ListroomActivity.this, drawer, R.string.open_drawer, R.string.close_drawer);
+
         drawer.addDrawerListener(mainTogle);
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 drawer.closeDrawer(Gravity.LEFT);
+
                 switch (item.getItemId()){
                     case R.id.nav_map:
                         Toast.makeText(ListroomActivity.this,"지도", Toast.LENGTH_SHORT).show();
@@ -311,4 +286,5 @@ public class ListroomActivity extends AppCompatActivity {
         super.onPostCreate(savedInstanceState);
         mainTogle.syncState();
     }
+
 }

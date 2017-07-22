@@ -5,26 +5,25 @@ package com.example.inyoung.teamapp.dto;
  */
 
 public class CheckListDTO {
-
-
     private String checkRoom_Name;
-
-    public CheckListDTO(){
-
-    }
+    private String manager_Name;
+    private String manager_Do;
 
 
-    public CheckListDTO(String checkRoom_Name) {
 
+
+    public CheckListDTO(String checkRoom_Name, String manager_Name,String manager_Do) {
         this.checkRoom_Name = checkRoom_Name;
-
-    }
-    public void setCheckRoom_Name(String checkRoom_Name) {
-        this.checkRoom_Name = checkRoom_Name;
+        this.manager_Name = manager_Name;
+        this.manager_Do=manager_Do;
     }
 
-    public String getCheck_RoomName() {
+    public String getCheck_RoomName() {return checkRoom_Name;}
 
-        return checkRoom_Name;}
+    public String getManager_Name() {
+        return manager_Name;
+    }
+
+    public  String getManager_Do(){return  manager_Do; }
 
 }

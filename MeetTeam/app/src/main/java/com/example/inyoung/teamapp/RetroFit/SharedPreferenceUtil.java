@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
  */
 
 public class SharedPreferenceUtil {
+
     public static final String APP_SHARED_PREFS = "thisApp.SharedPreference";
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -27,13 +28,16 @@ public class SharedPreferenceUtil {
     }
 
     public SharedPreferenceUtil(Context context) {
+
         this.sharedPreferences = context.getSharedPreferences(APP_SHARED_PREFS, Activity.MODE_PRIVATE);
         this.editor = sharedPreferences.edit();
 
     }
 
     public String getSess() {
+
         return sharedPreferences.getString("sess", "defValue");
+
     }
 
 }

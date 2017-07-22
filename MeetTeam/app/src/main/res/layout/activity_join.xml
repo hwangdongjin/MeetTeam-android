@@ -138,6 +138,9 @@
         android:textColor="#668cff"
         android:layout_marginTop="15dp"
         android:layout_gravity="center"
-        android:background="@drawable/btn_basic" />
+        android:background="@drawable/btn_basic"
+        />
+
+
 </LinearLayout>
 

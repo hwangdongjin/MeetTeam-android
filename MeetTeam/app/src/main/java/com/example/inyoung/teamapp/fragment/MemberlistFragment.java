@@ -140,7 +140,10 @@ public class MemberlistFragment extends Fragment {
         fListView = (ListView)view.findViewById(R.id.listView_profile);
         profileList = new ArrayList<>();
         for(int i=0;i<number;i++){
+
             profileList.add(new MemberDTO("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2000px-Facebook_icon.svg.png", userList.get(i).getName(), "서울지부 총괄 GM"));
+
+
 
         }
        /* profileList.add(new MemberDTO("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2000px-Facebook_icon.svg.png", "함성호", "서울지부 총괄 GM"));

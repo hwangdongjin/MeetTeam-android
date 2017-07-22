@@ -17,8 +17,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMarkerClickListener,GoogleMap.OnMapLongClickListener{
 
     GoogleMap mMap;
+
+
     String mylatitude="36.444445";
     String mylongitude="127.444555";
+
     Button map_findbutton;
     Button map_plusbutton;
     Button map_minusbutton;
@@ -38,7 +41,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         map_minusbutton.setOnClickListener(this);
         map_findbutton = (Button) findViewById(R.id.mapfr_find);
         map_findbutton.setOnClickListener(this);
+
+
+
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -46,8 +53,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         LatLng startingPoint = new LatLng(37.567174, 126.978158);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startingPoint,10));
         mMap.setOnMarkerClickListener(this);
+
+
+
         mMap.setOnMapLongClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -73,11 +84,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         Toast.makeText(getApplicationContext(),text, Toast.LENGTH_LONG).show();
         return false;
     }
+
+
     @Override
     public void onMapLongClick(LatLng latLng) {
         mMap.clear();
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
+
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.addMarker(markerOptions);
     }

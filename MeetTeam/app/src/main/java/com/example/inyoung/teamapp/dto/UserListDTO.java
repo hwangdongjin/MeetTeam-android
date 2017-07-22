@@ -7,15 +7,25 @@ import java.io.Serializable;
  */
 @SuppressWarnings("serial")
 public class UserListDTO implements Serializable{
+
+
     private String name;
 
     public UserListDTO(){};
 
     public UserListDTO (String name){
+
         this.name=name;
     }
+
+
+
+
 
     public String getName() {
         return name;
     }
+
+
+
 }
