@@ -78,11 +78,11 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
     private void initViewPaging(){
         mainViewPagerActivity = (ViewPager)findViewById(R.id.mainViewPager);
         tabs = (TabLayout)findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setIcon(R.drawable.memberiicon_black));
-        tabs.addTab(tabs.newTab().setIcon(R.drawable.meetingicon_black));
-        tabs.addTab(tabs.newTab().setIcon(R.drawable.checklisticon_black));
-        tabs.addTab(tabs.newTab().setIcon(R.drawable.settingicon_black));
-        //tabs.setSelectedTabIndicatorColor(Color.BLACK);
+        tabs.addTab(tabs.newTab().setIcon(R.drawable.checklist));
+        tabs.addTab(tabs.newTab().setIcon(R.drawable.meeting));
+        tabs.addTab(tabs.newTab().setIcon(R.drawable.membericon));
+        tabs.addTab(tabs.newTab().setIcon(R.drawable.settingicon));
+
       
         mainViewPagerActivity.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

@@ -1,6 +1,5 @@
 package com.example.inyoung.teamapp;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -33,10 +32,9 @@ public class ListroomActivity1 extends AppCompatActivity {
     private void initViewPaging() {
         listroomViewPagerActivity = (ViewPager)findViewById(R.id.listroomViewPager);
         listroomtabs = (TabLayout)findViewById(R.id.listroomtabs);
-        listroomtabs.addTab(listroomtabs.newTab().setText("리스트").setIcon(android.R.drawable.ic_dialog_info));
-        listroomtabs.addTab(listroomtabs.newTab().setText("방찾기"));
-        listroomtabs.addTab(listroomtabs.newTab().setText("설정"));
-        listroomtabs.setSelectedTabIndicatorColor(Color.BLACK);
+        listroomtabs.addTab(listroomtabs.newTab().setIcon(R.drawable.teamlist));
+        listroomtabs.addTab(listroomtabs.newTab().setIcon(R.drawable.plus));
+        listroomtabs.addTab(listroomtabs.newTab().setIcon(R.drawable.settingicon));
 
         listroomViewPagerActivity.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(listroomtabs));
 

@@ -12,18 +12,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/listroomtoolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/chatView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#ffffff"></android.support.v7.widget.RecyclerView>
+            android:background="#f7f7f7"></android.support.v7.widget.RecyclerView>
 
 
 
