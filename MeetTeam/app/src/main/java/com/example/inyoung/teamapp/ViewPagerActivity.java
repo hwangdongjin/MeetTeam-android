@@ -82,7 +82,7 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
         tabs.addTab(tabs.newTab().setText("모임"));
         tabs.addTab(tabs.newTab().setText("그룹"));
         tabs.addTab(tabs.newTab().setText("설정"));
-        tabs.setSelectedTabIndicatorColor(Color.BLACK);
+        //tabs.setSelectedTabIndicatorColor(Color.BLACK);
       
         mainViewPagerActivity.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
