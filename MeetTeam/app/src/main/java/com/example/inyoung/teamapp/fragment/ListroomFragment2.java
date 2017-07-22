@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -79,15 +81,32 @@ public class ListroomFragment2 extends Fragment {
                         session=sessDB.getString("session","error");
                         Log.i("mtage","titi:"+session);
                         networkService=ApplicationController.getInstance().getNetworkService();
-                        Call<ResponseBody> thum= networkService.post_roomAdd(session,"안녕", "후후");
+                        Call<ResponseBody> thum= networkService.post_roomAdd(session,title,subject);
                         thum.enqueue(new Callback<ResponseBody>() {
                                 @Override
                             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                                 if(response.isSuccess()){
-                                    intent = new Intent();
+                                    /*intent = new Intent();
                                     intent.setClass(view.getContext(),ListroomFragment1.class);
                                     intent.putExtra("add",true);
-                                    startActivity(intent);
+                                    startActivity(intent);*/
+
+                                    Fragment fragment = new ListroomFragment1();
+                                    FragmentManager fragmentManager = getFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.attach(fragment);
+                                    //fragmentTransaction.replace(R.id.listroomViewPager,fragment);
+
+                                    Bundle args = new Bundle();
+                                    args.putBoolean("add",true);
+                                    //args.putString("true","add");
+                                    //args.putString("add","true");
+
+
+                                    fragment.setArguments(args);
+
+                                    fragmentTransaction.commit();
+
                                 }
                             }
 
