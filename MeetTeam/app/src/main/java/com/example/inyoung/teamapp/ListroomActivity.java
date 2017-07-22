@@ -83,22 +83,6 @@ public class ListroomActivity extends AppCompatActivity {
         setContentView(view);
         initToolBar();
 
-//        boolean respone_add=intent2.getBooleanExtra("add",false);
-//        boolean respone_search=intent2.getBooleanExtra("search",false);
-//
-//        if(respone_add=true){
-//            initRecyclerView(view);
-//        }
-//        else{
-//            Toast.makeText(application, "방 만들기 실패", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        if (respone_search = true) {
-//            initRecyclerView(view);
-//        }
-//        else{
-//            Toast.makeText(application, "방 찾기 실패", Toast.LENGTH_SHORT).show();
-//        }
     }
 
     private void initRecyclerView(final View view)  {
@@ -112,6 +96,7 @@ public class ListroomActivity extends AppCompatActivity {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 if (response.isSuccess()){
                     try {
+
                         jsonArray= new JSONArray(response.body().string());
                         chatList= new ArrayList<>();
 
@@ -175,6 +160,7 @@ public class ListroomActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                                 if(response.isSuccess()){
+
                                     intent = new Intent();
                                     intent.setClass(getApplicationContext(),ListroomActivity.class);
                                     intent.putExtra("add",true);

@@ -25,6 +25,7 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
     private Context context;
 
 
+
     public CheckListAddRecyclerViewAdapter(ArrayList<CheckAddDTO> checkList,Context context){
 
         this.checkList=checkList;

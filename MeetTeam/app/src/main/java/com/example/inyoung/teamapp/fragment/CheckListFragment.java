@@ -66,10 +66,6 @@ public class CheckListFragment extends Fragment {
                 roAdapter.notifyDataSetChanged();
 
 
-
-
-
-
             }
         });
 

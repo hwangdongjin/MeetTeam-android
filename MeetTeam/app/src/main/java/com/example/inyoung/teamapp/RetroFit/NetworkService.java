@@ -3,6 +3,8 @@ package com.example.inyoung.teamapp.RetroFit;
 import com.example.inyoung.teamapp.dto.UserDTO;
 import com.squareup.okhttp.ResponseBody;
 
+import java.util.ArrayList;
+
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.Field;
@@ -32,4 +34,9 @@ public interface NetworkService {
     @FormUrlEncoded
     @POST("/user/list")
     Call<ResponseBody> post_userList(@Field("title")String title);
+    @FormUrlEncoded
+    @POST("/ttable/add")
+    Call<ResponseBody> post_ttableAdd(@Field("sess")String sess, @Field("roomTitle")String title, @Field("date")String date, @Field("times")ArrayList arrayList);
+
+
 }

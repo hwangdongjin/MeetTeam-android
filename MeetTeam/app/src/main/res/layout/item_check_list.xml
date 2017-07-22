@@ -12,8 +12,25 @@
         app:cardCornerRadius="10dp"
         app:cardPreventCornerOverlap="true"
         app:contentPadding="5dp"
-        android:layout_height="268dp">
+        android:layout_height="297dp">
 
+
+        <Button
+            android:text="UP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_up"
+            android:elevation="1dp"
+            android:layout_marginLeft="280dp"
+            android:layout_marginTop="100dp" />
+
+        <Button
+            android:text="down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_down"
+            android:layout_marginLeft="280dp"
+            android:layout_marginTop="150dp" />
 
         <Button
             android:text="등록하기"
@@ -42,20 +59,16 @@
             android:max="100"
             android:progress="0"/>
 
-        <Button
-            android:id="@+id/checkbox_add"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:text="체크추가"
-            android:layout_marginTop="95dp"
-            android:layout_marginLeft="270dp"/>
-
         <android.support.v7.widget.RecyclerView
             android:layout_marginTop="60dp"
             android:layout_marginLeft="25dp"
             android:id="@+id/checkbox_view"
-            android:layout_width="250dp"
-            android:layout_height="195dp" />
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+        </android.support.v7.widget.RecyclerView>
+
 
     </android.support.v7.widget.CardView>
 
