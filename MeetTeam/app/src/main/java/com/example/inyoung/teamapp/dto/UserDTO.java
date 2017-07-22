@@ -5,6 +5,8 @@ package com.example.inyoung.teamapp.dto;
  */
 
 public class UserDTO {
+
+
     private String id;
     private String password;
     private String name;
@@ -13,10 +15,8 @@ public class UserDTO {
     private String addr;
     private String email;
     private boolean isProfessor;
+    public  UserDTO(){}
 
-    public  UserDTO(){
-
-    }
 
     public UserDTO(String id, boolean isProfessor, String email, String addr, String phoneNum, int idNum, String name, String password) {
         this.id = id;
@@ -92,4 +92,6 @@ public class UserDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }

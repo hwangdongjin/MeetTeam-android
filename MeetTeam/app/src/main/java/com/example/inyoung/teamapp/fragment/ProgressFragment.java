@@ -74,6 +74,8 @@ public class ProgressFragment extends Fragment {
         }
     }
 
+
+
     @Override
     public void onDetach() {
         super.onDetach();

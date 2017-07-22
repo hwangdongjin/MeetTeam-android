@@ -3,18 +3,17 @@ package com.example.inyoung.teamapp.adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.inyoung.teamapp.R;
-import com.example.inyoung.teamapp.dto.CheckAddDTO;
 import com.example.inyoung.teamapp.dto.CheckListDTO;
 
 import java.util.ArrayList;
@@ -25,96 +24,141 @@ import java.util.ArrayList;
 
 public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckListRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
     private ArrayList<CheckListDTO> checkList;
-    private ArrayList<CheckAddDTO> checkAddList;
     private Context context;
     private int pageNumber;
     private AlertDialog.Builder dlg;
+    Button manager_Button;
+    Button member1,member2,member3,member4,member5,member6;
+    TextView managerName;
+    String memberSelect,memberFinal = "";
 
-    private CheckListAddRecyclerViewAdapter roAdapter;
-    EditText av,as;
-    String teamName,teamDo;
+
+
 
     public CheckListRecyclerViewAdapter(ArrayList<CheckListDTO> checkList, Context context) {
         this.checkList = checkList;
         this.context = context;
+
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView checkRoom_name;
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView checkRoom_name;
+        private TextView manager_Name;
+        private TextView manager_Do;
         private Button manager_Button;
+
+        private CheckBox checkBox;
+        private ProgressBar progressBar;
+
+
+        private EditText editText4;
+        private EditText editText5;
+
+
+
+
+
+        private RecyclerView checkbox_view;
         private Button checkbox_add;
-        private TextView manage_Name,manage_Do;
-        private RecyclerView check11;
+
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             checkRoom_name=(TextView)itemView.findViewById(R.id.CheckRoomName);
-            check11=(RecyclerView) itemView.findViewById(R.id.checkbox_view);
+            manager_Name=(TextView)itemView.findViewById(R.id.manager_Name);
+            manager_Do=(TextView) itemView.findViewById(R.id.manager_do);
             manager_Button=(Button) itemView.findViewById(R.id.manager_button);
+
+            checkBox=(CheckBox) itemView.findViewById(R.id.manager_checkbox);
+            progressBar=(ProgressBar) itemView.findViewById(R.id.progressBar);
+
+
+
+            editText4=(EditText) itemView.findViewById(R.id.editText4);
+            editText5=(EditText) itemView.findViewById(R.id.editText5);
+
+
+
+
+
+            checkbox_view=(RecyclerView) itemView.findViewById(R.id.checkbox_view);
             checkbox_add=(Button) itemView.findViewById(R.id.checkbox_add);
-            manage_Name= (TextView) itemView.findViewById(R.id.manager_Name11);
-            manage_Do= (TextView) itemView.findViewById(R.id.manager_do11);
+
+
         }
-
-
-
     }
 
     @Override
     public CheckListRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_check_list, parent,false);
         CheckListRecyclerViewAdapter.ViewHolder vholder = new CheckListRecyclerViewAdapter.ViewHolder(itemView);
+
+
+        //Fragment fragment = new checkboxfragment();
+
         return vholder;
     }
 
     @Override
-    public void onBindViewHolder(final CheckListRecyclerViewAdapter.ViewHolder holder, final int position) {
-
+    public void onBindViewHolder(final CheckListRecyclerViewAdapter.ViewHolder holder, int position) {
+        holder.manager_Name.setText(checkList.get(position).getManager_Name());
         holder.checkRoom_name.setText(checkList.get(position).getCheck_RoomName());
-        holder.checkbox_add.setOnClickListener(new View.OnClickListener() {
+        holder.manager_Do.setText(checkList.get(position).getManager_Do());
+
+
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkAddList.add(0,new CheckAddDTO("안녕","안녕"));
-                roAdapter.notifyItemInserted(0);
-                roAdapter.notifyDataSetChanged();
+                if(holder.checkBox.isChecked() == true)
+                    holder.progressBar.setProgress(100);
+                else
+                    holder.progressBar.setProgress(0);
             }
         });
+
+
+
         holder.manager_Button.setOnClickListener(new View.OnClickListener(){
+
             @Override
-            public void onClick(final View v) {
+            public void onClick(View v) {
+
                 dlg = new AlertDialog.Builder(v.getContext());
                 LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View view1 = inflater.inflate(R.layout.item_check_list_member2, null, false);
                 dlg.setView(view1);
-                final AlertDialog.Builder builder = dlg;
-                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        av = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText4);
-                        as = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText5);
-                        checkAddList = new ArrayList<>();
-                        checkAddList.add(new CheckAddDTO(av.getText().toString(),as.getText().toString()));
-                        Log.i("mytag","titi:"+checkAddList.get(0).getManager_Name());
-                        roAdapter = new CheckListAddRecyclerViewAdapter(checkAddList,context);
-                        holder.check11.setHasFixedSize(true);
-                        holder.check11.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
-                        holder.check11.setAdapter(roAdapter);
-                        roAdapter.notifyDataSetChanged();
 
+
+
+
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {
+                        EditText av = (EditText)((AlertDialog)dialog).findViewById(R.id.editText4);
+                        EditText as = (EditText)((AlertDialog)dialog).findViewById(R.id.editText5);
+                        holder.manager_Name.setText(av.getText().toString());
+                        holder.manager_Do.setText(as.getText().toString());
 
 
 
 
                     }
                 });
-                builder.setNegativeButton("취소", null);
+                dlg.setNegativeButton("취소", null);
                 dlg.show();
             }
         });
 
+
+
+
+        holder.checkbox_add.setOnClickListener(this);
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -139,7 +183,7 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
             dlg = new AlertDialog.Builder(v.getContext());
             LayoutInflater inflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view1 = inflater.inflate(R.layout.item_check_list_member2, null, false);
-           dlg.setView(view1);
+            dlg.setView(view1);
             dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -156,9 +200,26 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
             dlg.setNegativeButton("취소", null);
             dlg.show();
                 break;*/
+
+
+
+
+
+
+
             case R.id.checkbox_add:
+
+
+
         }
+
+
+
     }
+
+
+
+
 
 /*
     public String memberClick(View v){
@@ -194,5 +255,15 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         }
 
         return memberSelect;
+
+
+
+
+
+
+
     }*/
+
+
+
 }
