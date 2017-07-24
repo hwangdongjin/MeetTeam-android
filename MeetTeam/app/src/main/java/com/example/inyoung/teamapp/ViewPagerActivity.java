@@ -82,6 +82,7 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
         tabs.addTab(tabs.newTab().setIcon(R.drawable.meeting));
         tabs.addTab(tabs.newTab().setIcon(R.drawable.membericon));
         tabs.addTab(tabs.newTab().setIcon(R.drawable.settingicon));
+        tabs.setSelectedTabIndicatorHeight(0);
 
       
         mainViewPagerActivity.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));

@@ -35,6 +35,7 @@ public class ListroomActivity1 extends AppCompatActivity {
         listroomtabs.addTab(listroomtabs.newTab().setIcon(R.drawable.teamlist));
         listroomtabs.addTab(listroomtabs.newTab().setIcon(R.drawable.plus));
         listroomtabs.addTab(listroomtabs.newTab().setIcon(R.drawable.settingicon));
+        listroomtabs.setSelectedTabIndicatorHeight(0);
 
         listroomViewPagerActivity.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(listroomtabs));
 
