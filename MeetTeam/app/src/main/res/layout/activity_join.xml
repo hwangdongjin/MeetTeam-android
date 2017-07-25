@@ -13,7 +13,7 @@
         android:layout_width="85dp"
         android:layout_height="35dp"
         android:layout_gravity="center"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
         android:layout_weight="0.05"
         android:src="@drawable/mainicon" />
 
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="10dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_weight="0.19"
         android:src="@drawable/btn_account" />
 
@@ -31,7 +31,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/viewstyle"
         android:maxLines="1"
         android:textColor="#000000"
@@ -115,7 +115,7 @@
         android:textColor="#000000"
         android:textSize="15dp"
         android:textColorHint="#a7a9ad"
-        android:hint="idNum" />
+        android:hint="Student Number" />
 
     <EditText
         android:id="@+id/edt_addr"

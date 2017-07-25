@@ -75,7 +75,7 @@ public class TimeTableFragment extends Fragment {
         final DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                DateSelectView.setText(year+"년"+month+"월"+dayOfMonth+"일");
+                DateSelectView.setText(year+"년 "+month+"월 "+dayOfMonth+"일");
             }
         };
 

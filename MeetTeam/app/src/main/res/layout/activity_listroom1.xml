@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f7f7f7"
+    android:background="#fafafa"
     tools:context="com.example.inyoung.teamapp.ListroomActivity1">
 
     <LinearLayout
@@ -34,7 +34,7 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/listroomtabs"
             android:layout_width="match_parent"
-            android:background="#f0f0f0"
+            android:background="#fafafa"
             android:layout_height="60dp"></android.support.design.widget.TabLayout>
     </LinearLayout>
 </LinearLayout>

@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        android:background="#000000">
+        android:background="#ffffff">
 
         <ImageView
             android:layout_width="60dp"
@@ -22,7 +22,8 @@
             android:textSize="12sp"
             android:id="@+id/mName"
             android:layout_marginTop="15dp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textColor="#000000"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -31,6 +32,8 @@
             android:id="@+id/mContent"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textColor="#000000"/>
+
     </LinearLayout>
 </LinearLayout>

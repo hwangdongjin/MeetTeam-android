@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#f7f7f7">
+    android:background="#fafafa">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="title"
+            android:textStyle="bold"
             android:textColor="#5a595b"
             android:textSize="20dp" />
 
