@@ -37,6 +37,9 @@ public interface NetworkService {
     @FormUrlEncoded
     @POST("/ttable/add")
     Call<ResponseBody> post_ttableAdd(@Field("sess")String sess, @Field("roomTitle")String title, @Field("date")String date, @Field("times")ArrayList arrayList);
+    @FormUrlEncoded
+    @POST("/ttable/show")
+    Call<ResponseBody> post_ttableShow(@Field("roomTitle")String roomTitle,@Field("date")String date);
 
 
 }

@@ -3,18 +3,17 @@ package com.example.inyoung.teamapp.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.fragment.ListroomFragment1;
 import com.example.inyoung.teamapp.fragment.ListroomFragment2;
 import com.example.inyoung.teamapp.fragment.ListroomFragment3;
 
 public class ListroomAdapter extends FragmentStatePagerAdapter {
+
     private int pagerNum;
 
     public ListroomAdapter(FragmentManager fm, int pagerNum) {
+
         super(fm);
         this.pagerNum = pagerNum;
     }

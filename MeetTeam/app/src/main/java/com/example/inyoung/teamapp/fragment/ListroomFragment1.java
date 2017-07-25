@@ -1,8 +1,6 @@
 package com.example.inyoung.teamapp.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -22,6 +20,7 @@ import android.widget.EditText;
 import com.example.inyoung.teamapp.ApplicationController;
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
+import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.adapter.RoomRecyclerViewAdapter;
 import com.example.inyoung.teamapp.dto.RoomDTO;
 import com.squareup.okhttp.ResponseBody;
@@ -59,31 +58,34 @@ public class ListroomFragment1 extends Fragment {
 
     Intent intent;
 
-    SharedPreferences sessDB;
+
+    SharedPreferenceUtil sessDB;
     private NetworkService networkService;
     private ApplicationController application;
     public JSONArray jsonArray;
     public JSONObject jsonObject;
 
+    public ListroomFragment1(){
+
+
+
+    }
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.activity_listroom_fragment1, container, false);
-
         application = ApplicationController.getInstance();
         application.buildNetworkService();
         networkService = ApplicationController.getInstance().getNetworkService();
-
-
         initRecyclerView(view);
         return view;
     }
 
     private void initRecyclerView(final View view) {
 
-        sessDB = this.getActivity().getSharedPreferences("sessDB", Context.MODE_PRIVATE);
-
-        Call<ResponseBody> thumbnailCall = networkService.post_roomList(sessDB.getString("session","error"));
+        sessDB= new SharedPreferenceUtil(getContext());
+        Call<ResponseBody> thumbnailCall = networkService.post_roomList(sessDB.getSess());
         thumbnailCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -123,11 +125,6 @@ public class ListroomFragment1 extends Fragment {
 
     }
 
-    /*private void iniiLayoutManager(View view) {
-        Log.i("태그","iniiLayoutManager");
-        manager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
-        chatView.setLayoutManager(manager);
-    }*/
     private void iniiLayoutManager(View view) {
         Log.i("태그","iniiLayoutManager");
         manager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
