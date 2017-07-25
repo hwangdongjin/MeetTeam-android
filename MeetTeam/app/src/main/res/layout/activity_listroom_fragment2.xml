@@ -6,15 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.inyoung.teamapp.fragment.ListroomFragment2">
 
-    <EditText
-        android:id="@+id/fr1_edit_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <ImageButton
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -23,7 +15,8 @@
         android:layout_below="@+id/fr1_edit_search"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="17dp" />
+        android:layout_marginEnd="17dp"
+        android:text="방찾기" />
 
     <Button
         android:id="@+id/btn_add"
@@ -33,5 +26,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="63dp"
         android:text="방추가" />
+
+    <EditText
+        android:id="@+id/fr1_edit_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

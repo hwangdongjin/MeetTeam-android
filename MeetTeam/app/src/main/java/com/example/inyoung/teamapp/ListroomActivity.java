@@ -3,7 +3,6 @@ package com.example.inyoung.teamapp;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -25,6 +24,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
+import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.adapter.RoomRecyclerViewAdapter;
 import com.example.inyoung.teamapp.dto.RoomDTO;
 import com.squareup.okhttp.ResponseBody;
@@ -60,7 +60,7 @@ public class ListroomActivity extends AppCompatActivity {
 
     Intent intent;
 
-    SharedPreferences sessDB;
+    SharedPreferenceUtil sessDB;
     private NetworkService networkService;
     private ApplicationController application;
     public JSONArray jsonArray;
@@ -88,9 +88,9 @@ public class ListroomActivity extends AppCompatActivity {
     private void initRecyclerView(final View view)  {
 
 
-        sessDB = getSharedPreferences("sessDB",MODE_PRIVATE);
+        sessDB = new SharedPreferenceUtil(getApplicationContext());
 
-        Call<ResponseBody> thumbnailCall = networkService.post_roomList(sessDB.getString("session","error"));
+        Call<ResponseBody> thumbnailCall = networkService.post_roomList(sessDB.getSess());
         thumbnailCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -153,9 +153,9 @@ public class ListroomActivity extends AppCompatActivity {
 
                         title = edt_title.getText().toString();
                         subject = edt_subject.getText().toString();
-                        sessDB = getSharedPreferences("sessDB",MODE_PRIVATE);
+                        sessDB= new SharedPreferenceUtil(getApplicationContext());
 
-                        Call<ResponseBody> thum= networkService.post_roomAdd(sessDB.getString("session","error"),title, subject);
+                        Call<ResponseBody> thum= networkService.post_roomAdd(sessDB.getSess(),title, subject);
                         thum.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -188,9 +188,9 @@ public class ListroomActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         title = edt_title.getText().toString();
-                        sessDB = getSharedPreferences("sessDB",MODE_PRIVATE);
+                        sessDB= new SharedPreferenceUtil(getApplicationContext());
 
-                        Call<ResponseBody> thum= networkService.post_roomAddUser(sessDB.getString("session","error"),title);
+                        Call<ResponseBody> thum= networkService.post_roomAddUser(sessDB.getSess(),title);
                         thum.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
