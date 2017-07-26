@@ -77,7 +77,7 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
     @Override
     public void onBindViewHolder(RoomRecyclerViewAdapter.ViewHolder holder,final int position) {
         holder.title.setText(roomList.get(holder.getAdapterPosition()).getRoom_Title());
-        holder.chiefName.setText(roomList.get(holder.getAdapterPosition()).getManager_Name());
+        holder.chiefName.setText("팀장 : "+roomList.get(holder.getAdapterPosition()).getManager_Name());
         Log.i("Mytag", "testbody:" + roomList.get(0));
         holder.btnEnter.setOnClickListener(new View.OnClickListener(){
                 @Override
