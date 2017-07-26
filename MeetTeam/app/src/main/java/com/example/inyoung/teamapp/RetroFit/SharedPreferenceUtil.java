@@ -14,9 +14,17 @@ public class SharedPreferenceUtil {
     private SharedPreferences.Editor editor;
     private String sess;
     private String id;
+    private String name;
+    private String roomTitle;
 
     public void setSess(String sess) {
-        editor.putString("sess", sess);
+        editor.putString("sesssion", sess);
+        editor.commit();
+
+    }
+    public void setRoomTitle(String roomTitle){
+
+        editor.putString("roomTitle",roomTitle);
         editor.commit();
 
     }
@@ -24,6 +32,11 @@ public class SharedPreferenceUtil {
     public void setId(String id) {
         editor.putString("id", id);
         editor.commit();
+    }
+    public void setName(String name){
+        editor.putString("name",name);
+        editor.commit();
+
     }
 
     public SharedPreferenceUtil(Context context) {
@@ -33,7 +46,8 @@ public class SharedPreferenceUtil {
     }
 
     public String getSess() {
-        return sharedPreferences.getString("sess", "defValue");
+        return sharedPreferences.getString("sesssion", "defValue");
     }
-
+    public String getName() {return sharedPreferences.getString("name","dafValue");}
+    public String getRoomTitle(){return  sharedPreferences.getString("roomTitle","dafValue");}
 }

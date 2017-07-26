@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,25 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.inyoung.teamapp.ApplicationController;
 import com.example.inyoung.teamapp.R;
+import com.example.inyoung.teamapp.RetroFit.NetworkService;
+import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
+import com.squareup.okhttp.ResponseBody;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 /**
  * Created by MYpc on 2017-04-05.
@@ -28,9 +46,16 @@ public class TimeTableFragment extends Fragment {
     TextView placeText;
     View view;
     static int textId;
-
-    Button DateSelectButton;
+    SharedPreferenceUtil sessDB;
+     Button DateSelectButton;
     TextView DateSelectView;
+    String sess,roomTitle,date;
+    static int year1,month1,dayOfMonth1;
+    ArrayList<String> times,timeTemp;
+    private NetworkService networkService;
+    ApplicationController application;
+    public JSONArray jsonArray;
+    public JSONObject jsonObject;
 
 
 
@@ -41,6 +66,8 @@ public class TimeTableFragment extends Fragment {
         placeText=(TextView)view.findViewById(R.id.textViewPlaceOk) ;
         DateSelectButton=(Button) view.findViewById(R.id.DateSelectButton);
         DateSelectView = (TextView) view.findViewById(R.id.DateSelectView);
+        sessDB = new SharedPreferenceUtil(getContext());
+        times= new ArrayList<>();
         view.findViewById(R.id.TableText0).setOnClickListener(onClick);
         view.findViewById(R.id.TableText1).setOnClickListener(onClick);
         view.findViewById(R.id.TableText2).setOnClickListener(onClick);
@@ -76,6 +103,9 @@ public class TimeTableFragment extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 DateSelectView.setText(year+"년 "+month+"월 "+dayOfMonth+"일");
+                year1=year;
+                month1=month;
+                dayOfMonth1=dayOfMonth;
             }
         };
 
@@ -125,95 +155,229 @@ public class TimeTableFragment extends Fragment {
             switch (v.getId()){
 
                 case R.id.TableText0:
+
                     textId=R.id.TableText0;
-                    initDialog(view,textId);
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("0");
+                    initTableAdd(times);
                     break;
                 case R.id.TableText1:
                     textId=R.id.TableText1;
-                    initDialog(view,textId);
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("1");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText2:
                     textId=R.id.TableText2;
-                    initDialog(view,textId);
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("2");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText3:
                     textId=R.id.TableText3;
-                    initDialog(view,textId);
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("3");
+                    initTableAdd(times);
+
+                    break;
+
                 case R.id.TableText4:
                     textId=R.id.TableText4;
-                    initDialog(view,textId);
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("4");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText5:
                     textId=R.id.TableText5;
-                    initDialog(view,textId);
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("5");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText6:
                     textId=R.id.TableText6;
-                    initDialog(view,textId);
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("6");
+                    initTableAdd(times);
+
+                    break;
+
                 case R.id.TableText7:
                     textId=R.id.TableText7;
-                    initDialog(view,textId);
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("7");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText8:
                     textId=R.id.TableText8;
-                    initDialog(view,textId);
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("8");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText9:
                     textId=R.id.TableText9;
-                    initDialog(view,textId);
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("9");
+                    initTableAdd(times);
+
+                    break;
                 case R.id.TableText10:
-                    initDialog(view,textId);
+                    textId=R.id.TableText10;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("10");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText11:
-                    initDialog(view,textId);
+                    textId=R.id.TableText11;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("11");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText12:
-                    initDialog(view,textId);
+                    textId=R.id.TableText12;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("12");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText13:
-                    initDialog(view,textId);
+                    textId=R.id.TableText13;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("13");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText14:
-                    initDialog(view,textId);
+                    textId=R.id.TableText14;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("14");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText15:
-                    initDialog(view,textId);
+                    textId=R.id.TableText15;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("15");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText16:
-                    initDialog(view,textId);
+                    textId=R.id.TableText16;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("16");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText17:
-                    initDialog(view,textId);
+                    textId=R.id.TableText17;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("17");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText18:
-                    initDialog(view,textId);
+                    textId=R.id.TableText18;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("18");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText19:
-                    initDialog(view,textId);
+                    textId=R.id.TableText19;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("19");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText20:
-                    initDialog(view,textId);
+                    textId=R.id.TableText20;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("20");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText21:
-                    initDialog(view,textId);
+                    textId=R.id.TableText21;
+                    text1= (TextView) v.findViewById(textId);
+                    times.add("21");
+                    initTableAdd(times);
+
+
                     break;
                 case R.id.TableText22:
-                    initDialog(view,textId);
+                    textId=R.id.TableText22;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("22");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText23:
-                    initDialog(view,textId);
+                    textId=R.id.TableText23;
+                    text1= (TextView) v.findViewById(textId);
+                    times.add("23");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText24:
-                    initDialog(view,textId);
+                    textId=R.id.TableText24;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("24");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText25:
-                    initDialog(view,textId);
+                    textId=R.id.TableText25;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("25");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText26:
-                    initDialog(view,textId);
+                    textId=R.id.TableText26;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("26");
+                    initTableAdd(times);
+
                     break;
                 case R.id.TableText27:
-                    initDialog(view,textId);
+                    textId=R.id.TableText27;
+                    text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
+                    times.add("27");
+                    initTableAdd(times);
+
                     break;
 
 
@@ -222,11 +386,92 @@ public class TimeTableFragment extends Fragment {
         }
     };
 
+    public void initTableAdd(ArrayList<String> times){
+        sessDB= new SharedPreferenceUtil(getContext());
+        sess=sessDB.getSess();
+        roomTitle=sessDB.getRoomTitle();
+        date= String.valueOf(year1)+"-"+String.valueOf(month1)+"-"+String.valueOf(dayOfMonth1);
+        Log.i("mytag","datess:"+year1);
+        application = ApplicationController.getInstance();
+        application.buildNetworkService();
+        networkService = ApplicationController.getInstance().getNetworkService();
+        Call<ResponseBody> thumbnailcall = networkService.post_ttableAdd(sess,roomTitle,date,times);
+        thumbnailcall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+
+                if(response.isSuccess()){
+
+                    initTableShow(roomTitle,date);
+                }
+                else
+                    Toast.makeText(getContext(),"실패하였습니다",Toast.LENGTH_LONG).show();
+
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void initTableShow(String roomTitle,String date){
+
+        application = ApplicationController.getInstance();
+        application.buildNetworkService();
+        networkService = ApplicationController.getInstance().getNetworkService();
+        Call<ResponseBody> thumnailcall = networkService.post_ttableShow(roomTitle,date);
+        thumnailcall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+
+                if(response.isSuccess()){
+                    try {
+
+                        jsonObject= new JSONObject(response.body().string());
+                        Log.i("mytag","json:"+jsonObject.getString("tables"));
+                        jsonArray= new JSONArray(jsonObject.getString("tables"));
+                        timeTemp = new ArrayList<String>();
+                        for(int i=0;i<jsonArray.length();i++){
+
+                            timeTemp.add(jsonArray.getJSONObject(i).getString("times"));
+                            Log.i("mytag","timeTemp:"+timeTemp.get(i));
+
+                        }
 
 
 
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
 
+                }
+
+
+                else
+                    Toast.makeText(getContext(),"실패하였습니다",Toast.LENGTH_LONG).show();
+
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void initSetText(){
+
+
+    }
 
     }
 

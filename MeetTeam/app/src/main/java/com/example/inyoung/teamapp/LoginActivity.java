@@ -1,7 +1,6 @@
 package com.example.inyoung.teamapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
+import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.squareup.okhttp.ResponseBody;
 
 import org.json.JSONException;
@@ -25,10 +25,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private Intent intent;
     EditText edt_id, edt_pw;
-
-    SharedPreferences sessDB;
-    String result;
-
+    SharedPreferenceUtil sessDB;
+    String result,name;
     private NetworkService networkService;
     ApplicationController application;
     JSONObject jsonObject;
@@ -53,12 +51,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 application = ApplicationController.getInstance();
                 application.buildNetworkService();
                 networkService = ApplicationController.getInstance().getNetworkService();
-
                 final String id = edt_id.getText().toString();
                 String pw = edt_pw.getText().toString();
-
-                sessDB = getSharedPreferences("sessDB",MODE_PRIVATE);
-                final SharedPreferences.Editor editor = sessDB.edit();
+                sessDB = new SharedPreferenceUtil(this);
 
                 Call<ResponseBody> thumbnailCall = networkService.post_login(id, pw);
                 thumbnailCall.enqueue(new Callback<ResponseBody>() {
@@ -68,9 +63,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             try {
                                 jsonObject = new JSONObject(response.body().string());
                                 result = jsonObject.get("sess").toString();
+                                name=jsonObject.get("name").toString();
+                                Log.i("mytag","pro:"+name);
+                                //editor.putString("session",result);
+                                //editor.putString("name",name);
+                                sessDB.setSess(result);
+                                sessDB.setName(name);
 
-                                editor.putString("session",result);
-                                editor.commit();
+                                //editor.commit();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             } catch (JSONException e) {

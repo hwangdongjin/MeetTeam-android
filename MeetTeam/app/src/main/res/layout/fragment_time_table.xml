@@ -404,7 +404,7 @@
                     android:background="#ff0000ff"
                     android:text="11~12" />
                 <TextView
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:layout_margin="0.3dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:layout_weight="2"
@@ -413,7 +413,7 @@
                     android:text=""
                     android:id="@+id/TableText3" />
                 <TextView
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:layout_margin="0.3dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:layout_weight="2"
@@ -422,7 +422,7 @@
                     android:text=""
                     android:id="@+id/TableText7" />
                 <TextView
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:layout_margin="0.3dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:layout_weight="2"
@@ -431,7 +431,7 @@
                     android:text=""
                     android:id="@+id/TableText11" />
                 <TextView
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:layout_margin="0.3dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:layout_weight="2"
@@ -440,7 +440,7 @@
                     android:text=""
                     android:id="@+id/TableText15" />
                 <TextView
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:layout_margin="0.3dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:layout_weight="2"
@@ -449,7 +449,7 @@
                     android:text=""
                     android:id="@+id/TableText19" />
                 <TextView
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:layout_margin="0.3dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:layout_weight="2"

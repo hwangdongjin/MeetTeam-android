@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.inyoung.teamapp.ApplicationController;
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
+import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.ViewPagerActivity;
 import com.example.inyoung.teamapp.dto.RoomDTO;
 import com.example.inyoung.teamapp.dto.UserListDTO;
@@ -46,6 +47,7 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
     JSONObject jsonObject1;
     static int itemNum;
     String roomTitle;
+    SharedPreferenceUtil sessDB;
 
     public RoomRecyclerViewAdapter(ArrayList<RoomDTO> roomList, Context context) {
         this.roomList = roomList;
@@ -77,16 +79,14 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
         holder.title.setText(roomList.get(holder.getAdapterPosition()).getRoom_Title());
         holder.chiefName.setText("팀장 : "+roomList.get(holder.getAdapterPosition()).getManager_Name());
         Log.i("Mytag", "testbody:" + roomList.get(0));
-        //holder.btnEnter.setOnClickListener(this);
-        //itemNum = holder.btnEnter.getId();
         holder.btnEnter.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    //tv_title = (TextView)v.findViewById(R.id.tv_title);
-                    // roomTitle = tv_title.getText().toString();
+                sessDB= new SharedPreferenceUtil(context);
                 roomTitle = roomList.get(position).getRoom_Title();
-                application = ApplicationController.getInstance();
-                application.buildNetworkService();
+                    sessDB.setRoomTitle(roomTitle);
+                    application = ApplicationController.getInstance();
+                    application.buildNetworkService();
                 networkService = ApplicationController.getInstance().getNetworkService();
                 Call<ResponseBody> thumbnailCall = networkService.post_userList(roomTitle);
                 thumbnailCall.enqueue(new Callback<ResponseBody>() {
