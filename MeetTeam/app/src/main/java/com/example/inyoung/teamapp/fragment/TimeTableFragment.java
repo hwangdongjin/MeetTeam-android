@@ -3,11 +3,8 @@ package com.example.inyoung.teamapp.fragment;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-<<<<<<< HEAD
 import android.os.Build;
-=======
 import android.content.Intent;
->>>>>>> 7b50752da765c4be3f48c7d530685c4ed37d8752
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
