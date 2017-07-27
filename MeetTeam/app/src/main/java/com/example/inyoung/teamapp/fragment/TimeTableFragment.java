@@ -3,6 +3,7 @@ package com.example.inyoung.teamapp.fragment;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inyoung.teamapp.ApplicationController;
+import com.example.inyoung.teamapp.MapActivity;
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
@@ -56,6 +58,9 @@ public class TimeTableFragment extends Fragment {
     ApplicationController application;
     public JSONArray jsonArray;
     public JSONObject jsonObject;
+
+
+    Button mapSelectButton;
 
 
 
@@ -98,6 +103,16 @@ public class TimeTableFragment extends Fragment {
         view.findViewById(R.id.TableText27).setOnClickListener(onClick);
 
 
+        mapSelectButton = (Button)view.findViewById(R.id.mapSelect);
+        mapSelectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MapActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         final DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -106,6 +121,7 @@ public class TimeTableFragment extends Fragment {
                 year1=year;
                 month1=month;
                 dayOfMonth1=dayOfMonth;
+                sessDB.setDate(Integer.toString(year)+"-"+Integer.toString(month)+"-"+Integer.toString(dayOfMonth));
             }
         };
 

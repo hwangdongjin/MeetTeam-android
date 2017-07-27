@@ -1,11 +1,13 @@
 package com.example.inyoung.teamapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.inyoung.teamapp.RetroFit.NetworkService;
+import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -13,6 +15,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.okhttp.ResponseBody;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMarkerClickListener,GoogleMap.OnMapLongClickListener{
 
@@ -22,6 +33,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     Button map_findbutton;
     Button map_plusbutton;
     Button map_minusbutton;
+
+
+
+    SharedPreferenceUtil sessDB;
+    private NetworkService networkService;
+    private ApplicationController application;
+    public JSONArray jsonArray;
+    JSONObject jsonObject;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +58,42 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         map_minusbutton.setOnClickListener(this);
         map_findbutton = (Button) findViewById(R.id.mapfr_find);
         map_findbutton.setOnClickListener(this);
+
+
+        go();
+    }
+
+    private void go() {
+        application = ApplicationController.getInstance();
+        application.buildNetworkService();
+        networkService = ApplicationController.getInstance().getNetworkService();
+        sessDB = new SharedPreferenceUtil(getApplicationContext());
+        Call<ResponseBody> thumbnail = networkService.post_mapshow(sessDB.getRoomTitle(),sessDB.getDate());
+        thumbnail.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                /*try {
+                    jsonArray = new JSONArray(response.body().string());
+                    for(int i=0;i<jsonArray.length();i++) {
+                        jsonObject = jsonArray.getJSONObject(i);
+                        LatLng latlng = new LatLng(jsonObject.get());
+                        MarkerOptions opt = new MarkerOptions();
+                        opt.position(latlng);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+
+
     }
 
     @Override
@@ -71,6 +127,27 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public boolean onMarkerClick(Marker marker) {
         String text = "latitude ="+ marker.getPosition().latitude + "\n"+"longitude ="+ marker.getPosition().longitude;
         Toast.makeText(getApplicationContext(),text, Toast.LENGTH_LONG).show();
+
+        application = ApplicationController.getInstance();
+        application.buildNetworkService();
+        networkService = ApplicationController.getInstance().getNetworkService();
+
+        double longitude = marker.getPosition().longitude;
+        double latitude = marker.getPosition().latitude;
+
+        sessDB = new SharedPreferenceUtil(getApplicationContext());
+        Call<ResponseBody> thumbnalCall = networkService.post_map(sessDB.getSess(),sessDB.getRoomTitle(),sessDB.getDate(),longitude,latitude);
+        thumbnalCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
         return false;
     }
     @Override
