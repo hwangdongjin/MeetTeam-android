@@ -91,9 +91,14 @@ public class ListroomFragment1 extends Fragment {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 if (response.isSuccess()){
                     try {
+<<<<<<< HEAD
                         jsonArray= new JSONArray(response.body().string());
 
                         chatList= new ArrayList<>();
+=======
+                        jsonArray = new JSONArray(response.body().string());
+                        chatList = new ArrayList<>();
+>>>>>>> 7b50752da765c4be3f48c7d530685c4ed37d8752
 
                         for(int i=0; i<jsonArray.length(); i++){
                             jsonObject = jsonArray.getJSONObject(i);

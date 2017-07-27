@@ -1,20 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_time"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="1dp"
     android:paddingLeft="1dp"
     android:paddingRight="1dp"
     android:paddingTop="1dp"
     tools:context="com.example.mypc.timetable.TimeActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/DateSelectButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_dateselector" />
+
+        <TextView
+            android:id="@+id/DateSelectView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="----년 --월 --일"
+            android:textColorHint="#a7a9ad"
+            android:textColor="#000000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:text="약속시간:"
+            android:id="@+id/textTime"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="#a7a9ad"/>
+
+        <TextView
+            android:id="@+id/textViewTimeOk"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:gravity="center_vertical|center_horizontal" />
+
+        <TextView
+            android:text="약속장소:"
+            android:layout_height="50dp"
+            android:id="@+id/textView3"
+            android:layout_width="70dp"
+            android:textColor="#a7a9ad"
+            android:gravity="center_vertical|center_horizontal" />
+
+        <TextView
+            android:id="@+id/textViewPlaceOk"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:gravity="center_vertical|center_horizontal" />
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_marginRight="0.01dp"
         android:layout_marginLeft="0.01dp"
-        android:layout_marginTop="100dp"
         android:id="@+id/scrollView2"
         android:layout_height="240dp">
 
@@ -412,77 +474,11 @@
 
     </ScrollView>
 
-    <TextView
-        android:text="약속시간:"
-        android:id="@+id/textTime"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:layout_below="@+id/textView2"
-        android:layout_alignLeft="@+id/timetable"
-        android:layout_alignStart="@+id/timetable" />
-
-    <TextView
-        android:text="약속장소:"
-        android:layout_height="50dp"
-        android:id="@+id/textView3"
-        android:layout_width="70dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:layout_below="@+id/DateSelectButton"
-        android:layout_toRightOf="@+id/textViewTimeOk"
-        android:layout_toEndOf="@+id/textViewTimeOk" />
-
-    <TextView
-        android:layout_height="50dp"
-        android:layout_alignTop="@+id/textTime"
-        android:id="@+id/textViewTimeOk"
-        android:layout_width="120dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:layout_toRightOf="@+id/textTime" />
-
-    <TextView
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3"
-        android:id="@+id/textViewPlaceOk"
-        android:gravity="center_vertical|center_horizontal" />
-
-
-
-
-
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/TimeSelectButton"
-        android:text="날짜:"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="@color/cardview_dark_background" />
-
-    <TextView
-        android:id="@+id/DateSelectView"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_alignBottom="@+id/DateSelectButton"
-        android:textColor="@color/cardview_dark_background" />
-
     <Button
-        android:id="@+id/DateSelectButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="날짜선택"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/DateSelectView"
-        android:layout_toEndOf="@+id/DateSelectView" />
+        android:id="@+id/mapSelect"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Button" />
 
 
-</RelativeLayout>
+</LinearLayout>

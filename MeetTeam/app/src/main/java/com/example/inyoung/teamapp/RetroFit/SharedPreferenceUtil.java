@@ -16,6 +16,7 @@ public class SharedPreferenceUtil {
     private String id;
     private String name;
     private String roomTitle;
+    private String date;
 
     public void setSess(String sess) {
         editor.putString("sesssion", sess);
@@ -39,6 +40,11 @@ public class SharedPreferenceUtil {
 
     }
 
+    public void setDate(String date){
+        editor.putString("date",date);
+        editor.commit();
+    }
+
     public SharedPreferenceUtil(Context context) {
         this.sharedPreferences = context.getSharedPreferences(APP_SHARED_PREFS, Activity.MODE_PRIVATE);
         this.editor = sharedPreferences.edit();
@@ -50,4 +56,5 @@ public class SharedPreferenceUtil {
     }
     public String getName() {return sharedPreferences.getString("name","dafValue");}
     public String getRoomTitle(){return  sharedPreferences.getString("roomTitle","dafValue");}
+    public String getDate() {return sharedPreferences.getString("date","dafValue");}
 }

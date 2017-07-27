@@ -3,7 +3,11 @@ package com.example.inyoung.teamapp.fragment;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+<<<<<<< HEAD
 import android.os.Build;
+=======
+import android.content.Intent;
+>>>>>>> 7b50752da765c4be3f48c7d530685c4ed37d8752
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
@@ -19,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inyoung.teamapp.ApplicationController;
+import com.example.inyoung.teamapp.MapActivity;
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
@@ -61,6 +66,9 @@ public class TimeTableFragment extends Fragment {
     String[] tablePos;
 
 
+    Button mapSelectButton;
+
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -101,14 +109,25 @@ public class TimeTableFragment extends Fragment {
         view.findViewById(R.id.TableText27).setOnClickListener(onClick);
 
 
+        mapSelectButton = (Button)view.findViewById(R.id.mapSelect);
+        mapSelectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MapActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         final DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                DateSelectView.setText(year+"년"+month+"월"+dayOfMonth+"일");
+                DateSelectView.setText(year+"년 "+month+"월 "+dayOfMonth+"일");
                 year1=year;
                 month1=month;
                 dayOfMonth1=dayOfMonth;
+                sessDB.setDate(Integer.toString(year)+"-"+Integer.toString(month)+"-"+Integer.toString(dayOfMonth));
             }
         };
 
@@ -667,18 +686,7 @@ public class TimeTableFragment extends Fragment {
 
 
 
-
-
-
-
     }
-
-
-
-
-
-
-
 
     }
 
