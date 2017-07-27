@@ -3,7 +3,9 @@ package com.example.inyoung.teamapp.fragment;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -51,11 +53,12 @@ public class TimeTableFragment extends Fragment {
     TextView DateSelectView;
     String sess,roomTitle,date;
     static int year1,month1,dayOfMonth1;
-    ArrayList<String> times,timeTemp;
+    ArrayList<String> times,timeTablePos,timeTableUser;
     private NetworkService networkService;
     ApplicationController application;
-    public JSONArray jsonArray;
+    public Object jsonArray;
     public JSONObject jsonObject;
+    String[] tablePos;
 
 
 
@@ -327,6 +330,7 @@ public class TimeTableFragment extends Fragment {
                 case R.id.TableText21:
                     textId=R.id.TableText21;
                     text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
                     times.add("21");
                     initTableAdd(times);
 
@@ -343,6 +347,7 @@ public class TimeTableFragment extends Fragment {
                 case R.id.TableText23:
                     textId=R.id.TableText23;
                     text1= (TextView) v.findViewById(textId);
+                    text1.append(sessDB.getName());
                     times.add("23");
                     initTableAdd(times);
 
@@ -425,6 +430,7 @@ public class TimeTableFragment extends Fragment {
         networkService = ApplicationController.getInstance().getNetworkService();
         Call<ResponseBody> thumnailcall = networkService.post_ttableShow(roomTitle,date);
         thumnailcall.enqueue(new Callback<ResponseBody>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
 
@@ -432,16 +438,18 @@ public class TimeTableFragment extends Fragment {
                     try {
 
                         jsonObject= new JSONObject(response.body().string());
-                        Log.i("mytag","json:"+jsonObject.getString("tables"));
-                        jsonArray= new JSONArray(jsonObject.getString("tables"));
-                        timeTemp = new ArrayList<String>();
+                        JSONArray jsonArray=new JSONArray(jsonObject.get("tables").toString());
+
                         for(int i=0;i<jsonArray.length();i++){
 
-                            timeTemp.add(jsonArray.getJSONObject(i).getString("times"));
-                            Log.i("mytag","timeTemp:"+timeTemp.get(i));
-
+                            JSONObject json= jsonArray.getJSONObject(i);
+                            JSONObject json2 = new JSONObject(json.toString());
+                            JSONArray jsonArray1 = new JSONArray(json2.get("times").toString());
+                            String userName = (String) json2.get("userName");
+                            for(int j=0;j<jsonArray1.length();j++) {
+                                initSetText(Integer.parseInt(jsonArray1.get(j).toString()), userName);
+                            }
                         }
-
 
 
                     } catch (JSONException e) {
@@ -468,7 +476,195 @@ public class TimeTableFragment extends Fragment {
 
     }
 
-    public void initSetText(){
+    public void initSetText(int arrTimes, String userName) throws JSONException {
+
+
+
+
+            int number = arrTimes;
+            Log.i("mytag","number22:"+number);
+            switch (number) {
+
+                case 0:
+                    textId = R.id.TableText0;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 1:
+
+                    textId = R.id.TableText1;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+
+
+                case 2:
+                    textId = R.id.TableText2;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 3:
+                    textId = R.id.TableText3;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+
+                case 4:
+                    textId = R.id.TableText4;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 5:
+                    textId = R.id.TableText5;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 6:
+                    textId = R.id.TableText6;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+
+                case 7:
+                    textId = R.id.TableText7;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 8:
+                    textId = R.id.TableText8;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 9:
+                    textId = R.id.TableText9;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 10:
+                    textId = R.id.TableText10;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 11:
+                    textId = R.id.TableText11;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 12:
+                    textId = R.id.TableText12;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 13:
+                    textId = R.id.TableText13;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+                    break;
+                case 14:
+                    textId = R.id.TableText14;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+                    break;
+                case 15:
+                    textId = R.id.TableText15;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 16:
+                    textId = R.id.TableText16;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 17:
+                    textId = R.id.TableText17;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 18:
+                    textId = R.id.TableText18;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 19:
+                    textId = R.id.TableText19;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 20:
+                    textId = R.id.TableText20;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+                    break;
+                case 21:
+                    textId = R.id.TableText21;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+
+                    break;
+                case 22:
+                    textId = R.id.TableText22;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 23:
+                    textId = R.id.TableText23;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+                    break;
+                case 24:
+                    textId = R.id.TableText24;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 25:
+                    textId = R.id.TableText25;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 26:
+                    textId = R.id.TableText26;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+                case 27:
+                    textId = R.id.TableText27;
+                    text1 = (TextView) view.findViewById(textId);
+                    text1.append(userName);
+
+                    break;
+
+
+
+
+
+
+        }
+
+
+
 
 
 

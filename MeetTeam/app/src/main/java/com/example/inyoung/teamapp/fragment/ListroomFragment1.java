@@ -92,6 +92,7 @@ public class ListroomFragment1 extends Fragment {
                 if (response.isSuccess()){
                     try {
                         jsonArray= new JSONArray(response.body().string());
+
                         chatList= new ArrayList<>();
 
                         for(int i=0; i<jsonArray.length(); i++){
