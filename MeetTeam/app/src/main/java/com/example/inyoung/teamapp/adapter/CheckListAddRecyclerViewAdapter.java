@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.inyoung.teamapp.R;
+import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.dto.CheckAddDTO;
 
 import java.util.ArrayList;
@@ -23,6 +24,11 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
 
     private ArrayList<CheckAddDTO> checkList;
     private Context context;
+    SharedPreferenceUtil sessDB;
+
+    private int gValue;
+    int checkboxcount=0;
+
 
 
 
@@ -37,6 +43,8 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
         protected TextView manager_Name,manager_Do;
         protected CheckBox checkBox;
         protected ProgressBar progressBar;
+        RecyclerView chatView;
+
 
 
 
@@ -47,6 +55,7 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
             manager_Name=(TextView) itemView.findViewById(R.id.manager_Name11);
             checkBox= (CheckBox) itemView.findViewById(R.id.manager_checkbox);
             progressBar= (ProgressBar) itemView.findViewById(R.id.progressBar);
+            chatView= (RecyclerView) itemView.findViewById(R.id.chatView);
 
         }
     }
@@ -62,19 +71,33 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
 
     @Override
     public void onBindViewHolder(final CheckListAddRecyclerViewAdapter.ViewHolder holder, int position) {
-
+        sessDB= new SharedPreferenceUtil(context);
         holder.manager_Do.setText(checkList.get(position).getManager_Do());
         holder.manager_Name.setText(checkList.get(position).getManager_Name());
         Log.i("mytag","size"+checkList.size());
+
+
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.checkBox.isChecked() == true)
-                    holder.progressBar.setProgress(100);
+                if(holder.checkBox.isChecked() == true) {
+
+                    //Log.i("mytag", "titi:" + sessDB.getCheckboxcount());
+                    checkboxcount++;
+                    //sessDB.setCheckboxcount(checkboxcount);
+
+                    //holder.progressBar.setProgress(100 / sessDB.getCheckboxcount());
+
+
+
+
+
+                }
                 else
                     holder.progressBar.setProgress(0);
             }
         });
+        //holder.progressBar.setProgress(100);
 
 
 
