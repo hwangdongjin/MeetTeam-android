@@ -2,6 +2,7 @@ package com.example.inyoung.teamapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -18,7 +19,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.okhttp.ResponseBody;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -67,24 +71,43 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         application = ApplicationController.getInstance();
         application.buildNetworkService();
         networkService = ApplicationController.getInstance().getNetworkService();
+
+
         sessDB = new SharedPreferenceUtil(getApplicationContext());
         Call<ResponseBody> thumbnail = networkService.post_mapshow(sessDB.getRoomTitle(),sessDB.getDate());
         thumbnail.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                /*try {
-                    jsonArray = new JSONArray(response.body().string());
-                    for(int i=0;i<jsonArray.length();i++) {
-                        jsonObject = jsonArray.getJSONObject(i);
-                        LatLng latlng = new LatLng(jsonObject.get());
-                        MarkerOptions opt = new MarkerOptions();
-                        opt.position(latlng);
+                //좌표찍힘
+                //LatLng latlng = new LatLng(36.444445,127.444555);
+                //MarkerOptions opt = new MarkerOptions();
+                //opt.position(latlng);
+                //mMap.addMarker(opt);
+                try {
+                    if(response.isSuccess()){
+                    jsonObject = new JSONObject(response.body().string());
+                        Log.i("mytag","reason:"+jsonObject.get("places").toString());
+                    jsonArray = new JSONArray(jsonObject.get("places").toString());
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject json = jsonArray.getJSONObject(i);
+                        JSONObject json2 = new JSONObject(json.toString());
+                        JSONObject json3 = new JSONObject(json2.get("loc").toString());
+                        JSONObject json4 = new JSONObject(json3.toString());
+                        JSONArray  jsonArray1 = new JSONArray(json4.get("coordinates").toString());
+                        for(int j=0;j<1;j++) {
+                            LatLng latLng = new LatLng(Double.parseDouble(jsonArray1.get(j + 1).toString()), Double.parseDouble(jsonArray1.get(j).toString()));
+                            MarkerOptions opt = new MarkerOptions();
+                            opt.position(latLng);
+                            opt.title((String) json2.get("userName"));
+                            mMap.addMarker(opt);
+                        }
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }*/
+                }
             }
 
             @Override
@@ -103,6 +126,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startingPoint,10));
         mMap.setOnMarkerClickListener(this);
         mMap.setOnMapLongClickListener(this);
+
+
+
+
+
     }
 
     @Override
@@ -140,6 +168,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         thumbnalCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                if(response.isSuccess()){
+
+
+
+                    go();
+                }
 
             }
 
@@ -148,6 +182,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             }
         });
+
+
         return false;
     }
     @Override
@@ -157,5 +193,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         markerOptions.position(latLng);
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.addMarker(markerOptions);
+        Toast.makeText(getApplicationContext(),"위치를 확정하시려면 마커를 한번 더 클릭해주세요",Toast.LENGTH_LONG).show();
+
+
+
     }
 }
