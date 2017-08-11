@@ -28,9 +28,10 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
     private ArrayList<CheckListDTO> checkList;
     private ArrayList<CheckAddDTO> checkAddList;
     private Context context;
-    int count=0;
+    private int checkNum;
     private AlertDialog.Builder dlg;
     LinearLayoutManager linearLayoutManager;
+    SharedPreferenceUtil db;
 
     private CheckListAddRecyclerViewAdapter roAdapter;
     EditText av,as;
@@ -46,14 +47,16 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         this.checkList = checkList;
         this.context = context;
     }
+    public CheckListRecyclerViewAdapter(){}
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView checkRoom_name;
-
         private Button manager_Button;
         private Button checkbox_add,btn_down,btn_up;
         private TextView manage_Name,manage_Do;
         private RecyclerView check11;
+        private ProgressBar progressBar;
 
 
         ProgressBar progressBar;
@@ -73,6 +76,7 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
             manage_Do= (TextView) itemView.findViewById(R.id.manager_do11);
             btn_down= (Button) itemView.findViewById(R.id.btn_down);
             btn_up= (Button) itemView.findViewById(R.id.btn_up);
+            progressBar= (ProgressBar) itemView.findViewById(R.id.progressBar);
 
 
             progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
@@ -98,6 +102,10 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
     public void onBindViewHolder(final CheckListRecyclerViewAdapter.ViewHolder holder, final int position) {
 
         checkAddList = new ArrayList<>();
+        db= new SharedPreferenceUtil(context);
+        checkNum=db.getCheckNum();
+        CheckListAddRecyclerViewAdapter check = new CheckListAddRecyclerViewAdapter();
+
         sessDB = new SharedPreferenceUtil(context);
 
 
@@ -187,6 +195,11 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         linearLayoutManager.setAutoMeasureEnabled(true);
         holder.check11.setLayoutManager(linearLayoutManager);
         holder.check11.setAdapter(roAdapter);
+
+    }
+    public void setProgressBar(int checkNum){
+
+        this.checkNum=checkNum;
 
     }
 

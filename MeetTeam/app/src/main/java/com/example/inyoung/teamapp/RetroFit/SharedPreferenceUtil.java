@@ -16,8 +16,17 @@ public class SharedPreferenceUtil {
     private String id;
     private String name;
     private String roomTitle;
+    public static int checkNum=0;
+
+
+    public void setCheckNum() {
+        editor.putInt("checkNum",4);
+        editor.commit();
+    }
+
     private String date;
     private int checkboxcount;
+
 
     public void setSess(String sess) {
         editor.putString("sesssion", sess);
@@ -63,7 +72,9 @@ public class SharedPreferenceUtil {
     public String getName() {return sharedPreferences.getString("name","dafValue");}
     public String getRoomTitle(){return  sharedPreferences.getString("roomTitle","dafValue");}
     public String getDate() {return sharedPreferences.getString("date","dafValue");}
+    public int getCheckNum(){return sharedPreferences.getInt("checkNum", Integer.parseInt("8282"));}
     public int getCheckboxcount(){return sharedPreferences.getInt("checkboxcount",999);}
+
 }
 
 
