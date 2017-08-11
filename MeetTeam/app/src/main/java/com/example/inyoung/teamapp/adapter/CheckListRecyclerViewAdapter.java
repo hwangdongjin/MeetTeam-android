@@ -56,16 +56,10 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         private Button checkbox_add,btn_down,btn_up;
         private TextView manage_Name,manage_Do;
         private RecyclerView check11;
-        private ProgressBar progressBar;
-
 
         ProgressBar progressBar;
         SharedPreferenceUtil sessDB;
         private RecyclerView checkbox_view;
-
-
-
-
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -78,15 +72,9 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
             btn_up= (Button) itemView.findViewById(R.id.btn_up);
             progressBar= (ProgressBar) itemView.findViewById(R.id.progressBar);
 
-
             progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
             checkbox_view = (RecyclerView) itemView.findViewById(R.id.checkbox_view);
-
-
         }
-
-
-
     }
 
     @Override
@@ -157,15 +145,10 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
                         initRecycleView(holder);
                         //checkboxcount++;
                         //sessDB.setCheckboxcount(checkboxcount);
-
-
-
-
                     }
                 });
                 builder.setNegativeButton("취소", null);
                 dlg.show();
-
             }
         });
 
@@ -186,21 +169,19 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         }
     }
     public void initRecycleView(ViewHolder holder){
-
         checkAddList.add(new CheckAddDTO(av.getText().toString(), as.getText().toString()));
         holder.check11.setHasFixedSize(true);
         holder.check11.setFocusable(false);
+
         roAdapter = new CheckListAddRecyclerViewAdapter(checkAddList, context);
         linearLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
         linearLayoutManager.setAutoMeasureEnabled(true);
         holder.check11.setLayoutManager(linearLayoutManager);
         holder.check11.setAdapter(roAdapter);
-
     }
+
     public void setProgressBar(int checkNum){
-
         this.checkNum=checkNum;
-
     }
 
 }
