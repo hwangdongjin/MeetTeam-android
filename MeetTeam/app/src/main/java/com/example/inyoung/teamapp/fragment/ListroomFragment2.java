@@ -38,7 +38,7 @@ public class ListroomFragment2 extends Fragment{
     private AlertDialog.Builder dlg;
     String title, subject,session,search_title;
     Intent intent;
-    EditText edt_title, edt_subject,edt_searchTitle;
+    EditText edt_title, edt_subject, edt_title2;
     protected static volatile int instanceCount;
     SharedPreferenceUtil sessDB;
     private NetworkService networkService;
@@ -68,7 +68,6 @@ public class ListroomFragment2 extends Fragment{
         Log.i("태그","initAddRoom");
         btnAdd = (Button)view.findViewById(R.id.btn_add);
         btnSearch= (Button) view.findViewById(R.id.btn_search);
-        edt_searchTitle= (EditText) view.findViewById(R.id.fr1_edit_search);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,13 +111,22 @@ public class ListroomFragment2 extends Fragment{
                 dlg.show();
             }
         });
+
+
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                roomEnterDlg();
                 sessDB= new SharedPreferenceUtil(getContext());
                 session=sessDB.getSess();
 
-                search_title=edt_searchTitle.getText().toString();
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+
+                search_title=edt_title2.getText().toString();
                 application = ApplicationController.getInstance();
                 application.buildNetworkService();
                 networkService = ApplicationController.getInstance().getNetworkService();
@@ -155,6 +163,12 @@ public class ListroomFragment2 extends Fragment{
                 });
 
 
+                    }
+                });
+
+
+                dlg.setNegativeButton("취소", null);
+                dlg.show();
 
             }
         });
@@ -174,7 +188,7 @@ public class ListroomFragment2 extends Fragment{
         dlg = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_room_enter, null, false);
-        edt_title = (EditText)view.findViewById(R.id.edt_title);
+        edt_title2 = (EditText)view.findViewById(R.id.edt_title2);
         dlg.setView(view);
     }
 
