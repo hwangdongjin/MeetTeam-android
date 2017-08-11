@@ -36,12 +36,12 @@ public class CheckListFragment extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-
         view = inflater.inflate(R.layout.fragement_check_list, container, false);
         initRecyclerView(view);
         initButton(view);
         return view;
     }
+
     private void initRecyclerView(View view) {
         Log.i("태그","initRecyclerView");
         chatView = (RecyclerView) view.findViewById(R.id.chatView);
@@ -51,7 +51,6 @@ public class CheckListFragment extends Fragment {
         roAdapter = new CheckListRecyclerViewAdapter(chatList, getContext());
         chatView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         chatView.setAdapter(roAdapter);
-
     }
 
     private void initButton(View view) {
@@ -60,12 +59,9 @@ public class CheckListFragment extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 chatList.add(0,new CheckListDTO("CheckList"));
                 roAdapter.notifyItemInserted(0);
                 roAdapter.notifyDataSetChanged();
-
-
             }
         });
 

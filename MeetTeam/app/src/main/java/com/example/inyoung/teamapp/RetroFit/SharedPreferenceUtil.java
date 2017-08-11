@@ -24,6 +24,10 @@ public class SharedPreferenceUtil {
         editor.commit();
     }
 
+    private String date;
+    private int checkboxcount;
+
+
     public void setSess(String sess) {
         editor.putString("sesssion", sess);
         editor.commit();
@@ -51,10 +55,15 @@ public class SharedPreferenceUtil {
         editor.commit();
     }
 
+    public void setCheckboxcount(int checkboxcount){
+
+        editor.putInt("checkboxcount",checkboxcount);
+        editor.commit();
+    }
+
     public SharedPreferenceUtil(Context context) {
         this.sharedPreferences = context.getSharedPreferences(APP_SHARED_PREFS, Activity.MODE_PRIVATE);
         this.editor = sharedPreferences.edit();
-
     }
 
     public String getSess() {
@@ -64,5 +73,26 @@ public class SharedPreferenceUtil {
     public String getRoomTitle(){return  sharedPreferences.getString("roomTitle","dafValue");}
     public String getDate() {return sharedPreferences.getString("date","dafValue");}
     public int getCheckNum(){return sharedPreferences.getInt("checkNum", Integer.parseInt("8282"));}
+    public int getCheckboxcount(){return sharedPreferences.getInt("checkboxcount",999);}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

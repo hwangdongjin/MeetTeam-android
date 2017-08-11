@@ -18,7 +18,6 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -40,6 +39,7 @@
         <activity android:name=".fragment.ListroomFragment3" />
         <activity android:name=".adapter.ListroomAdapter" />
         <activity android:name=".TtableActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

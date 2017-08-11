@@ -37,6 +37,12 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
     EditText av,as;
     String teamName,teamDo;
 
+    SharedPreferenceUtil sessDB;
+
+
+
+    int checkboxcount = 0;
+
     public CheckListRecyclerViewAdapter(ArrayList<CheckListDTO> checkList, Context context) {
         this.checkList = checkList;
         this.context = context;
@@ -53,6 +59,12 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         private ProgressBar progressBar;
 
 
+        ProgressBar progressBar;
+        SharedPreferenceUtil sessDB;
+        private RecyclerView checkbox_view;
+
+
+
 
 
         public ViewHolder(View itemView) {
@@ -65,6 +77,10 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
             btn_down= (Button) itemView.findViewById(R.id.btn_down);
             btn_up= (Button) itemView.findViewById(R.id.btn_up);
             progressBar= (ProgressBar) itemView.findViewById(R.id.progressBar);
+
+
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
+            checkbox_view = (RecyclerView) itemView.findViewById(R.id.checkbox_view);
 
 
         }
@@ -89,6 +105,23 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         db= new SharedPreferenceUtil(context);
         checkNum=db.getCheckNum();
         CheckListAddRecyclerViewAdapter check = new CheckListAddRecyclerViewAdapter();
+
+        sessDB = new SharedPreferenceUtil(context);
+
+
+        /*holder.progressBar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                holder.progressBar.setProgress(0);
+                int num=sessDB.getCheckboxcount();
+                num--;
+                Log.i("mytag", "titii:" + num);
+                if (num!=0){
+                    int k = 100/num;
+                    holder.progressBar.setProgress(k);}
+                return false;
+            }
+        });*/
 
 
 
@@ -122,6 +155,8 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
                         av = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText4);
                         as = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText5);
                         initRecycleView(holder);
+                        //checkboxcount++;
+                        //sessDB.setCheckboxcount(checkboxcount);
 
 
 
