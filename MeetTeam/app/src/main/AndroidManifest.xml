@@ -38,7 +38,8 @@
         <activity android:name=".fragment.ListroomFragment1" />
         <activity android:name=".fragment.ListroomFragment2" />
         <activity android:name=".fragment.ListroomFragment3" />
-        <activity android:name=".adapter.ListroomAdapter"></activity>
+        <activity android:name=".adapter.ListroomAdapter" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
