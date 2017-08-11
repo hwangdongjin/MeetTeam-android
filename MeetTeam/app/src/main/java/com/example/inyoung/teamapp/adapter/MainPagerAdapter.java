@@ -8,7 +8,7 @@ import com.example.inyoung.teamapp.dto.UserListDTO;
 import com.example.inyoung.teamapp.fragment.CheckListFragment;
 import com.example.inyoung.teamapp.fragment.ConfigureFragment;
 import com.example.inyoung.teamapp.fragment.MemberlistFragment;
-import com.example.inyoung.teamapp.fragment.TimeTableFragment;
+import com.example.inyoung.teamapp.fragment.OptionFragment;
 
 import java.util.ArrayList;
 
@@ -36,7 +36,7 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
                 fragment = new CheckListFragment();
                 break;
             case 1:
-                fragment = new TimeTableFragment();
+                fragment = new OptionFragment();
                 break;
             case 2:
                 fragment = MemberlistFragment.newInstance(userList,Num);

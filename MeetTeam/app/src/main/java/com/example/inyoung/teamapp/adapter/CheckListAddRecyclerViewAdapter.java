@@ -1,6 +1,7 @@
 package com.example.inyoung.teamapp.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.inyoung.teamapp.R;
+import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.dto.CheckAddDTO;
 
 import java.util.ArrayList;
@@ -23,8 +25,12 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
 
     private ArrayList<CheckAddDTO> checkList;
     private Context context;
+    private int checkNum;
+    SharedPreferenceUtil DB;
+    CheckListRecyclerViewAdapter roAdapter;
+    LinearLayoutManager linearLayoutManager;
 
-
+   public CheckListAddRecyclerViewAdapter(){}
 
     public CheckListAddRecyclerViewAdapter(ArrayList<CheckAddDTO> checkList,Context context){
 
@@ -37,6 +43,7 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
         protected TextView manager_Name,manager_Do;
         protected CheckBox checkBox;
         protected ProgressBar progressBar;
+        RecyclerView check11;
 
 
 
@@ -47,7 +54,7 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
             manager_Name=(TextView) itemView.findViewById(R.id.manager_Name11);
             checkBox= (CheckBox) itemView.findViewById(R.id.manager_checkbox);
             progressBar= (ProgressBar) itemView.findViewById(R.id.progressBar);
-
+            check11= (RecyclerView) itemView.findViewById(R.id.chatView);
         }
     }
 
@@ -62,19 +69,24 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
 
     @Override
     public void onBindViewHolder(final CheckListAddRecyclerViewAdapter.ViewHolder holder, int position) {
-
+        DB= new SharedPreferenceUtil(context);
         holder.manager_Do.setText(checkList.get(position).getManager_Do());
         holder.manager_Name.setText(checkList.get(position).getManager_Name());
         Log.i("mytag","size"+checkList.size());
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.checkBox.isChecked() == true)
-                    holder.progressBar.setProgress(100);
-                else
-                    holder.progressBar.setProgress(0);
+
+                CheckListRecyclerViewAdapter check = new CheckListRecyclerViewAdapter();
+                check.setProgressBar(4);
+
+
+
+
             }
         });
+
+        Log.i("mytag","1526"+DB.getCheckNum());
 
 
 

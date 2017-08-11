@@ -17,7 +17,6 @@ import java.util.ArrayList;
 /**
  * Created by inyoung on 2017-01-17.
  */
-//BaseAdapter상속 받아서 3 + 1 오버라이드
 public class ProfileAdapter extends BaseAdapter {
     private ArrayList<MemberDTO> profileList;
     private Context context;

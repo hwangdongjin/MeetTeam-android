@@ -44,7 +44,7 @@ import retrofit.Retrofit;
 
 public class TimeTableFragment extends Fragment {
     private AlertDialog.Builder dlg;
-    EditText name,edt_tableName;
+    EditText name;
     TextView text1;
     TextView timeText;
     TextView placeText;
