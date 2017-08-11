@@ -23,35 +23,34 @@
         android:textColor="@android:color/black" />
 
     <Button
-        android:text="시간표"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/btn_table"
-        android:layout_marginTop="180dp"
-        android:layout_marginLeft="30dp" />
+        android:background="@drawable/meeting_time"
+        android:layout_marginTop="77dp"
+        android:layout_below="@+id/txt_time"
+        android:layout_alignLeft="@+id/DateSelectButton"
+        android:layout_alignStart="@+id/DateSelectButton" />
 
     <Button
-        android:text="지도"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/btn_map"
-        android:layout_marginTop="180dp"
-        android:layout_marginLeft="230dp" />
+        android:background="@drawable/meeting_place"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_alignTop="@+id/btn_table"
+        android:layout_alignRight="@+id/DateSelectView"
+        android:layout_alignEnd="@+id/DateSelectView" />
 
     <Button
-        android:text="맛집"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/btn_store"
-        android:layout_marginTop="330dp"
-        android:layout_marginLeft="130dp" />  <Button
-    android:id="@+id/DateSelectButton"
-    android:layout_gravity="center"
-    android:background="@drawable/btn_dateselector"
-    android:layout_height="50dp"
-    android:layout_width="50dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="70dp" />
+        android:id="@+id/DateSelectButton"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_dateselector"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="70dp" />
 
     <TextView
         android:id="@+id/DateSelectView"
