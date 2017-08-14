@@ -90,7 +90,7 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
             public void onClick(View v) {
 
                 CheckListRecyclerViewAdapter check = new CheckListRecyclerViewAdapter();
-                check.setProgressBar(4);
+
 
                 if(holder.checkBox.isChecked() == true) {
 
@@ -99,11 +99,6 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
                     //sessDB.setCheckboxcount(checkboxcount);
 
                     //holder.progressBar.setProgress(100 / sessDB.getCheckboxcount());
-
-
-
-
-
                 }
                 else
                     holder.progressBar.setProgress(0);

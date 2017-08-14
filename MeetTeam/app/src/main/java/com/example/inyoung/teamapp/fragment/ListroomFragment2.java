@@ -77,7 +77,6 @@ public class ListroomFragment2 extends Fragment{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-
                         title = edt_title.getText().toString();
                         subject = edt_subject.getText().toString();
                         sessDB= new SharedPreferenceUtil(getContext());

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,14 +29,12 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
     private ArrayList<CheckListDTO> checkList;
     private ArrayList<CheckAddDTO> checkAddList;
     private Context context;
-    private int checkNum;
     private AlertDialog.Builder dlg;
     LinearLayoutManager linearLayoutManager;
     SharedPreferenceUtil db;
-
-    private CheckListAddRecyclerViewAdapter roAdapter;
+    private CheckListViewAdapter checkListViewAdapter;
     EditText av,as;
-    String teamName,teamDo;
+    boolean lastitemVisibleFlag;
 
     SharedPreferenceUtil sessDB;
 
@@ -55,7 +54,7 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         private Button manager_Button;
         private Button checkbox_add,btn_down,btn_up;
         private TextView manage_Name,manage_Do;
-        private RecyclerView check11;
+        private ListView checkListView;
 
         ProgressBar progressBar;
         SharedPreferenceUtil sessDB;
@@ -64,16 +63,11 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         public ViewHolder(View itemView) {
             super(itemView);
             checkRoom_name=(TextView)itemView.findViewById(R.id.CheckRoomName);
-            check11=(RecyclerView) itemView.findViewById(R.id.checkbox_view);
             manager_Button=(Button) itemView.findViewById(R.id.manager_button);
             manage_Name= (TextView) itemView.findViewById(R.id.manager_Name11);
             manage_Do= (TextView) itemView.findViewById(R.id.manager_do11);
-            btn_down= (Button) itemView.findViewById(R.id.btn_down);
-            btn_up= (Button) itemView.findViewById(R.id.btn_up);
             progressBar= (ProgressBar) itemView.findViewById(R.id.progressBar);
-
-            progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
-            checkbox_view = (RecyclerView) itemView.findViewById(R.id.checkbox_view);
+            checkListView= (ListView) itemView.findViewById(R.id.CheckListView);
         }
     }
 
@@ -89,45 +83,9 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
     @Override
     public void onBindViewHolder(final CheckListRecyclerViewAdapter.ViewHolder holder, final int position) {
 
-        checkAddList = new ArrayList<>();
-        db= new SharedPreferenceUtil(context);
-        checkNum=db.getCheckNum();
-        CheckListAddRecyclerViewAdapter check = new CheckListAddRecyclerViewAdapter();
-
         sessDB = new SharedPreferenceUtil(context);
-
-
-        /*holder.progressBar.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                holder.progressBar.setProgress(0);
-                int num=sessDB.getCheckboxcount();
-                num--;
-                Log.i("mytag", "titii:" + num);
-                if (num!=0){
-                    int k = 100/num;
-                    holder.progressBar.setProgress(k);}
-                return false;
-            }
-        });*/
-
-
-
-
+        checkAddList = new ArrayList<>();
         holder.checkRoom_name.setText(checkList.get(position).getCheck_RoomName());
-        holder.btn_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.check11.scrollToPosition(0);
-            }
-        });
-        holder.btn_down.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.check11.scrollToPosition(roAdapter.getItemCount()-1);
-            }
-        });
-
         holder.manager_Button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(final View v) {
@@ -142,9 +100,11 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
 
                         av = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText4);
                         as = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText5);
-                        initRecycleView(holder);
-                        //checkboxcount++;
-                        //sessDB.setCheckboxcount(checkboxcount);
+                        checkAddList.add(new CheckAddDTO(av.getText().toString(),as.getText().toString(),true));
+                        initCheckListView(holder,checkAddList);
+                        checkListViewAdapter.notifyDataSetChanged();
+
+
                     }
                 });
                 builder.setNegativeButton("취소", null);
@@ -165,23 +125,18 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
     public void onClick(final View v) {
         switch (v.getId()){
 
-            //case R.id.checkbox_add:
+
         }
     }
-    public void initRecycleView(ViewHolder holder){
-        checkAddList.add(new CheckAddDTO(av.getText().toString(), as.getText().toString()));
-        holder.check11.setHasFixedSize(true);
-        holder.check11.setFocusable(false);
+    public void initCheckListView(CheckListRecyclerViewAdapter.ViewHolder holder,ArrayList<CheckAddDTO> checkAddList){
 
-        roAdapter = new CheckListAddRecyclerViewAdapter(checkAddList, context);
-        linearLayoutManager= new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
-        linearLayoutManager.setAutoMeasureEnabled(true);
-        holder.check11.setLayoutManager(linearLayoutManager);
-        holder.check11.setAdapter(roAdapter);
+
+        checkListViewAdapter = new CheckListViewAdapter(checkAddList,context);
+        holder.checkListView.setAdapter(checkListViewAdapter);
+        holder.checkListView.setFastScrollEnabled(true);
+        checkListViewAdapter.notifyDataSetChanged();
+
     }
 
-    public void setProgressBar(int checkNum){
-        this.checkNum=checkNum;
-    }
 
 }

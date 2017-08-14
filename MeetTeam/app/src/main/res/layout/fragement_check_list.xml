@@ -14,10 +14,10 @@
 
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/chatView"
+            android:id="@+id/chatView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.93"
             android:background="#ffffff"></android.support.v7.widget.RecyclerView>
 
         <LinearLayout
@@ -33,6 +33,7 @@
                 android:text="체크리스트 추가"
                 android:textSize="20sp"
                 />
+
             <Button
                 android:id="@+id/btn_search"
                 android:layout_width="wrap_content"

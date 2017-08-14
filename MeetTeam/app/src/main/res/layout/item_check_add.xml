@@ -29,7 +29,8 @@
             android:layout_marginLeft="190dp"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
-            android:text="manager" />
+            android:text="manager"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:text="manager_do"

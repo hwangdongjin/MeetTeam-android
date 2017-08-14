@@ -377,9 +377,14 @@ public class TtableActivity extends AppCompatActivity {
 
                     textId = R.id.TableText0;
                     text1 = (TextView) findViewById(textId);
-                    text1.append(userName+",");
-                    int z =text1.getText().toString().indexOf(",");
-                    String temp= text1.getText().toString().substring(0,z);
+                    ArrayList arrayList ;
+                    arrayList= new ArrayList();
+                    arrayList.add(userName);
+
+
+
+
+
 
 
                     break;
