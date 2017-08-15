@@ -103,9 +103,10 @@ public class ListroomFragment1 extends Fragment {
                         chatView = (RecyclerView) view.findViewById(R.id.chatView);
                         chatView.setHasFixedSize(true);
                         iniiLayoutManager(view);
-
                         roAdapter = new RoomRecyclerViewAdapter(chatList,view.getContext());
                         chatView.setAdapter(roAdapter);
+                        roAdapter.notifyItemInserted(0);
+                        roAdapter.notifyDataSetChanged();
                     }
 
                     catch (IOException e) {

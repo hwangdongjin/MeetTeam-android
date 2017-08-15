@@ -16,7 +16,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tast_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
@@ -27,7 +27,6 @@
                 android:id="@+id/edt_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/tv_title"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="6"
                 android:ems="5"
