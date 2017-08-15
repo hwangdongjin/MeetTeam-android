@@ -40,17 +40,17 @@ public interface NetworkService {
     @FormUrlEncoded
     @POST("/ttable/show")
     Call<ResponseBody> post_ttableShow(@Field("roomTitle")String roomTitle,@Field("date")String date);
-
-
-
-
     @FormUrlEncoded
     @POST("/map/show")
     Call<ResponseBody> post_mapshow(@Field("roomTitle")String roomTitle,@Field("date")String date);
-
     @FormUrlEncoded
     @POST("/map/add")
     Call<ResponseBody> post_map(@Field("sess")String sess, @Field("roomTitle")String title, @Field("date")String date, @Field("longitude")double longitude, @Field("latitude")double latitude);
-
+    @FormUrlEncoded
+    @POST("/task/add")
+    Call<ResponseBody> post_taskAdd(@Field("sess")String sess, @Field("roomTitle")String title,@Field("taskName")String taskName);
+    @FormUrlEncoded
+    @POST("/task/show")
+    Call<ResponseBody> post_taskShow(@Field("roomTitle")String title);
 
 }

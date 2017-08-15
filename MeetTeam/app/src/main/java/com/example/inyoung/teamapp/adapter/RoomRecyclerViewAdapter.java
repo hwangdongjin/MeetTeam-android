@@ -61,7 +61,7 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
 
         public ViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.tv_title);
+            title = (TextView) itemView.findViewById(R.id.tast_title);
             chiefName = (TextView) itemView.findViewById(R.id.tv_managerName);
             btnEnter = (Button) itemView.findViewById(btn_enter);
         }

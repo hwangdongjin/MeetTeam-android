@@ -1,5 +1,6 @@
 package com.example.inyoung.teamapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -46,6 +47,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public JSONArray jsonArray;
     JSONObject jsonObject;
 
+    static int year1,month1,dayOfMonth1;
+    Intent intent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         //mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        intent = getIntent();
+        year1 = intent.getIntExtra("year",0);
+        month1=intent.getIntExtra("month",0);
+        dayOfMonth1=intent.getIntExtra("day",0);
 
         map_plusbutton = (Button)findViewById(R.id.mapfr_plus);
         map_plusbutton.setOnClickListener(this);
@@ -74,7 +83,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
         sessDB = new SharedPreferenceUtil(getApplicationContext());
-        Call<ResponseBody> thumbnail = networkService.post_mapshow(sessDB.getRoomTitle(),sessDB.getDate());
+        Call<ResponseBody> thumbnail = networkService.post_mapshow(sessDB.getRoomTitle(),/*sessDB.getDate()*/year1+"-"+month1+"-"+dayOfMonth1);
         thumbnail.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -164,7 +173,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         double latitude = marker.getPosition().latitude;
 
         sessDB = new SharedPreferenceUtil(getApplicationContext());
-        Call<ResponseBody> thumbnalCall = networkService.post_map(sessDB.getSess(),sessDB.getRoomTitle(),sessDB.getDate(),longitude,latitude);
+        Call<ResponseBody> thumbnalCall = networkService.post_map(sessDB.getSess(),sessDB.getRoomTitle(),/*sessDB.getDate()*/year1+"-"+month1+"-"+dayOfMonth1,longitude,latitude);
         thumbnalCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {

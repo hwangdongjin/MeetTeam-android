@@ -143,12 +143,7 @@ public class MemberlistFragment extends Fragment {
             profileList.add(new MemberDTO("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2000px-Facebook_icon.svg.png", userList.get(i).getName(), "서울지부 총괄 GM"));
 
         }
-       /* profileList.add(new MemberDTO("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/2000px-Facebook_icon.svg.png", "함성호", "서울지부 총괄 GM"));
-        profileList.add(new MemberDTO("https://en.facebookbrand.com/wp-content/themes/fb-branding/prj-fb-branding/assets/images/thumb-drawn.svg", "김우영", "안드로이드 개발 팀장"));
-        profileList.add(new MemberDTO("https://www.wired.com/wp-content/uploads/2015/06/FEATURED-facebook-open-source.jpg", "박종민", "안드로이드 개발 파트장"));
-        profileList.add(new MemberDTO("http://www.cfz.org.uk/images/facebook.png", "한채연", "웹 개발 파트장"));
-        profileList.add(new MemberDTO("https://tctechcrunch2011.files.wordpress.com/2014/09/facebook-trending.png?w=738", "정성일", "기획 마케팅 파트장"));
-        profileList.add(new MemberDTO("https://cdn2.tnwcdn.com/wp-content/blogs.dir/1/files/2016/07/facebook-disconnect-796x398.jpg", "김나경", "디자인 총괄 팀장"));*/
+
 
         pAdapter = new ProfileAdapter(profileList, getContext());
 
