@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.example.inyoung.teamapp.MapActivity;
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.TtableActivity;
@@ -76,6 +77,18 @@ public class OptionFragment extends Fragment {
 
 
 
+        });
+
+        btn_map = (Button) view.findViewById(R.id.btn_map);
+        btn_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getContext(), MapActivity.class);
+                intent.putExtra("year", year1);
+                intent.putExtra("month", month1);
+                intent.putExtra("day", dayOfMonth1);
+                startActivity(intent);
+            }
         });
 
         return view;
