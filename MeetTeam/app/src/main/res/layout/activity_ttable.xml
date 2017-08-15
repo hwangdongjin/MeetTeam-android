@@ -17,14 +17,6 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <Button
-            android:id="@+id/DateSelectButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/btn_dateselector" />
-
         <TextView
             android:id="@+id/DateSelectView"
             android:layout_width="wrap_content"
