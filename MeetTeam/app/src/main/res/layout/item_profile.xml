@@ -7,33 +7,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/mImage"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/mImage"
             android:layout_marginLeft="10dp" />
 
         <TextView
+            android:id="@+id/mName"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:id="@+id/mName"
             android:layout_marginTop="15dp"
             android:textAlignment="center"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/mContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:id="@+id/mContent"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
             android:textAlignment="center"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:textSize="12sp" />
 
     </LinearLayout>
 </LinearLayout>
