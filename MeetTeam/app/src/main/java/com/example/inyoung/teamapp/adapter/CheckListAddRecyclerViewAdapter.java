@@ -89,7 +89,6 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
             @Override
             public void onClick(View v) {
 
-                CheckListRecyclerViewAdapter check = new CheckListRecyclerViewAdapter();
 
 
                 if(holder.checkBox.isChecked() == true) {

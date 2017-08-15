@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.dto.CheckAddDTO;
@@ -33,48 +34,52 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
     LinearLayoutManager linearLayoutManager;
     SharedPreferenceUtil db;
     private CheckListViewAdapter checkListViewAdapter;
-    EditText av,as;
+    EditText av, as;
     boolean lastitemVisibleFlag;
-
     SharedPreferenceUtil sessDB;
-
-
-
-    int checkboxcount = 0;
+    private int checkboxcount = 0 ;
 
     public CheckListRecyclerViewAdapter(ArrayList<CheckListDTO> checkList, Context context) {
         this.checkList = checkList;
         this.context = context;
     }
-    public CheckListRecyclerViewAdapter(){}
+
+    public CheckListRecyclerViewAdapter(int checkboxcount) {
+
+        this.checkboxcount=checkboxcount;
+
+
+    }
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView checkRoom_name;
         private Button manager_Button;
-        private Button checkbox_add,btn_down,btn_up;
-        private TextView manage_Name,manage_Do;
+        private Button checkbox_add, btn_down, btn_up;
+        private TextView manage_Name, manage_Do;
         private ListView checkListView;
+        ArrayList<CheckAddDTO> checkAddDTO;
         private CheckBox manager_checkbox;
-        ProgressBar progressBar;
+        static ProgressBar progressBar;
         SharedPreferenceUtil sessDB;
         private RecyclerView checkbox_view;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            checkRoom_name=(TextView)itemView.findViewById(R.id.CheckRoomName);
-            manager_Button=(Button) itemView.findViewById(R.id.manager_button);
-            manage_Name= (TextView) itemView.findViewById(R.id.manager_Name11);
-            manage_Do= (TextView) itemView.findViewById(R.id.manager_do11);
-            progressBar= (ProgressBar) itemView.findViewById(R.id.progressBar);
-            checkListView= (ListView) itemView.findViewById(R.id.CheckListView);
-            manager_checkbox= (CheckBox) itemView.findViewById(R.id.manager_checkbox);
+            checkRoom_name = (TextView) itemView.findViewById(R.id.CheckRoomName);
+            manager_Button = (Button) itemView.findViewById(R.id.manager_button);
+            manage_Name = (TextView) itemView.findViewById(R.id.manager_Name11);
+            manage_Do = (TextView) itemView.findViewById(R.id.manager_do11);
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
+            checkListView = (ListView) itemView.findViewById(R.id.CheckListView);
+
         }
     }
 
     @Override
     public CheckListRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_check_list, parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_check_list, parent, false);
         CheckListRecyclerViewAdapter.ViewHolder vholder = new CheckListRecyclerViewAdapter.ViewHolder(itemView);
 
         return vholder;
@@ -86,7 +91,7 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         sessDB = new SharedPreferenceUtil(context);
         checkAddList = new ArrayList<>();
         holder.checkRoom_name.setText(checkList.get(position).getCheck_RoomName());
-        holder.manager_Button.setOnClickListener(new View.OnClickListener(){
+        holder.manager_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 dlg = new AlertDialog.Builder(v.getContext());
@@ -100,9 +105,14 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
 
                         av = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText4);
                         as = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText5);
-                        checkAddList.add(new CheckAddDTO(av.getText().toString(),as.getText().toString()));
-                        initCheckListView(holder,checkAddList);
+                        checkAddList.add(new CheckAddDTO(av.getText().toString(), as.getText().toString()));
+                        initCheckListView(holder, checkAddList);
                         checkListViewAdapter.notifyDataSetChanged();
+                        if(checkboxcount!=0){
+
+                            initProgressBar(holder);
+
+                        }
 
 
                     }
@@ -120,22 +130,27 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
     }
 
 
-
     @Override
     public void onClick(final View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
 
 
         }
     }
-    public void initCheckListView(CheckListRecyclerViewAdapter.ViewHolder holder,ArrayList<CheckAddDTO> checkAddList){
 
-        checkListViewAdapter = new CheckListViewAdapter(checkAddList,context);
+
+    public void initCheckListView(CheckListRecyclerViewAdapter.ViewHolder holder, ArrayList<CheckAddDTO> checkAddList) {
+
+        checkListViewAdapter = new CheckListViewAdapter(checkAddList, context);
         holder.checkListView.setAdapter(checkListViewAdapter);
         holder.checkListView.setFastScrollEnabled(true);
         checkListViewAdapter.notifyDataSetChanged();
-
     }
 
+    public void initProgressBar(CheckListRecyclerViewAdapter.ViewHolder holder) {
+
+         holder.progressBar.setProgress(100);
+
+    }
 
 }
