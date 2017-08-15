@@ -86,16 +86,6 @@
                 android:orientation="vertical"
                 android:layout_height="210dp">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/checkbox_view"
-            android:layout_width="match_parent"
-            android:layout_height="205dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="68dp"
-
-            android:background="#ffffff">
-
 
                 <ListView
                     android:layout_width="match_parent"
