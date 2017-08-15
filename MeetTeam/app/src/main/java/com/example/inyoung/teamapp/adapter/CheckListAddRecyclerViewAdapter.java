@@ -114,14 +114,11 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
 
     @Override
     public int getItemCount() {
-
-
         return checkList.size();
     }
 
     @Override
     public void onClick(View v) {
-
     }
 
 

@@ -30,325 +30,177 @@ import retrofit.Retrofit;
 
 public class TtableActivity extends AppCompatActivity {
 
+    private NetworkService networkService;
+    ApplicationController application;
+    Intent intent;
+
     private AlertDialog.Builder dlg;
-    static int textId;
+
     SharedPreferenceUtil sessDB;
     Button DateSelectButton;
     TextView DateSelectView;
     TextView text1;
     String sess,roomTitle,date;
-    static int year1,month1,dayOfMonth1;
-    ArrayList<String> times;
-    private NetworkService networkService;
-    ApplicationController application;
+
+    static int year, month, dayOfMonth;
+
     public Object jsonArray;
     public JSONObject jsonObject;
-    Intent intent;
-    String[] tablePos;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ttable);
-        DateSelectButton=(Button)findViewById(R.id.DateSelectButton);
+
         DateSelectView = (TextView) findViewById(R.id.DateSelectView);
-        sessDB = new SharedPreferenceUtil(getApplicationContext());
-        times= new ArrayList<>();
+
+        for(int i=0; i<28; i++){
+            int timeId= getResources().getIdentifier("TableText"+i, "id", getPackageName());
+            findViewById(timeId).setOnClickListener(onClick);
+        }
+
         intent = getIntent();
-        year1=intent.getIntExtra("year",0);
-        month1=intent.getIntExtra("month",0);
-        dayOfMonth1=intent.getIntExtra("day",0);
-        findViewById(R.id.TableText0).setOnClickListener(onClick);
-        findViewById(R.id.TableText1).setOnClickListener(onClick);
-        findViewById(R.id.TableText2).setOnClickListener(onClick);
-        findViewById(R.id.TableText3).setOnClickListener(onClick);
-        findViewById(R.id.TableText4).setOnClickListener(onClick);
-        findViewById(R.id.TableText5).setOnClickListener(onClick);
-        findViewById(R.id.TableText6).setOnClickListener(onClick);
-        findViewById(R.id.TableText7).setOnClickListener(onClick);
-        findViewById(R.id.TableText8).setOnClickListener(onClick);
-        findViewById(R.id.TableText9).setOnClickListener(onClick);
-        findViewById(R.id.TableText10).setOnClickListener(onClick);
-        findViewById(R.id.TableText11).setOnClickListener(onClick);
-        findViewById(R.id.TableText12).setOnClickListener(onClick);
-        findViewById(R.id.TableText13).setOnClickListener(onClick);
-        findViewById(R.id.TableText14).setOnClickListener(onClick);
-        findViewById(R.id.TableText15).setOnClickListener(onClick);
-        findViewById(R.id.TableText16).setOnClickListener(onClick);
-        findViewById(R.id.TableText17).setOnClickListener(onClick);
-        findViewById(R.id.TableText18).setOnClickListener(onClick);
-        findViewById(R.id.TableText19).setOnClickListener(onClick);
-        findViewById(R.id.TableText20).setOnClickListener(onClick);
-        findViewById(R.id.TableText21).setOnClickListener(onClick);
-        findViewById(R.id.TableText22).setOnClickListener(onClick);
-        findViewById(R.id.TableText23).setOnClickListener(onClick);
-        findViewById(R.id.TableText24).setOnClickListener(onClick);
-        findViewById(R.id.TableText25).setOnClickListener(onClick);
-        findViewById(R.id.TableText26).setOnClickListener(onClick);
-        findViewById(R.id.TableText27).setOnClickListener(onClick);
+        year = intent.getIntExtra("year",0);
+        month = intent.getIntExtra("month",0);
+        dayOfMonth = intent.getIntExtra("day",0);
+        date= String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(dayOfMonth);
 
+        DateSelectView.setText(year+"년"+month+"월"+dayOfMonth+"일");
+
+        sessDB = new SharedPreferenceUtil(getApplicationContext());
+        sess=sessDB.getSess();
+        roomTitle=sessDB.getRoomTitle();
+
+        initTableShow(roomTitle,date);
     }
-
 
     TextView.OnClickListener onClick =  new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
             switch (v.getId()){
-
                 case R.id.TableText0:
-
-                    times.add("0");
-                    initTableAdd(times);
-
+                    initTableAdd("0");
                     break;
                 case R.id.TableText1:
-
-                    times.add("1");
-                    initTableAdd(times);
-
+                    initTableAdd("1");
                     break;
                 case R.id.TableText2:
-
-                    times.add("2");
-                    initTableAdd(times);
-
+                    initTableAdd("2");
                     break;
                 case R.id.TableText3:
-
-                    times.add("3");
-                    initTableAdd(times);
-
+                    initTableAdd("3");
                     break;
-
                 case R.id.TableText4:
-
-                    times.add("4");
-                    initTableAdd(times);
-
+                    initTableAdd("4");
                     break;
                 case R.id.TableText5:
-
-                    times.add("5");
-                    initTableAdd(times);
-
+                    initTableAdd("5");
                     break;
                 case R.id.TableText6:
-
-                    times.add("6");
-                    initTableAdd(times);
-
+                    initTableAdd("6");
                     break;
-
                 case R.id.TableText7:
-
-                    times.add("7");
-                    initTableAdd(times);
-
+                    initTableAdd("7");
                     break;
                 case R.id.TableText8:
-
-                    times.add("8");
-                    initTableAdd(times);
-
+                    initTableAdd("8");
                     break;
                 case R.id.TableText9:
-
-                    times.add("9");
-                    initTableAdd(times);
-
+                    initTableAdd("9");
                     break;
                 case R.id.TableText10:
-
-                    times.add("10");
-                    initTableAdd(times);
-
+                    initTableAdd("10");
                     break;
                 case R.id.TableText11:
-
-                    times.add("11");
-                    initTableAdd(times);
-
+                    initTableAdd("11");
                     break;
                 case R.id.TableText12:
-
-                    times.add("12");
-                    initTableAdd(times);
-
+                    initTableAdd("12");
                     break;
                 case R.id.TableText13:
-
-                    times.add("13");
-                    initTableAdd(times);
-
+                    initTableAdd("13");
                     break;
                 case R.id.TableText14:
-
-                    times.add("14");
-                    initTableAdd(times);
-
+                    initTableAdd("14");
                     break;
                 case R.id.TableText15:
-
-                    times.add("15");
-                    initTableAdd(times);
-
+                    initTableAdd("15");
                     break;
                 case R.id.TableText16:
-
-                    times.add("16");
-                    initTableAdd(times);
-
+                    initTableAdd("16");
                     break;
                 case R.id.TableText17:
-
-                    times.add("17");
-                    initTableAdd(times);
-
+                    initTableAdd("17");
                     break;
                 case R.id.TableText18:
-
-                    times.add("18");
-                    initTableAdd(times);
-
+                    initTableAdd("18");
                     break;
                 case R.id.TableText19:
-
-                    times.add("19");
-                    initTableAdd(times);
-
+                    initTableAdd("19");
                     break;
                 case R.id.TableText20:
-
-                    times.add("20");
-                    initTableAdd(times);
-
+                    initTableAdd("20");
                     break;
                 case R.id.TableText21:
-
-                    times.add("21");
-                    initTableAdd(times);
-
-
+                    initTableAdd("21");
                     break;
                 case R.id.TableText22:
-
-                    times.add("22");
-                    initTableAdd(times);
-
+                    initTableAdd("22");
                     break;
                 case R.id.TableText23:
-
-                    times.add("23");
-                    initTableAdd(times);
-
+                    initTableAdd("23");
                     break;
                 case R.id.TableText24:
-
-                    times.add("24");
-                    initTableAdd(times);
-
+                    initTableAdd("24");
                     break;
                 case R.id.TableText25:
-
-                    times.add("25");
-                    initTableAdd(times);
-
+                    initTableAdd("25");
                     break;
                 case R.id.TableText26:
-
-                    times.add("26");
-                    initTableAdd(times);
-
+                    initTableAdd("26");
                     break;
                 case R.id.TableText27:
-
-                    times.add("27");
-                    initTableAdd(times);
-
+                    initTableAdd("27");
                     break;
-
-
             }
-
         }
     };
 
 
-    public void initTableAdd(ArrayList<String> times){
-        sess=sessDB.getSess();
-        roomTitle=sessDB.getRoomTitle();
-        date= String.valueOf(year1)+"-"+String.valueOf(month1)+"-"+String.valueOf(dayOfMonth1);
-        Log.i("mytag","datess:"+year1);
-        application = ApplicationController.getInstance();
-        application.buildNetworkService();
-        networkService = ApplicationController.getInstance().getNetworkService();
-        Call<ResponseBody> thumbnailcall = networkService.post_ttableAdd(sess,roomTitle,date,times);
-        thumbnailcall.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-
-                if(response.isSuccess()){
-
-                    initTableShow(roomTitle,date);
-                }
-                else
-                    Toast.makeText(getApplicationContext(),"실패하였습니다",Toast.LENGTH_LONG).show();
-
-
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-
-            }
-        });
-
-    }
-
     public void initTableShow(String roomTitle,String date){
-
         application = ApplicationController.getInstance();
         application.buildNetworkService();
         networkService = ApplicationController.getInstance().getNetworkService();
+
         Call<ResponseBody> thumnailcall = networkService.post_ttableShow(roomTitle,date);
+
         thumnailcall.enqueue(new Callback<ResponseBody>() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-
                 if(response.isSuccess()){
                     try {
-
                         jsonObject= new JSONObject(response.body().string());
-                        JSONArray jsonArray=new JSONArray(jsonObject.get("tables").toString());
-                        for(int i=0;i<jsonArray.length();i++){
+                        JSONArray tables = new JSONArray(jsonObject.get("tables").toString());
 
-                            JSONObject json= jsonArray.getJSONObject(i);
-                            JSONObject json2 = new JSONObject(json.toString());
-                            JSONArray jsonArray1 = new JSONArray(json2.get("times").toString());
-                            String userName = (String) json2.get("userName");
-                            initSetText(jsonArray1,userName);
+                        for(int i=0; i<tables.length();i++){
+                            String userNames = "";
+                            JSONObject table = tables.getJSONObject(i);
 
+                            int time = Integer.parseInt((String)table.get("time"));
+                            JSONArray userNamesArray = new JSONArray(table.get("userNames").toString());
+
+                            initSetText(time, userNamesArray);
                         }
-
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
                 }
-
-
-                else
+                else{
                     Toast.makeText(getApplicationContext(),"실패하였습니다",Toast.LENGTH_LONG).show();
-
-
+                }
             }
 
             @Override
@@ -356,233 +208,160 @@ public class TtableActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
+    public void initSetTextNull(){
+        for(int i=0; i<28; i++){
+            int timeId= getResources().getIdentifier("TableText"+i, "id", getPackageName());
+            TextView timeView = (TextView)findViewById(timeId);
+            timeView.setText("");
+        }
+    }
 
+    public void initSetText(int time, JSONArray userNamesArray) throws JSONException {
+        for(int i=0;i<userNamesArray.length();i++) {
+            String userName= userNamesArray.get(i).toString();
 
-
-    public void initSetText(JSONArray jsonArray, String userName) throws JSONException {
-
-
-        for(int i=0;i<jsonArray.length();i++) {
-
-            int number= Integer.parseInt(jsonArray.get(i).toString());
-            Log.i("mytag", "number22:" + number);
-            Log.i("mytag","text1:"+userName);
-
-            switch (number) {
-
+            switch (time) {
                 case 0:
-
-                    textId = R.id.TableText0;
-                    text1 = (TextView) findViewById(textId);
-                    ArrayList arrayList ;
-                    arrayList= new ArrayList();
-                    arrayList.add(userName);
-
-
-
-
-
-
-
+                    text1 = (TextView) findViewById(R.id.TableText0);
+                    text1.append(userName);
                     break;
                 case 1:
-
-                    textId = R.id.TableText1;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText1);
                     text1.append(userName);
-
                     break;
-
-
                 case 2:
-                    textId = R.id.TableText2;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText2);
                     text1.append(userName);
-
                     break;
                 case 3:
-                    textId = R.id.TableText3;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText3);
                     text1.append(userName);
-
                     break;
-
                 case 4:
-                    textId = R.id.TableText4;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText4);
                     text1.append(userName);
-
                     break;
                 case 5:
-                    textId = R.id.TableText5;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText5);
                     text1.append(userName);
-
                     break;
                 case 6:
-                    textId = R.id.TableText6;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText6);
                     text1.append(userName);
-
                     break;
-
                 case 7:
-                    textId = R.id.TableText7;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText7);
                     text1.append(userName);
-
                     break;
                 case 8:
-                    textId = R.id.TableText8;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText8);
                     text1.append(userName);
-
                     break;
                 case 9:
-                    textId = R.id.TableText9;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText9);
                     text1.append(userName);
-
                     break;
                 case 10:
-                    textId = R.id.TableText10;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText10);
                     text1.append(userName);
-
                     break;
                 case 11:
-                    textId = R.id.TableText11;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText11);
                     text1.append(userName);
-
                     break;
                 case 12:
-                    textId = R.id.TableText12;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText12);
                     text1.append(userName);
-
                     break;
                 case 13:
-                    textId = R.id.TableText13;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText13);
                     text1.append(userName);
                     break;
                 case 14:
-                    textId = R.id.TableText14;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText14);
                     text1.append(userName);
                     break;
                 case 15:
-                    textId = R.id.TableText15;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText15);
                     text1.append(userName);
-
                     break;
                 case 16:
-                    textId = R.id.TableText16;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText16);
                     text1.append(userName);
-
                     break;
                 case 17:
-                    textId = R.id.TableText17;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText17);
                     text1.append(userName);
-
                     break;
                 case 18:
-                    textId = R.id.TableText18;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText18);
                     text1.append(userName);
-
                     break;
                 case 19:
-                    textId = R.id.TableText19;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText19);
                     text1.append(userName);
-
                     break;
                 case 20:
-                    textId = R.id.TableText20;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText20);
                     text1.append(userName);
                     break;
                 case 21:
-                    textId = R.id.TableText21;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText21);
                     text1.append(userName);
-
-
                     break;
                 case 22:
-                    textId = R.id.TableText22;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText22);
                     text1.append(userName);
-
                     break;
                 case 23:
-                    textId = R.id.TableText23;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText23);
                     text1.append(userName);
                     break;
                 case 24:
-                    textId = R.id.TableText24;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText24);
                     text1.append(userName);
-
                     break;
                 case 25:
-                    textId = R.id.TableText25;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText25);
                     text1.append(userName);
-
                     break;
                 case 26:
-                    textId = R.id.TableText26;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText26);
                     text1.append(userName);
-
                     break;
                 case 27:
-                    textId = R.id.TableText27;
-                    text1 = (TextView) findViewById(textId);
-                    text1.setText(null);
+                    text1 = (TextView) findViewById(R.id.TableText27);
                     text1.append(userName);
-
                     break;
-
             }
         }
+    }
 
+    public void initTableAdd(String time){
+        sess=sessDB.getSess();
+        roomTitle=sessDB.getRoomTitle();
+
+        application = ApplicationController.getInstance();
+        application.buildNetworkService();
+        networkService = ApplicationController.getInstance().getNetworkService();
+
+        Call<ResponseBody> thumbnailcall = networkService.post_ttableAdd(sess, roomTitle, date, time);
+        thumbnailcall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                if(response.isSuccess()){
+                    initSetTextNull();
+                    initTableShow(roomTitle,date);
+                }
+                else
+                    Toast.makeText(getApplicationContext(),"실패하였습니다",Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onFailure(Throwable t) {
+            }
+        });
     }
 
 }
