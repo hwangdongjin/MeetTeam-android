@@ -68,7 +68,7 @@ public class CheckListFragment extends Fragment {
         return view;
     }
 
-    private void initRecyclerView(final View view) {
+    public void initRecyclerView(final View view) {
         String roomTitle = sessDB.getRoomTitle();
         application = ApplicationController.getInstance();
         application.buildNetworkService();
