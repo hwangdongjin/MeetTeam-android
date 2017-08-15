@@ -53,9 +53,14 @@ public class CheckListViewAdapter extends BaseAdapter {
         holder.checkBox= (CheckBox) itemView.findViewById(R.id.manager_checkbox);
         holder.manager_Name= (TextView) itemView.findViewById(R.id.manager_Name11);
         holder.manager_Do= (TextView) itemView.findViewById(R.id.manager_do11);
-        holder.checkBox.setChecked(checkList.get(position).getCheck());
         holder.manager_Do.setText(checkList.get(position).getManager_Do());
         holder.manager_Name.setText(checkList.get(position).getManager_Name());
         return itemView;
+    }
+    public void initProgress(){
+
+
+
+
     }
 }

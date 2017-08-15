@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.dto.CheckAddDTO;
@@ -55,11 +55,10 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         private Button checkbox_add,btn_down,btn_up;
         private TextView manage_Name,manage_Do;
         private ListView checkListView;
-
+        private CheckBox manager_checkbox;
         ProgressBar progressBar;
         SharedPreferenceUtil sessDB;
         private RecyclerView checkbox_view;
-
         public ViewHolder(View itemView) {
             super(itemView);
             checkRoom_name=(TextView)itemView.findViewById(R.id.CheckRoomName);
@@ -68,6 +67,7 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
             manage_Do= (TextView) itemView.findViewById(R.id.manager_do11);
             progressBar= (ProgressBar) itemView.findViewById(R.id.progressBar);
             checkListView= (ListView) itemView.findViewById(R.id.CheckListView);
+            manager_checkbox= (CheckBox) itemView.findViewById(R.id.manager_checkbox);
         }
     }
 
@@ -100,7 +100,7 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
 
                         av = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText4);
                         as = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText5);
-                        checkAddList.add(new CheckAddDTO(av.getText().toString(),as.getText().toString(),true));
+                        checkAddList.add(new CheckAddDTO(av.getText().toString(),as.getText().toString()));
                         initCheckListView(holder,checkAddList);
                         checkListViewAdapter.notifyDataSetChanged();
 
@@ -129,7 +129,6 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         }
     }
     public void initCheckListView(CheckListRecyclerViewAdapter.ViewHolder holder,ArrayList<CheckAddDTO> checkAddList){
-
 
         checkListViewAdapter = new CheckListViewAdapter(checkAddList,context);
         holder.checkListView.setAdapter(checkListViewAdapter);

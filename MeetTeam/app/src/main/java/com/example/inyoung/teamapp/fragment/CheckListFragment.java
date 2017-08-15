@@ -98,11 +98,6 @@ public class CheckListFragment extends Fragment {
                         roAdapter.notifyDataSetChanged();
                         chatView.setAdapter(roAdapter);
 
-
-
-
-
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
