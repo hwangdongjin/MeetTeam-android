@@ -6,7 +6,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="150dp"
+        android:background="@drawable/img_box"
         android:orientation="vertical">
 
         <LinearLayout
@@ -20,20 +21,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:layout_weight="1"
-                android:text="title" />
+                android:text="팀 이름"
+                android:textStyle="bold"
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/edt_title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
-                android:layout_weight="6"
+                android:background="@drawable/img_textbackgr"
                 android:ems="5"
-                android:hint="방 이름 입력" />
+                android:hint="  방 이름 입력"
+                android:textSize="15dp"
+                android:textColorHint="#a7a9ad" />
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -42,41 +47,30 @@
                 android:id="@+id/tv_subject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_weight="1"
-                android:text="subject" />
+                android:layout_marginLeft="40dp"
+                android:text="과목명"
+                android:textStyle="bold"
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/edt_subject"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignBaseline="@+id/tv_subject"
-                android:layout_marginLeft="40dp"
-                android:layout_weight="6"
+                android:layout_marginLeft="24dp"
+                android:background="@drawable/img_textbackgr"
                 android:ems="5"
-                android:hint="과목 입력" />
+                android:hint="  과목 입력"
+                android:textSize="15dp"
+                android:textColorHint="#a7a9ad" />
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button5"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ok" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="cancel" />
-
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_ok" />
     </LinearLayout>
+
 </LinearLayout>

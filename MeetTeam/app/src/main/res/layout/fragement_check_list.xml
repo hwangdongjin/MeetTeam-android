@@ -27,7 +27,6 @@
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="체크리스트 추가"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/check_add"
                 android:textSize="20sp" />
@@ -37,7 +36,6 @@
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="방 찾기"
                 android:background="@drawable/check_delete"
                 android:textSize="20sp" />
         </LinearLayout>
