@@ -15,13 +15,14 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="?attr/actionBarSize"
+            android:background="#6990da">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:src="@drawable/title_name" />
+                android:layout_margin="13dp"
+                android:src="@drawable/title_name_white"  />
 
         </android.support.v7.widget.Toolbar>
 
@@ -34,7 +35,7 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/listroomtabs"
             android:layout_width="match_parent"
-            android:background="#fafafa"
-            android:layout_height="60dp"></android.support.design.widget.TabLayout>
+            android:layout_height="60dp"
+            android:background="#cecece">></android.support.design.widget.TabLayout>
     </LinearLayout>
 </LinearLayout>
