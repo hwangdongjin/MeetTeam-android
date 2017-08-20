@@ -87,9 +87,7 @@ public class CheckListFragment extends Fragment {
                         for(int i=0;i<taskArray.length();i++){
                             taskObject= taskArray.getJSONObject(i);
                             chatList.add(new CheckListDTO((String) taskObject.get("taskName")));
-                            Log.i("mytag","dkdkej:"+taskObject.get("taskName").toString());
                         }
-
                         chatView = (RecyclerView) view.findViewById(R.id.chatView11);
                         chatView.setHasFixedSize(false);
                         chatView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
