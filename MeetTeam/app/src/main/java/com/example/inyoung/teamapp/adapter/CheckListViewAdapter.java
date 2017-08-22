@@ -1,7 +1,8 @@
 package com.example.inyoung.teamapp.adapter;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.SharedPreferences;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,14 @@ import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.inyoung.teamapp.ApplicationController;
 import com.example.inyoung.teamapp.R;
+import com.example.inyoung.teamapp.RetroFit.NetworkService;
 import com.example.inyoung.teamapp.dto.CheckAddDTO;
+import com.example.inyoung.teamapp.dto.CheckListDTO;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -19,20 +26,27 @@ import java.util.ArrayList;
  * Created by MYpc on 2017-08-11.
  */
 
-public class CheckListViewAdapter extends BaseAdapter {
+public class CheckListViewAdapter extends BaseAdapter{
 
 
     private ArrayList<CheckAddDTO> checkList;
     private Context context;
     CheckListRecyclerViewAdapter checkListRecyclerViewAdapter;
-    static int count;
-
+    static int progressNum,total;
+    SharedPreferences pref ;
+    SharedPreferences.Editor editor;
+    ApplicationController application;
+    NetworkService networkService;
+    ArrayList<CheckListDTO> chatList;
+    JSONArray taskArray;
+    JSONObject taskObject;
+    RecyclerView chatView;
+    CheckListRecyclerViewAdapter roAdapter;
     public CheckListViewAdapter(ArrayList<CheckAddDTO> checkList, Context context) {
 
         this.checkList = checkList;
         this.context = context;
     }
-
 
     @Override
     public int getCount() { return checkList.size(); }
@@ -43,45 +57,50 @@ public class CheckListViewAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) { return position; }
 
-    public int getCheckCount(){return count;}
+    public int getCheckNum(){
+        total=0;
+        for(int i=0;i<checkList.size();i++){
+            if(checkList.get(i).getCheck()==true){
+                total++;
+            }
+        }
+        return total;
+    }
 
     class Holder {
         CheckBox checkBox;
         TextView manager_Do;
         TextView manager_Name;
-        boolean checkBoxState;
         ProgressBar progressBar;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
+        pref=context.getSharedPreferences("pref",Context.MODE_PRIVATE);
+        editor=pref.edit();
         final View itemView = LayoutInflater.from(context).inflate(R.layout.item_check_add, parent, false);
-        final View itemView2 = LayoutInflater.from(context).inflate(R.layout.fragement_check_list, parent, false);
         final Holder holder = new Holder();
-        //프로필리스트에서 이름이랑 정보 가져오기
         holder.checkBox= (CheckBox) itemView.findViewById(R.id.manager_checkbox);
-        holder.checkBox.setChecked(false);
-        Log.i("mytag","state:"+holder.checkBox.isChecked());
-        holder.checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(((CheckBox)v).isChecked()){
-
-
-                }
-            }
-        });
         holder.manager_Name= (TextView) itemView.findViewById(R.id.manager_Name11);
         holder.manager_Do= (TextView) itemView.findViewById(R.id.manager_do11);
         holder.manager_Do.setText(checkList.get(position).getManager_Do());
         holder.manager_Name.setText(checkList.get(position).getManager_Name());
-
+        holder.checkBox.setChecked(checkList.get(position).getCheck());
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkList.get(position).setCheck();
+                holder.checkBox.setChecked(checkList.get(position).getCheck());
+                total=0;
+                for(int i=0;i<checkList.size();i++){
+                    if(checkList.get(i).getCheck()==true){
+                        total++;
+                    }
+                }
+            }
+        });
         return itemView;
     }
 
-
-
-
-    }
+}
 

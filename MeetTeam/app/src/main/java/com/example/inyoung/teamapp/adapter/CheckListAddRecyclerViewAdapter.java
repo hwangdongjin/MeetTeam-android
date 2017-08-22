@@ -1,7 +1,6 @@
 package com.example.inyoung.teamapp.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,20 +24,10 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
 
     private ArrayList<CheckAddDTO> checkList;
     private Context context;
-
-    private int checkNum;
     SharedPreferenceUtil DB;
-    CheckListRecyclerViewAdapter roAdapter;
-    LinearLayoutManager linearLayoutManager;
     SharedPreferenceUtil sessDB;
-    private int gValue;
-    int checkboxcount=0;
-
-
-   public CheckListAddRecyclerViewAdapter(){}
 
     public CheckListAddRecyclerViewAdapter(ArrayList<CheckAddDTO> checkList,Context context){
-
         this.checkList=checkList;
         this.context=context;
     }
@@ -51,18 +40,13 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
         RecyclerView check11;
         RecyclerView chatView;
 
-    
-      
-      public ViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
 
             super(itemView);
             manager_Do=(TextView)itemView.findViewById(R.id.manager_do11);
             manager_Name=(TextView) itemView.findViewById(R.id.manager_Name11);
             checkBox= (CheckBox) itemView.findViewById(R.id.manager_checkbox);
             progressBar= (ProgressBar) itemView.findViewById(R.id.progressBar);
-            check11= (RecyclerView) itemView.findViewById(R.id.chatView);
-            chatView= (RecyclerView) itemView.findViewById(R.id.chatView);
-
         }
     }
 
@@ -82,33 +66,14 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
         sessDB= new SharedPreferenceUtil(context);
         holder.manager_Do.setText(checkList.get(position).getManager_Do());
         holder.manager_Name.setText(checkList.get(position).getManager_Name());
-        Log.i("mytag","size"+checkList.size());
-
-
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-
-                if(holder.checkBox.isChecked() == true) {
-
-                    //Log.i("mytag", "titi:" + sessDB.getCheckboxcount());
-                    checkboxcount++;
-                    //sessDB.setCheckboxcount(checkboxcount);
-
-                    //holder.progressBar.setProgress(100 / sessDB.getCheckboxcount());
-                }
-                else
-                    holder.progressBar.setProgress(0);
             }
         });
-        //holder.progressBar.setProgress(100);
-
-        Log.i("mytag","1526"+DB.getCheckNum());
-
-
-
+        Log.i("mytag","size"+checkList.size());
     }
 
     @Override
