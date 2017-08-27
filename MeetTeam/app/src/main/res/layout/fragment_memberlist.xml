@@ -16,7 +16,8 @@
         <ListView
             android:id="@+id/listView_profile"
             android:layout_width="match_parent"
-            android:layout_height="400sp"></ListView>
+            android:layout_height="wrap_content"
+            android:background="#000000"></ListView>
 
     </LinearLayout>
 

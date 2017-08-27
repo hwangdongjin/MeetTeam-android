@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,7 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -65,7 +63,7 @@ public class TtableActivity extends AppCompatActivity {
         dayOfMonth = intent.getIntExtra("day",0);
         date= String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(dayOfMonth);
 
-        DateSelectView.setText(year+"년"+month+"월"+dayOfMonth+"일");
+        DateSelectView.setText(year+"년 "+month+"월 "+dayOfMonth+"일");
 
         sessDB = new SharedPreferenceUtil(getApplicationContext());
         sess=sessDB.getSess();
