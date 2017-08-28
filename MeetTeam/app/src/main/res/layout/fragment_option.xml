@@ -8,32 +8,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="30dp">
-
-        <Button
-            android:id="@+id/DateSelectButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:background="@drawable/btn_dateselect" />
-
-        <TextView
-            android:id="@+id/DateSelectView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:hint="----년 --월 --일"
-            android:textColor="#000000"
-            android:textColorHint="#a7a9ad"
-            android:layout_marginLeft="20dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center_horizontal|center_vertical"
         android:layout_marginTop="30dp">
 
@@ -55,10 +29,37 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="30dp">
+
+        <Button
+            android:id="@+id/DateSelectButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_calendar" />
+
+        <TextView
+            android:id="@+id/DateSelectView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:hint="----년 --월 --일"
+            android:textColor="#000000"
+            android:textColorHint="#a7a9ad"
+            android:layout_marginLeft="15dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginBottom="70dp">
+        android:layout_marginBottom="90dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -70,7 +71,7 @@
                 android:id="@+id/btn_table"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
-                android:background="@drawable/meeting_time" />
+                android:background="@drawable/btn_timetable" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -94,7 +95,7 @@
                 android:layout_width="85dp"
                 android:layout_height="85dp"
                 android:id="@+id/btn_map"
-                android:background="@drawable/meeting_place" />
+                android:background="@drawable/btn_map" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
