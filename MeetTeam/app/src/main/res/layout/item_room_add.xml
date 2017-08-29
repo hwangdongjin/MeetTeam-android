@@ -85,8 +85,6 @@
                 android:layout_marginLeft="15dp" />
 
         </LinearLayout>
-
-
-    </LinearLayout>
+       </LinearLayout>
 
 </LinearLayout>

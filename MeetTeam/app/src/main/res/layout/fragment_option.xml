@@ -23,8 +23,8 @@
         android:textColor="@android:color/black" />
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         android:id="@+id/btn_table"
         android:background="@drawable/meeting_time"
         android:layout_marginTop="77dp"
@@ -33,8 +33,8 @@
         android:layout_alignStart="@+id/DateSelectButton" />
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         android:id="@+id/btn_map"
         android:background="@drawable/meeting_place"
         android:layout_marginRight="30dp"
@@ -46,9 +46,9 @@
     <Button
         android:id="@+id/DateSelectButton"
         android:layout_gravity="center"
-        android:background="@drawable/btn_dateselector"
-        android:layout_height="50dp"
-        android:layout_width="50dp"
+        android:background="@drawable/btn_dateselect"
+        android:layout_height="40dp"
+        android:layout_width="40dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="70dp" />
 

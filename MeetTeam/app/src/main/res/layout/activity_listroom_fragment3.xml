@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/profile_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginBottom="60dp"
@@ -30,7 +30,9 @@
             android:id="@+id/profile_button"
             android:layout_width="150dp"
             android:layout_height="30dp"
-            android:background="@drawable/modify_profile"
+            android:background="@drawable/btn_yellow"
+            android:text="프로필 변경"
+            android:textColor="#000000"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
@@ -38,11 +40,13 @@
             android:id="@+id/logout_button"
             android:layout_width="150dp"
             android:layout_height="30dp"
-            android:background="@drawable/log_out"
-            android:layout_below="@+id/profile_button"
             android:layout_alignLeft="@+id/profile_button"
             android:layout_alignStart="@+id/profile_button"
-            android:layout_marginTop="30dp"/>
+            android:layout_below="@+id/profile_button"
+            android:layout_marginTop="30dp"
+            android:textColor="#000000"
+            android:background="@drawable/btn_yellow"
+            android:text="로그아웃"/>
 
 
     </LinearLayout>
