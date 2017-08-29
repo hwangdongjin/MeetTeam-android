@@ -56,7 +56,7 @@ public class TtableActivity extends AppCompatActivity {
         dayOfMonth = intent.getIntExtra("day",0);
         date= String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(dayOfMonth);
 
-        DateSelectView.setText(year+"년"+month+"월"+dayOfMonth+"일");
+        DateSelectView.setText(year+"년 "+month+"월 "+dayOfMonth+"일");
 
         sessDB = new SharedPreferenceUtil(getApplicationContext());
         sess=sessDB.getSess();

@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="13dp"
-                android:src="@drawable/title_name_white"  />
+                android:src="@drawable/title_name_white" />
 
         </android.support.v7.widget.Toolbar>
 
@@ -30,12 +30,13 @@
             android:id="@+id/listroomViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingTop="10dp"
             android:layout_weight="1"></android.support.v4.view.ViewPager>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/listroomtabs"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="#cecece">></android.support.design.widget.TabLayout>
+            android:layout_height="60dp">>
+        </android.support.design.widget.TabLayout>
     </LinearLayout>
 </LinearLayout>
