@@ -6,36 +6,54 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:background="@drawable/img_box"
-        android:orientation="vertical">
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:background="@drawable/img_box">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:orientation="horizontal">
-
             <TextView
                 android:id="@+id/tast_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:text="task"
+                android:text="체크리스트"
                 android:textStyle="bold"
                 android:textColor="#000000" />
-
             <EditText
-                android:id="@+id/edt_task"
+                android:id="@+id/edt_title2"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
-                android:background="@drawable/img_textbackgr"
-                android:ems="5"
-                android:hint="  task 입력"
+                android:background="@drawable/img_textbackgr
+                android:hint="체크리스트 입력"
                 android:textSize="15dp"
-                android:textColorHint="#a7a9ad" />
+                android:textColorHint="#a7a9ad"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:background="@drawable/btn_ok"
+                android:id="@+id/btn_ok"
+                android:layout_marginLeft="150dp" />
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:background="@drawable/btn_ok"
+                android:id="@+id/btn_cancel"
+                android:layout_marginLeft="15dp" />
+           
         </LinearLayout>
 
         <Button

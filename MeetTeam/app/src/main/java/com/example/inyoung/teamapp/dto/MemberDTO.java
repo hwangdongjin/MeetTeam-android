@@ -8,11 +8,13 @@ public class MemberDTO {
     private String mImage;
     private String mName;
     private String mData;
+    private String phoneNum;
 
-    public MemberDTO(String mImage, String mName, String mData) {
+    public MemberDTO(String mImage, String mName, String mData,String phoneNum) {
         this.mImage = mImage;
         this.mName = mName;
         this.mData = mData;
+        this.phoneNum=phoneNum;
     }
 
     public String getmImage() {
@@ -26,4 +28,8 @@ public class MemberDTO {
     public String getmData() {
         return mData;
     }
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
 }

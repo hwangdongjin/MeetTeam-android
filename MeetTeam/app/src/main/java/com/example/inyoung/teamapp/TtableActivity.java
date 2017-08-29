@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -33,18 +30,12 @@ public class TtableActivity extends AppCompatActivity {
     private NetworkService networkService;
     ApplicationController application;
     Intent intent;
-
     private AlertDialog.Builder dlg;
-
     SharedPreferenceUtil sessDB;
-    Button DateSelectButton;
     TextView DateSelectView;
     TextView text1;
     String sess,roomTitle,date;
-
     static int year, month, dayOfMonth;
-
-    public Object jsonArray;
     public JSONObject jsonObject;
 
     @Override
@@ -171,7 +162,6 @@ public class TtableActivity extends AppCompatActivity {
         application = ApplicationController.getInstance();
         application.buildNetworkService();
         networkService = ApplicationController.getInstance().getNetworkService();
-
         Call<ResponseBody> thumnailcall = networkService.post_ttableShow(roomTitle,date);
 
         thumnailcall.enqueue(new Callback<ResponseBody>() {
@@ -182,14 +172,11 @@ public class TtableActivity extends AppCompatActivity {
                     try {
                         jsonObject= new JSONObject(response.body().string());
                         JSONArray tables = new JSONArray(jsonObject.get("tables").toString());
-
                         for(int i=0; i<tables.length();i++){
                             String userNames = "";
                             JSONObject table = tables.getJSONObject(i);
-
                             int time = Integer.parseInt((String)table.get("time"));
                             JSONArray userNamesArray = new JSONArray(table.get("userNames").toString());
-
                             initSetText(time, userNamesArray);
                         }
                     } catch (JSONException e) {

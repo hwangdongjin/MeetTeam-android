@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.inyoung.teamapp.MapActivity;
 import com.example.inyoung.teamapp.R;
@@ -35,7 +36,7 @@ public class OptionFragment extends Fragment {
 
 
 
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_option, container, false);
         sessDB = new SharedPreferenceUtil(getContext());
@@ -45,13 +46,16 @@ public class OptionFragment extends Fragment {
         btn_table.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                     if(year1!=0&&month1!=0&&dayOfMonth1!=0){
                      intent = new Intent(getContext(), TtableActivity.class);
                      intent.putExtra("year", year1);
                      intent.putExtra("month", month1);
                      intent.putExtra("day", dayOfMonth1);
                      startActivity(intent);
-
+                     }
+                else{
+                         Toast.makeText(getContext(),"날짜를 선택해 주세요",Toast.LENGTH_LONG).show();
+                     }
             }
         });
 
@@ -62,7 +66,7 @@ public class OptionFragment extends Fragment {
 
                 DateSelectView.setText(year+"년 "+month+"월 "+dayOfMonth+"일");
                 year1=year;
-                month1=month;
+                month1=month+1;
                 dayOfMonth1=dayOfMonth;
 
             }
