@@ -7,10 +7,10 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_weight="1">
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.5">
 
         <Button
             android:id="@+id/DateSelectButton"
@@ -24,10 +24,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="15dp"
             android:hint="----년 --월 --일"
             android:textColor="#000000"
-            android:textColorHint="#a7a9ad"
-            android:layout_marginLeft="15dp"/>
+            android:textColorHint="#a7a9ad" />
 
     </LinearLayout>
 
@@ -35,15 +35,15 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_weight="2">
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_table"
@@ -58,29 +58,30 @@
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginTop="5dp"
                 android:text="시간 정하기"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="50dp"
-            android:layout_gravity="center_vertical">
+            android:orientation="vertical">
 
             <Button
+                android:id="@+id/btn_map"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
-                android:id="@+id/btn_map"
                 android:background="@drawable/btn_map" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="장소 정하기"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginTop="5dp"
-                android:textColor="#000000"/>
+                android:text="장소 정하기"
+                android:textColor="#000000" />
 
         </LinearLayout>
 
@@ -88,25 +89,46 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginBottom="50dp"
-        android:layout_weight="1">
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_weight="0.3"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/txt_time"
-            android:layout_width="100dp"
-            android:layout_height="70dp"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal|center_vertical"
             android:text="약속시간"
             android:textColor="@android:color/black" />
 
+        <AutoCompleteTextView
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal|center_vertical"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal"
+        android:layout_weight="0.3"
+        android:layout_marginBottom="50dp">
+
         <TextView
-            android:text="약속장소"
-            android:layout_width="100dp"
             android:id="@+id/txt_place"
-            android:layout_height="70dp"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="약속장소"
             android:textColor="@android:color/black" />
+
+        <AutoCompleteTextView
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal|center_vertical"/>
 
     </LinearLayout>
 
