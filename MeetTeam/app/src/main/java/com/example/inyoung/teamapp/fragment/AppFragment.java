@@ -22,8 +22,6 @@ import com.example.inyoung.teamapp.TtableActivity;
  */
 
 public class AppFragment extends Fragment {
-
-
     View view;
     Button btn_table,btn_map,btn_store;
     Intent intent;
@@ -31,11 +29,6 @@ public class AppFragment extends Fragment {
     static int year1,month1,dayOfMonth1;
     SharedPreferenceUtil sessDB;
     Button DateSelectButton;
-
-
-
-
-
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_option, container, false);
@@ -46,20 +39,19 @@ public class AppFragment extends Fragment {
         btn_table.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                     if(year1!=0&&month1!=0&&dayOfMonth1!=0){
+                     if("".equals(DateSelectView.getText().toString())){
+                         Toast.makeText(getContext(),"날짜를 입력하세요",Toast.LENGTH_LONG).show();
+                     }
+                     else {
                      intent = new Intent(getContext(), TtableActivity.class);
                      intent.putExtra("year", year1);
                      intent.putExtra("month", month1);
                      intent.putExtra("day", dayOfMonth1);
                      startActivity(intent);
                      }
-                else{
-                         Toast.makeText(getContext(),"날짜를 선택해 주세요",Toast.LENGTH_LONG).show();
-                     }
+
             }
         });
-
-
         final DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -68,7 +60,6 @@ public class AppFragment extends Fragment {
                 year1=year;
                 month1=month+1;
                 dayOfMonth1=dayOfMonth;
-
             }
         };
 
