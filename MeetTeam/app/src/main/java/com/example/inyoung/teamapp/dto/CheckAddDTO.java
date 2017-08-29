@@ -10,13 +10,15 @@ public class CheckAddDTO {
     private String manager_Name;
     private String manager_Do;
     private boolean check;
+    private int clistNum;
 
 
-    public CheckAddDTO(String manager_Name,String manager_Do,boolean check) {
+    public CheckAddDTO(String manager_Name,String manager_Do,boolean check,int clistNum) {
 
         this.manager_Name = manager_Name;
         this.manager_Do=manager_Do;
         this.check =check;
+        this.clistNum=clistNum;
 
     }
 
@@ -40,6 +42,7 @@ public class CheckAddDTO {
     public  String getManager_Do(){return  manager_Do; }
 
     public boolean getCheck(){return check;}
+    public int getClistNum(){return clistNum;}
 
 
 

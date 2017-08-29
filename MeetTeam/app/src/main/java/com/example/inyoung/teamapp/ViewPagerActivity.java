@@ -31,10 +31,7 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
         setContentView(R.layout.activity_view_pager);
         Intent intent = getIntent();
         userDTO= (ArrayList<UserListDTO>) intent.getSerializableExtra("test");
-
-        //String test = userList.get(0).getName();
-       Log.i("mytag","test"+userDTO.get(0).getName());
-
+        Log.i("mytag","test"+userDTO.get(0).getName());
         initViewPaging();
         initToolBar();
     }

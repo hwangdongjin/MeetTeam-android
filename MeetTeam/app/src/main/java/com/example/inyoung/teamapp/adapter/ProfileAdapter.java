@@ -1,10 +1,13 @@
 package com.example.inyoung.teamapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,8 +29,8 @@ public class ProfileAdapter extends BaseAdapter {
         this.context = context;
     }
 
-    public static ProfileAdapter profileInstance(ArrayList<MemberDTO> profileList, Context context){
-        return new ProfileAdapter(profileList,context);
+    public static ProfileAdapter profileInstance(ArrayList<MemberDTO> profileList, Context context) {
+        return new ProfileAdapter(profileList, context);
     }
 
     @Override
@@ -50,10 +53,11 @@ public class ProfileAdapter extends BaseAdapter {
         ImageView mImage;
         TextView mName;
         TextView mContent;
+        Button btn_call;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         //아이템 뷰에 인플레이터
         View itemView = LayoutInflater.from(context).inflate(R.layout.item_profile, parent, false);
@@ -63,12 +67,18 @@ public class ProfileAdapter extends BaseAdapter {
         holder.mImage = (ImageView) itemView.findViewById(R.id.mImage);
         holder.mName = (TextView) itemView.findViewById(R.id.mName);
         holder.mContent = (TextView) itemView.findViewById(R.id.mContent);
+        holder.btn_call = (Button) itemView.findViewById(R.id.btn_call);
 
         //프로필리스트에서 이름이랑 정보 가져오기
         holder.mName.setText(profileList.get(position).getmName());
         holder.mContent.setText(profileList.get(position).getmData());
-
-        //프로필리스트에서 이미지 가져오기
+        holder.btn_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String call="tel:"+profileList.get(position).getPhoneNum();
+                context.startActivity(new Intent("android.intent.action.DIAL", Uri.parse(call)));
+            }
+        });
         Glide.with(context)
                 .load(profileList.get(position).getmImage())
                 .fitCenter()

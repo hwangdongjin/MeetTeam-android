@@ -83,7 +83,6 @@ public class ListroomFragment1 extends Fragment {
     }
 
     private void initRecyclerView(final View view) {
-
         sessDB= new SharedPreferenceUtil(getContext());
         Call<ResponseBody> thumbnailCall = networkService.post_roomList(sessDB.getSess());
         thumbnailCall.enqueue(new Callback<ResponseBody>() {
@@ -94,12 +93,12 @@ public class ListroomFragment1 extends Fragment {
 
                         jsonArray= new JSONArray(response.body().string());
                         chatList= new ArrayList<>();
-
-                        for(int i=0; i<jsonArray.length(); i++){
-                            jsonObject = jsonArray.getJSONObject(i);
-                            chatList.add(new RoomDTO((String) jsonObject.get("title"), (String) jsonObject.get("chiefName"),i));
+                        if(jsonArray.length()!=0) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                jsonObject = jsonArray.getJSONObject(i);
+                                chatList.add(new RoomDTO((String) jsonObject.get("title"), (String) jsonObject.get("chiefName"), i));
+                            }
                         }
-
                         chatView = (RecyclerView) view.findViewById(R.id.chatView);
                         chatView.setHasFixedSize(true);
                         iniiLayoutManager(view);

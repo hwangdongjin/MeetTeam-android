@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText edt_id, edt_pw;
     SharedPreferenceUtil sessDB;
     String result,name;
+    String id,pw;
     private NetworkService networkService;
     ApplicationController application;
     JSONObject jsonObject;
@@ -51,45 +53,50 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 application = ApplicationController.getInstance();
                 application.buildNetworkService();
                 networkService = ApplicationController.getInstance().getNetworkService();
-                final String id = edt_id.getText().toString();
-                String pw = edt_pw.getText().toString();
-                sessDB = new SharedPreferenceUtil(this);
+                if("".equals(edt_id.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"아이디를 입력하세요",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    id = edt_id.getText().toString();
+                }
+                if("".equals(edt_pw.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"비밀번호를 입력하세요",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    pw = edt_pw.getText().toString();
+                }
 
-                Call<ResponseBody> thumbnailCall = networkService.post_login(id, pw);
-                thumbnailCall.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                        if (response.isSuccess()) {
-                            try {
-                                jsonObject = new JSONObject(response.body().string());
-                                result = jsonObject.get("sess").toString();
-                                name=jsonObject.get("name").toString();
-                                Log.i("mytag","pro:"+name);
-                                //editor.putString("session",result);
-                                //editor.putString("name",name);
-                                sessDB.setSess(result);
-                                sessDB.setName(name);
-
-                                //editor.commit();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                    sessDB = new SharedPreferenceUtil(this);
+                    Call<ResponseBody> thumbnailCall = networkService.post_login(id, pw);
+                    thumbnailCall.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                            if (response.isSuccess()) {
+                                try {
+                                    jsonObject = new JSONObject(response.body().string());
+                                    result = jsonObject.get("sess").toString();
+                                    name = jsonObject.get("name").toString();
+                                    sessDB.setSess(result);
+                                    sessDB.setName(name);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                intent = new Intent(getApplicationContext(), ListroomActivity1.class);
+                                startActivity(intent);
+                            } else {
+                                int statusCode = response.code();
+                                Log.i("MyTag", "응답코드:" + statusCode);
                             }
-                            intent = new Intent(getApplicationContext(), ListroomActivity1.class);
-                            startActivity(intent);
-                        } else {
-                            int statusCode = response.code();
-                            Log.i("MyTag", "응답코드:" + statusCode);
                         }
-                    }
+                        @Override
+                        public void onFailure(Throwable t) {
+                            Log.i("MyTag", "서버 onFailure 에러내용 : " + t.getMessage());
+                        }
+                    });
+                    break;
 
-                    @Override
-                    public void onFailure(Throwable t) {
-                        Log.i("MyTag", "서버 onFailure 에러내용 : " + t.getMessage());
-                    }
-                });
-                break;
 
             case R.id.btn_join:
                 intent = new Intent(getApplicationContext(), JoinActivity.class);

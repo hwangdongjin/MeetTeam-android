@@ -1,7 +1,6 @@
 package com.example.inyoung.teamapp.fragment;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -9,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +20,8 @@ import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.adapter.CheckListRecyclerViewAdapter;
+import com.example.inyoung.teamapp.adapter.CheckListViewAdapter;
+import com.example.inyoung.teamapp.dto.CheckAddDTO;
 import com.example.inyoung.teamapp.dto.CheckListDTO;
 import com.squareup.okhttp.ResponseBody;
 
@@ -45,19 +45,24 @@ public class CheckListFragment extends Fragment {
 
     View view;
     private RecyclerView chatView;
-    private ArrayList<CheckListDTO> chatList;
-    private CheckListDTO checkListDTO;
+    static ArrayList<CheckListDTO> chatList;
+    static ArrayList<CheckAddDTO> checkAddList, checkShowList;
     private CheckListRecyclerViewAdapter roAdapter;
     SharedPreferenceUtil sessDB;
     private Button btnAdd;
-    private Button btnSearch;
-    private AlertDialog.Builder dlg;
+    private AlertDialog dlg;
     EditText edt_task;
     private NetworkService networkService;
     ApplicationController application;
     public JSONArray taskArray;
     public JSONObject taskObject;
     String taskName;
+    Button btn_ok,btn_cancel;
+    public JSONObject jsonObject;
+    public JSONArray jsonArray;
+    public JSONArray clistArray;
+    public JSONObject clistObject;
+    CheckListViewAdapter checkListViewAdapter;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -79,11 +84,9 @@ public class CheckListFragment extends Fragment {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 if(response.isSuccess()){
-
                     try {
-
-                        chatList= new ArrayList<>();
                         taskArray= new JSONArray(response.body().string());
+                        chatList= new ArrayList<>();
                         for(int i=0;i<taskArray.length();i++){
                             taskObject= taskArray.getJSONObject(i);
                             chatList.add(new CheckListDTO((String) taskObject.get("taskName")));
@@ -91,18 +94,15 @@ public class CheckListFragment extends Fragment {
                         chatView = (RecyclerView) view.findViewById(R.id.chatView11);
                         chatView.setHasFixedSize(false);
                         chatView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-                        roAdapter = new CheckListRecyclerViewAdapter(chatList, getContext());
+                        roAdapter = new CheckListRecyclerViewAdapter(chatList,getContext());
                         roAdapter.notifyItemInserted(0);
                         roAdapter.notifyDataSetChanged();
                         chatView.setAdapter(roAdapter);
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
                 }
 
             }
@@ -111,60 +111,51 @@ public class CheckListFragment extends Fragment {
 
             }
         });
-
-
-
     }
 
+
     private void initButton(View view) {
-        Log.i("태그","initAddRoom");
         btnAdd = (Button)view.findViewById(R.id.btn_add);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dlg = new AlertDialog.Builder(v.getContext());
-                LayoutInflater inflater = (LayoutInflater)v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View view1 = inflater.inflate(R.layout.item_task_add,null, false);
-                dlg.setView(view1);
-                dlg.setPositiveButton("확인",new DialogInterface.OnClickListener() {
+                LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View view = inflater.inflate(R.layout.item_task_add, null, false);
+                dlg= new AlertDialog.Builder(getContext()).create();
+                dlg.setView(view);
+                dlg.show();
+                edt_task= (EditText) view.findViewById(R.id.edt_title2);
+                btn_ok= (Button) view.findViewById(R.id.btn_ok);
+                btn_cancel= (Button) view.findViewById(R.id.btn_cancel);
+                btn_ok.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        edt_task= (EditText) view1.findViewById(R.id.edt_task);
-                        chatList.add(new CheckListDTO(edt_task.getText().toString()));
-                        initTask(view1);
+                    public void onClick(View v) {
+                        if("".equals(edt_task.getText().toString())){
+                            Toast.makeText(getContext(),"체크리스트를 입력하세요",Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            taskName=edt_task.getText().toString();
+                        }
+                        if(taskName!=null) {
+                            chatList.add(new CheckListDTO(edt_task.getText().toString()));
+                            initTask(view,taskName);
+                            dlg.cancel();
+                        }
                     }
                 });
-                dlg.setNegativeButton("취소",null);
-                dlg.show();
-            }
-        });
-
-        btnSearch = (Button)view.findViewById(R.id.btn_search);
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dlg = new AlertDialog.Builder(v.getContext());
-                LayoutInflater inflater = (LayoutInflater)v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View view1 = inflater.inflate(R.layout.item_room_enter,null, false);
-
-                dlg.setView(view1);
-                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                btn_cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
+                        dlg.cancel();
                     }
                 });
-                dlg.setNegativeButton("취소", null);
-                dlg.show();
             }
         });
     }
-
-    public void initTask(final View view){
+    public void initTask(final View view,String taskName){
         String sess = sessDB.getSess();
         String roomTitle = sessDB.getRoomTitle();
-        edt_task= (EditText) view.findViewById(R.id.edt_task);
         chatView= (RecyclerView) view.findViewById(R.id.chatView11);
-        taskName =  edt_task.getText().toString();
         application = ApplicationController.getInstance();
         application.buildNetworkService();
         networkService = ApplicationController.getInstance().getNetworkService();
@@ -172,26 +163,13 @@ public class CheckListFragment extends Fragment {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-
-
                 if(response.isSuccess()){
-
                     Toast.makeText(getContext(),"추가되었습니다",Toast.LENGTH_LONG).show();
                 }
-
             }
-
             @Override
             public void onFailure(Throwable t) {
-
             }
         });
-
-
-
-
-
-
-
     }
 }

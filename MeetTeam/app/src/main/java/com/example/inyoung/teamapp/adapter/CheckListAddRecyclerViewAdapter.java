@@ -2,7 +2,6 @@ package com.example.inyoung.teamapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,10 +25,13 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
     private Context context;
     SharedPreferenceUtil DB;
     SharedPreferenceUtil sessDB;
+    static int progressNum,total;
+
 
     public CheckListAddRecyclerViewAdapter(ArrayList<CheckAddDTO> checkList,Context context){
         this.checkList=checkList;
         this.context=context;
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -41,7 +43,6 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
         RecyclerView chatView;
 
         public ViewHolder(View itemView) {
-
             super(itemView);
             manager_Do=(TextView)itemView.findViewById(R.id.manager_do11);
             manager_Name=(TextView) itemView.findViewById(R.id.manager_Name11);
@@ -60,20 +61,24 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
     }
 
     @Override
-    public void onBindViewHolder(final CheckListAddRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final CheckListAddRecyclerViewAdapter.ViewHolder holder, final int position) {
         
         DB= new SharedPreferenceUtil(context);
         sessDB= new SharedPreferenceUtil(context);
         holder.manager_Do.setText(checkList.get(position).getManager_Do());
-        holder.manager_Name.setText(checkList.get(position).getManager_Name());
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                checkList.get(position).setCheck();
+                holder.checkBox.setChecked(checkList.get(position).getCheck());
+                total=0;
+                for(int i=0;i<checkList.size();i++){
+                    if(checkList.get(i).getCheck()==true){
+                        total++;
+                    }
+                }
             }
         });
-        Log.i("mytag","size"+checkList.size());
     }
 
     @Override
@@ -83,6 +88,15 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
 
     @Override
     public void onClick(View v) {
+    }
+    public int getCheckNum(){
+        total=0;
+        for(int i=0;i<checkList.size();i++){
+            if(checkList.get(i).getCheck()==true){
+                total++;
+            }
+        }
+        return total;
     }
 
 
