@@ -5,10 +5,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.inyoung.teamapp.dto.UserListDTO;
-import com.example.inyoung.teamapp.fragment.CheckListFragment;
+import com.example.inyoung.teamapp.fragment.AppFragment;
 import com.example.inyoung.teamapp.fragment.ConfigureFragment;
 import com.example.inyoung.teamapp.fragment.MemberlistFragment;
-import com.example.inyoung.teamapp.fragment.OptionFragment;
+import com.example.inyoung.teamapp.fragment.TaskFragment;
 
 import java.util.ArrayList;
 
@@ -33,16 +33,16 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
         //pageNum은 ViewPagerActivity에서 tabs.getCount();
         switch (pageNum){
             case 0:
-                fragment = new CheckListFragment();
-                break;
-            case 1:
-                fragment = new OptionFragment();
-                break;
-            case 2:
                 fragment = MemberlistFragment.newInstance(userList,Num);
                 break;
+            case 1:
+                fragment = new ConfigureFragment();
+                break;
+            case 2:
+                fragment = new TaskFragment();
+                break;
             case 3:
-                fragment = ConfigureFragment.newInstance("forth", "Configure");
+                fragment = new AppFragment();
                 break;
         }
         return fragment;

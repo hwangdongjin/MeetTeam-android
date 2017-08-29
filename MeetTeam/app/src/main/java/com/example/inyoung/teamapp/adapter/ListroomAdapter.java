@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.inyoung.teamapp.fragment.ListroomFragment1;
-import com.example.inyoung.teamapp.fragment.ListroomFragment2;
-import com.example.inyoung.teamapp.fragment.ListroomFragment3;
+import com.example.inyoung.teamapp.fragment.RoomListFragment;
+import com.example.inyoung.teamapp.fragment.RoomAddFragment;
+import com.example.inyoung.teamapp.fragment.SettingFragment;
 
 public class ListroomAdapter extends FragmentStatePagerAdapter {
 
@@ -23,13 +23,13 @@ public class ListroomAdapter extends FragmentStatePagerAdapter {
         //pageNum은 ViewPagerActivity에서 tabs.getCount();
         switch (pageNum){
             case 0:
-                fragment = new ListroomFragment1();
+                fragment = new RoomListFragment();
                 break;
             case 1:
-                fragment = new ListroomFragment2();
+                fragment = new RoomAddFragment();
                 break;
             case 2:
-                fragment = new ListroomFragment3();
+                fragment = new SettingFragment();
                 break;
 
         }

@@ -55,7 +55,7 @@ public class MemberlistFragment extends Fragment {
     public MemberlistFragment() {
     }
 
-    public static MemberlistFragment newInstance(ArrayList<UserListDTO> userList,int num) {
+    public static MemberlistFragment newInstance(ArrayList<UserListDTO> userList, int num) {
         MemberlistFragment fragment = new MemberlistFragment();
         Bundle args = new Bundle();
         args.putSerializable("userlist",userList);
@@ -66,6 +66,7 @@ public class MemberlistFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             userList = (ArrayList<UserListDTO>) getArguments().get("userlist");

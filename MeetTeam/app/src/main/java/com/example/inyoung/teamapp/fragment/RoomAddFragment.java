@@ -24,7 +24,7 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class ListroomFragment2 extends Fragment{
+public class RoomAddFragment extends Fragment{
     View view;
     private Button btnAdd;
     private Button btnSearch;
@@ -36,7 +36,7 @@ public class ListroomFragment2 extends Fragment{
     SharedPreferenceUtil sessDB;
     private NetworkService networkService;
     private ApplicationController application;
-    public ListroomFragment2() {
+    public RoomAddFragment() {
 
     }
 

@@ -37,7 +37,7 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class ListroomFragment1 extends Fragment {
+public class RoomListFragment extends Fragment {
     View view;
 
     private RecyclerView chatView;
@@ -65,7 +65,7 @@ public class ListroomFragment1 extends Fragment {
     public JSONArray jsonArray;
     public JSONObject jsonObject;
 
-    public ListroomFragment1(){
+    public RoomListFragment(){
 
 
 

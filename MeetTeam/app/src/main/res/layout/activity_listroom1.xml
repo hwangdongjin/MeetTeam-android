@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fafafa"
-    tools:context="com.example.inyoung.teamapp.ListroomActivity1">
+    tools:context="com.example.inyoung.teamapp.ListroomActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListroomActivity" />
         <activity android:name=".ViewPagerActivity" />
         <activity android:name=".JoinActivity" />
         <activity android:name=".MapActivity" />
@@ -33,7 +32,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".ListroomActivity1" />
+        <activity android:name=".ListroomActivity" />
         <activity android:name=".TtableActivity"></activity>
         <activity android:name=".ProfileActivity"></activity>
     </application>

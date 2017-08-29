@@ -18,7 +18,7 @@ import com.example.inyoung.teamapp.R;
 
 import java.io.File;
 
-public class ListroomFragment3 extends Fragment {
+public class SettingFragment extends Fragment {
     private static final int PICK_FROM_CAMERA = 0;
     View view;
     ImageView profile_image;

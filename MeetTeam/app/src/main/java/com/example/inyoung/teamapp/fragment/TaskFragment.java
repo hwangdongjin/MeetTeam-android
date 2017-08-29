@@ -41,7 +41,7 @@ import retrofit.Retrofit;
  * Created by MYpc on 2017-04-10.
  */
 
-public class CheckListFragment extends Fragment {
+public class TaskFragment extends Fragment {
 
     View view;
     private RecyclerView chatView;

@@ -21,7 +21,7 @@ import com.example.inyoung.teamapp.TtableActivity;
  * Created by MYpc on 2017-08-11.
  */
 
-public class OptionFragment extends Fragment {
+public class AppFragment extends Fragment {
 
 
     View view;
