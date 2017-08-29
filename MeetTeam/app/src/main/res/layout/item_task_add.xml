@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
-                android:background="@drawable/img_textbackgr
+                android:background="@drawable/img_textbackgr"
                 android:hint="체크리스트 입력"
                 android:textSize="15dp"
                 android:textColorHint="#a7a9ad"/>
