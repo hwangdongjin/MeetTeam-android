@@ -53,5 +53,10 @@ public interface NetworkService {
     @FormUrlEncoded
     @POST("/task/clistAdd")
     Call<ResponseBody> post_taskClistAdd(@Field("roomTitle")String title,@Field("taskName")String taskName,@Field("list")String list,@Field("name")String name);
+    @FormUrlEncoded
+    @POST("/task/remove")
+    Call<ResponseBody> post_taskDelete(@Field("sess")String sess, @Field("roomTitle")String title,@Field("taskName")String taskName);
+
+
 
 }

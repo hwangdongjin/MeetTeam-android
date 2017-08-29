@@ -49,7 +49,7 @@ public class TaskFragment extends Fragment {
     static ArrayList<CheckAddDTO> checkAddList, checkShowList;
     private CheckListRecyclerViewAdapter roAdapter;
     SharedPreferenceUtil sessDB;
-    private Button btnAdd;
+    private Button btnAdd,btnDelete;
     private AlertDialog dlg;
     EditText edt_task;
     private NetworkService networkService;
@@ -63,8 +63,6 @@ public class TaskFragment extends Fragment {
     public JSONArray clistArray;
     public JSONObject clistObject;
     CheckListViewAdapter checkListViewAdapter;
-
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         view = inflater.inflate(R.layout.fragement_check_list, container, false);
         sessDB = new SharedPreferenceUtil(getContext());
@@ -112,10 +110,9 @@ public class TaskFragment extends Fragment {
             }
         });
     }
-
-
     private void initButton(View view) {
         btnAdd = (Button)view.findViewById(R.id.btn_add);
+        btnDelete= (Button) view.findViewById(R.id.btn_delete);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,12 +140,36 @@ public class TaskFragment extends Fragment {
                         }
                     }
                 });
-                btn_cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dlg.cancel();
-                    }
-                });
+               btnDelete.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                       final View view = inflater.inflate(R.layout.item_task_add, null, false);
+                       dlg= new AlertDialog.Builder(getContext()).create();
+                       dlg.setView(view);
+                       dlg.show();
+                       edt_task= (EditText) view.findViewById(R.id.edt_title2);
+                       btn_ok= (Button) view.findViewById(R.id.btn_ok);
+                       btn_cancel= (Button) view.findViewById(R.id.btn_cancel);
+                       btn_ok.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View v) {
+                               if("".equals(edt_task.getText().toString())){
+                                   Toast.makeText(getContext(),"체크리스트를 입력하세요",Toast.LENGTH_LONG).show();
+                               }
+                               else {
+                                   taskName=edt_task.getText().toString();
+                               }
+                               if(taskName!=null) {
+                                   initTaskDelete(view,taskName);
+                                   dlg.cancel();
+                               }
+
+                           }
+                       });
+
+                   }
+               });
             }
         });
     }
@@ -171,5 +192,32 @@ public class TaskFragment extends Fragment {
             public void onFailure(Throwable t) {
             }
         });
+    }
+    public void initTaskDelete(final View vie,String taskName){
+        String sess = sessDB.getSess();
+        String roomTitle = sessDB.getRoomTitle();
+        chatView= (RecyclerView) view.findViewById(R.id.chatView11);
+        application = ApplicationController.getInstance();
+        application.buildNetworkService();
+        networkService = ApplicationController.getInstance().getNetworkService();
+        Call<ResponseBody> call = networkService.post_taskDelete(sess,roomTitle,taskName);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                if (response.isSuccess()){
+                    Toast.makeText(getContext(),"삭제되었습니다",Toast.LENGTH_LONG).show();
+                    initRecyclerView(view);
+                }
+                else if(response.code()==400){
+                    Toast.makeText(getContext(),"잘못입력하셨습니다",Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Throwable t) {
+            }
+        });
+
+
+
     }
 }
