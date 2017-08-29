@@ -83,7 +83,7 @@
                 android:id="@+id/btn_cancel"
                 android:layout_marginLeft="15dp" />
 
-        </LinearLayout>
+        </LinearLayout><![CDATA[
 =======
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -91,46 +91,9 @@
                 android:textSize="15dp"
                 android:textColorHint="#a7a9ad" />
 
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:text="할일 :"
-            android:textStyle="bold"
-            android:textColor="#000000" />
 
 
-        <EditText
-            android:id="@+id/editText5"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_alignBaseline="@+id/tv_subject"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/img_textbackgr"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="  할일 입력"
-            android:textSize="15dp"
-            android:textColorHint="#a7a9ad" />
-
-    </LinearLayout>
-
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/btn_yellow"
-            android:text="OK"
-            android:textColor="#000000"/>
-
+        ]]>
     </LinearLayout>
 
 </LinearLayout>

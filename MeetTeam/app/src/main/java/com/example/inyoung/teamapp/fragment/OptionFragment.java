@@ -63,8 +63,8 @@ public class OptionFragment extends Fragment {
         final DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-                DateSelectView.setText(year+"년 "+month+"월 "+dayOfMonth+"일");
+                int fix_month=month+1;
+                DateSelectView.setText(year+"년 "+fix_month+"월 "+dayOfMonth+"일");
                 year1=year;
                 month1=month+1;
                 dayOfMonth1=dayOfMonth;

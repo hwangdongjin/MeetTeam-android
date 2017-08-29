@@ -207,7 +207,8 @@ public class TtableActivity extends AppCompatActivity {
 
     public void initSetText(int time, JSONArray userNamesArray) throws JSONException {
         for(int i=0;i<userNamesArray.length();i++) {
-            String userName= userNamesArray.get(i).toString();
+            String userName= userNamesArray.get(i).toString() + " ";
+
 
             switch (time) {
                 case 0:
