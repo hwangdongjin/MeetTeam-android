@@ -13,6 +13,7 @@ public class UserDTO {
     private String addr;
     private String email;
     private boolean isProfessor;
+    private String photo;
 
     public  UserDTO(){
 
@@ -91,5 +92,13 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }
