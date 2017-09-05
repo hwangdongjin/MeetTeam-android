@@ -2,25 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center_horizontal|center_vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="vertical"
-        android:background="@drawable/img_box">
+        android:layout_height="180dp"
+        android:background="#ffffff"
+        android:padding="20dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_horizontal|center_vertical">
 
             <TextView
                 android:id="@+id/tast_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
                 android:text="팀 이름"
                 android:textStyle="bold"
                 android:textColor="#000000" />
@@ -32,27 +34,29 @@
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/img_textbackgr"
                 android:ems="5"
+                android:textColor="#000000"
                 android:hint="  방 이름 입력"
                 android:textSize="15dp"
                 android:textColorHint="#a7a9ad"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal">
+
             <Button
-                android:layout_width="50dp"
-                android:layout_height="25dp"
+                android:layout_width="45dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:background="@drawable/btn_ok"
-                android:id="@+id/btn_ok2"
-                android:layout_marginLeft="150dp" />
+                android:id="@+id/btn_ok"/>
             <Button
-                android:layout_width="50dp"
-                android:layout_height="25dp"
+                android:layout_width="45dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:background="@drawable/btn_ok"
+                android:background="@drawable/btn_cancel"
                 android:id="@+id/btn_cancel2"
                 android:layout_marginLeft="15dp" />
 
