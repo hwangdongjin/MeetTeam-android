@@ -20,7 +20,6 @@ import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.adapter.CheckListRecyclerViewAdapter;
-import com.example.inyoung.teamapp.adapter.CheckListViewAdapter;
 import com.example.inyoung.teamapp.dto.CheckAddDTO;
 import com.example.inyoung.teamapp.dto.CheckListDTO;
 import com.squareup.okhttp.ResponseBody;
@@ -42,11 +41,10 @@ import retrofit.Retrofit;
  */
 
 public class TaskFragment extends Fragment {
-
     View view;
     private RecyclerView chatView;
     static ArrayList<CheckListDTO> chatList;
-    static ArrayList<CheckAddDTO> checkAddList, checkShowList;
+    static ArrayList<CheckAddDTO> checkAddList;
     private CheckListRecyclerViewAdapter roAdapter;
     SharedPreferenceUtil sessDB;
     private Button btnAdd,btnDelete;
@@ -58,11 +56,7 @@ public class TaskFragment extends Fragment {
     public JSONObject taskObject;
     String taskName;
     Button btn_ok,btn_cancel;
-    public JSONObject jsonObject;
-    public JSONArray jsonArray;
     public JSONArray clistArray;
-    public JSONObject clistObject;
-    CheckListViewAdapter checkListViewAdapter;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         view = inflater.inflate(R.layout.fragement_check_list, container, false);
         sessDB = new SharedPreferenceUtil(getContext());
@@ -70,7 +64,6 @@ public class TaskFragment extends Fragment {
         initButton(view);
         return view;
     }
-
     public void initRecyclerView(final View view) {
         String roomTitle = sessDB.getRoomTitle();
         application = ApplicationController.getInstance();
@@ -85,14 +78,20 @@ public class TaskFragment extends Fragment {
                     try {
                         taskArray= new JSONArray(response.body().string());
                         chatList= new ArrayList<>();
+                        checkAddList=new ArrayList<>();
                         for(int i=0;i<taskArray.length();i++){
                             taskObject= taskArray.getJSONObject(i);
                             chatList.add(new CheckListDTO((String) taskObject.get("taskName")));
+                            clistArray = new JSONArray(taskObject.get("clist").toString());
+                            for (int j = 0; j < clistArray.length(); j++) {
+                                    JSONObject clistObject2 = clistArray.getJSONObject(j);
+                                    checkAddList.add(new CheckAddDTO((String) clistObject2.get("name"), (String) clistObject2.get("list"), (Boolean) clistObject2.get("isCheck"), i));
+                            }
                         }
                         chatView = (RecyclerView) view.findViewById(R.id.chatView11);
                         chatView.setHasFixedSize(false);
                         chatView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-                        roAdapter = new CheckListRecyclerViewAdapter(chatList,getContext());
+                        roAdapter = new CheckListRecyclerViewAdapter(chatList,checkAddList,clistArray.length(),getContext());
                         roAdapter.notifyItemInserted(0);
                         roAdapter.notifyDataSetChanged();
                         chatView.setAdapter(roAdapter);

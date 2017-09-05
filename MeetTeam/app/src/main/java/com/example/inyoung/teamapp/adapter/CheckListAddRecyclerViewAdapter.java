@@ -66,6 +66,7 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
         DB= new SharedPreferenceUtil(context);
         sessDB= new SharedPreferenceUtil(context);
         holder.manager_Do.setText(checkList.get(position).getManager_Do());
+        holder.manager_Name.setText(checkList.get(position).getManager_Name());
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
