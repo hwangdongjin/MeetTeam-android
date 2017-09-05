@@ -56,7 +56,12 @@ public interface NetworkService {
     @FormUrlEncoded
     @POST("/task/remove")
     Call<ResponseBody> post_taskDelete(@Field("sess")String sess, @Field("roomTitle")String title,@Field("taskName")String taskName);
-
+    @FormUrlEncoded
+    @POST("/user/show")
+    Call<ResponseBody> post_profile(@Field("sess")String sess);
+    @FormUrlEncoded
+    @POST("/user/update")
+    Call<ResponseBody> post_profileup(@Field("sess")String sess, @Field("password")String password, @Field("phoneNum")String phoneNum, @Field("addr")String addr, @Field("email")String email);
 
 
 }

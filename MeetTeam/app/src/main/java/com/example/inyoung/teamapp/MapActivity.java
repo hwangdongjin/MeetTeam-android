@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
@@ -24,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -142,6 +142,43 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.mapfr_find:
+                application = ApplicationController.getInstance();
+                application.buildNetworkService();
+                networkService = ApplicationController.getInstance().getNetworkService();
+                sessDB = new SharedPreferenceUtil(getApplicationContext());
+                Call<ResponseBody> thumbnail = networkService.post_mapshow(sessDB.getRoomTitle(),/*sessDB.getDate()*/year1+"-"+month1+"-"+dayOfMonth1);
+                final ArrayList<Double> array1= new ArrayList<>();
+                thumbnail.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                        try {
+                            if(response.isSuccess()) {
+                                jsonObject = new JSONObject(response.body().string());
+                                jsonArray = new JSONArray(jsonObject.get("places").toString());
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject place = jsonArray.getJSONObject(i);
+                                    JSONObject loc = new JSONObject(place.get("loc").toString());
+                                    JSONArray coordinates = new JSONArray(loc.get("coordinates").toString());
+                                    Double q = Double.parseDouble((String) coordinates.get(1));
+                                    String k = String.format("%.8f",q);
+                                    array1.add(Double.parseDouble(k));
+                                    Log.i("mytag2", "arr1:" + array1);
+
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+
+                    }
+                });
+
                 break;
             case R.id.mapfr_plus:
                 LatLng cameracenter2 = mMap.getProjection().getVisibleRegion().latLngBounds.getCenter();
