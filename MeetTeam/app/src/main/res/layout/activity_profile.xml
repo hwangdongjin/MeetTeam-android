@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal|center_vertical"
     tools:context="com.example.inyoung.teamapp.ProfileActivity"
     android:weightSum="1">
 
     <ImageView
         android:id="@+id/profile_image2"
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
-        android:layout_marginTop="90dp"
         android:background="@drawable/sample_user"
         android:layout_weight="0.30"/>
 
