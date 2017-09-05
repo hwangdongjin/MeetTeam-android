@@ -127,7 +127,7 @@ public class RoomAddFragment extends Fragment{
         alter.setView(view);
         alter.show();
         edt_title2 = (EditText)view.findViewById(R.id.edt_title2);
-        edt_ok= (Button) view.findViewById(R.id.btn_ok2);
+        edt_ok= (Button) view.findViewById(R.id.btn_ok);
         edt_cancel= (Button) view.findViewById(R.id.btn_cancel2);
         edt_ok.setOnClickListener(new View.OnClickListener() {
             @Override

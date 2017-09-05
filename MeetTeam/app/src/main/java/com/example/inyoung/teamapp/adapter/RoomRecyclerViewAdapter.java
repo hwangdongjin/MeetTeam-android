@@ -98,7 +98,7 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
                                 userList = new ArrayList<>();
                                 for(int i=0;i<jsonArray1.length();i++){
                                     jsonObject1 = jsonArray1.getJSONObject(i);
-                                    userList.add(new UserListDTO((String) jsonObject1.get("name"),(String) jsonObject1.get("phoneNum")));
+                                    userList.add(new UserListDTO((String) jsonObject1.get("name"),(String) jsonObject1.get("phoneNum"), (String) jsonObject1.get("photo"), (String) jsonObject1.get("email")));
                                 }
                                 Intent intent = new Intent();
                                 intent.setClass(context, ViewPagerActivity.class);

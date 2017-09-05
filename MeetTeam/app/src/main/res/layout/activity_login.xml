@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:weightSum="1"
     android:background="#f7f7f7"
+    android:gravity="center_horizontal|center_vertical"
     tools:context="com.example.inyoung.teamapp.LoginActivity"
     >
 
@@ -15,7 +16,6 @@
         android:layout_width="105dp"
         android:layout_height="56dp"
         android:layout_gravity="center"
-        android:layout_marginTop="150dp"
         android:layout_weight="0.05"
         android:src="@drawable/mainicon" />
 
@@ -58,7 +58,7 @@
             android:layout_height="30dp"
             android:background="@drawable/btn_basic"
             android:text="로그인"
-            android:textColor="#668cff"
+            android:textColor="#6990da"
             android:textStyle="" />
 
         <Button
@@ -68,7 +68,7 @@
             android:layout_marginLeft="10dp"
             android:background="@drawable/btn_basic"
             android:text="회원가입"
-            android:textColor="#668cff" />
+            android:textColor="#6990da" />
 
     </LinearLayout>
 

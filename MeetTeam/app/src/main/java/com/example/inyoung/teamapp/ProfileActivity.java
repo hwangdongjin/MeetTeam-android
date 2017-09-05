@@ -24,9 +24,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -254,4 +259,47 @@ public class ProfileActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+//    private void upload(Bitmap bitmap,String filePath){
+//        // Variables
+//        String filename = "/mnt/sdcard/Download/file.img";
+//        String stringUrl = "http://52.78.39.253:7530" + "imgUpload";
+//        String attachmentName = "photo";
+//        String crlf = "\r\n";
+//        String twoHyphens = "--";
+//        String boundary = "*****";
+//
+//        //Setup the request
+//        HttpURLConnection httpUrlConnection = null;
+//        URL url = new URL(stringUrl);
+//        httpUrlConnection = (HttpURLConnection) url.openConnection();
+//        httpUrlConnection.setUseCaches(false);
+//        httpUrlConnection.setDoOutput(true);
+//        httpUrlConnection.setDoInput(true);
+//
+//        httpUrlConnection.setRequestMethod("POST");
+//        httpUrlConnection.setRequestProperty("Connection", "Keep-Alive");
+//        httpUrlConnection.setRequestProperty("Cache-Control", "no-cache");
+//        httpUrlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+//
+//        // Start content wrapper
+//        DataOutputStream dos = new DataOutputStream(httpUrlConnection.getOutputStream());
+//        dos.writeBytes(twoHyphens + boundary + crlf);
+//        dos.writeBytes("Content-Disposition: form-data; name=\"" + attachmentName + "\";filename=\"" + filename + "\"" + crlf);
+//        dos.writeBytes(crlf);
+//
+//        // Read from FileInputStream and write to OutputStream
+//        if (filename != null) {
+//            FileInputStream fileInputStream = new FileInputStream(filename);
+//            int res = 1;
+//            while ((res = fileInputStream.read(buffer)) > 0) {
+//                OutputStream os = httpUrlConnection.getOutputStream();
+//                os.write(buffer, 0, res);
+//            }
+//        }
+//
+//        // Disconnection
+//        httpUrlConnection.disconnect();
+//    }
+
 }
