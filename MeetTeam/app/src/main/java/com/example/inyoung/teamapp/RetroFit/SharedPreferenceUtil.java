@@ -61,6 +61,7 @@ public class SharedPreferenceUtil {
     public String getName() {return sharedPreferences.getString("name","dafValue");}
     public String getRoomTitle(){return  sharedPreferences.getString("roomTitle","dafValue");}
     public String getDate() {return sharedPreferences.getString("date","dafValue");}
+
     public int getCheckNum(){return sharedPreferences.getInt("checkNum",Integer.parseInt("dafValue"));}
 
 }

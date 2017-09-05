@@ -13,22 +13,43 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.inyoung.teamapp.RetroFit.NetworkService;
+import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
+import com.squareup.okhttp.ResponseBody;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
+
 public class ProfileActivity extends AppCompatActivity {
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_iMAGE=2;
-    EditText profile_name, profile_email, profile_PhoneNum, profile_pw, profile_pwc;
+    EditText   profile_email, profile_PhoneNum, profile_pw, profile_pwc, profile_add;
+    TextView profile_name, profile_id, profile_idNum;
     Button profile_change;
     ImageView profile_image2;
     private Uri mlmageCaptureUri;
     private Intent intent;
     private String absolutePath;
+
+    SharedPreferenceUtil sessDB;
+    private NetworkService networkService;
+    private ApplicationController application;
+    public JSONArray jsonArray;
+    JSONObject jsonObject;
 
 
 
@@ -36,13 +57,19 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        profile_name = (EditText) findViewById(R.id.profile_name);
+        profile_name = (TextView) findViewById(R.id.profile_name);
+        profile_id = (TextView) findViewById(R.id.profile_id);
         profile_email = (EditText) findViewById(R.id.profile_email);
         profile_PhoneNum = (EditText) findViewById(R.id.profile_PhoneNum);
         profile_pw = (EditText) findViewById(R.id.profile_pw);
         profile_pwc = (EditText) findViewById(R.id.profile_pwc);
         profile_change = (Button) findViewById(R.id.profile_change);
         profile_image2 = (ImageView) findViewById(R.id.profile_image2);
+        profile_idNum = (TextView) findViewById(R.id.profile_idNum);
+        profile_add = (EditText) findViewById(R.id.profile_add);
+
+
+
 
 
         profile_image2.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +99,67 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
-    }
+
+
+        application = ApplicationController.getInstance();
+        application.buildNetworkService();
+        networkService = ApplicationController.getInstance().getNetworkService();
+
+        sessDB = new SharedPreferenceUtil(getApplicationContext());
+        Call<ResponseBody> thumbnail = networkService.post_profile(sessDB.getSess());
+        thumbnail.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    jsonObject = new JSONObject(response.body().string());
+                    profile_name.setText(jsonObject.get("name").toString());
+                    profile_id.setText(jsonObject.get("id").toString());
+                    profile_idNum.setText(jsonObject.get("idNum").toString());
+                    profile_email.setText(jsonObject.get("email").toString());
+                    profile_PhoneNum.setText(jsonObject.get("phoneNum").toString());
+                    profile_add.setText(jsonObject.get("addr").toString());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+
+
+        profile_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Call<ResponseBody> thumbnail2 = networkService.post_profileup(sessDB.getSess(), profile_pw.getText().toString(),
+                        profile_PhoneNum.getText().toString(), profile_add.getText().toString(), profile_email.getText().toString());
+                thumbnail2.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                        intent = new Intent(getApplicationContext(), ListroomActivity.class);
+                        startActivity(intent);
+                        //Fragment fr = new SettingFragment();
+                        //FragmentManager fm = getFragmentManager();
+                        //FragmentTransaction fragmentTransaction = fm.beginTransaction();
+
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+
+
+    }//oncreate
 
     public void doTakePhotoAction(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
