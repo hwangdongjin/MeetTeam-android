@@ -13,6 +13,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -180,6 +181,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                 LatLng latLng = new LatLng(sum1/(double)jsonArray.length(), sum2/jsonArray.length());
                                 Log.i("mytag3", "arr1:" + latLng);
                                 MarkerOptions opt = new MarkerOptions();
+                                opt.title("중간지점");
+                                opt.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                                 opt.position(latLng);
                                 mMap.addMarker(opt).showInfoWindow();
 
