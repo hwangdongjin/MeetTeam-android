@@ -2,6 +2,7 @@ package com.example.inyoung.teamapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,8 +20,7 @@ import retrofit.Retrofit;
 public class JoinActivity extends AppCompatActivity {
     EditText edt_id,edt_pw,edt_name,edt_idNum,edt_phoneNum,edt_addr,edt_email,edt_professor;
     Button btn_register;
-    int idNum;
-    String id,pw,name,phoneNum,addr,email;
+    String id,pw,name,idNum,phoneNum,addr,email;
     Boolean professor;
 
     private NetworkService networkService;
@@ -38,7 +38,7 @@ public class JoinActivity extends AppCompatActivity {
         edt_phoneNum = (EditText)findViewById(R.id.edt_phoneNum);
         edt_addr = (EditText)findViewById(R.id.edt_addr);
         edt_email = (EditText)findViewById(R.id.edt_email);
-        edt_professor = (EditText)findViewById(R.id.edt_professor);
+        
         ApplicationController application = ApplicationController.getInstance();
         application.buildNetworkService();
         networkService = ApplicationController.getInstance().getNetworkService();
@@ -50,40 +50,18 @@ public class JoinActivity extends AppCompatActivity {
                 Log.i("mytag","tse:"+edt_pw.getText().toString());
 
 
-                    if ("".equals(edt_id.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "아이디를 입력 해 주세요", Toast.LENGTH_LONG).show();
-                    else
-                        id = edt_id.getText().toString();
-                    if ("".equals(edt_pw.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "비밀번호를 입력 해 주세요", Toast.LENGTH_LONG).show();
-                    else
-                        pw = edt_pw.getText().toString();
-                    if ("".equals(edt_name.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "이름을 입력 해 주세요", Toast.LENGTH_LONG).show();
-                    else
-                        name = edt_name.getText().toString();
-                    if ("".equals(edt_idNum.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "학번을 입력 해 주세요", Toast.LENGTH_LONG).show();
-                    else
-                        idNum = Integer.parseInt(edt_idNum.getText().toString());
-                    if ("".equals(edt_phoneNum.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "전화번호를 입력 해 주세요", Toast.LENGTH_LONG).show();
-                    else
-                        phoneNum = edt_phoneNum.getText().toString();
-                    if ("".equals(edt_addr.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "주소를 입력 해 주세요", Toast.LENGTH_LONG).show();
-                    else
-                        addr = edt_addr.getText().toString();
-                    if ("".equals(edt_email.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "메일을 입력 해 주세요", Toast.LENGTH_LONG).show();
-                    else
-                        email = edt_email.getText().toString();
-                    if ("".equals(edt_professor.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "신분을 입력 해 주세요", Toast.LENGTH_LONG).show();
-                    else
-                        professor = Boolean.parseBoolean(edt_professor.getText().toString());
+                if (!TextUtils.isEmpty(edt_id.getText()) && !TextUtils.isEmpty(edt_pw.getText()) && !TextUtils.isEmpty(edt_name.getText())&&
+                        !TextUtils.isEmpty(edt_idNum.getText()) && !TextUtils.isEmpty(edt_phoneNum.getText()) && !TextUtils.isEmpty(edt_addr.getText())
+                        && !TextUtils.isEmpty(edt_email.getText())) {
 
-                if (id != null && pw != null && name != null && idNum != 0 && phoneNum != null && addr != null && email != null) {
+                    id = edt_id.getText().toString();
+                    pw = edt_pw.getText().toString();
+                    name = edt_name.getText().toString();
+                    idNum = edt_idNum.getText().toString();
+                    phoneNum = edt_phoneNum.getText().toString();
+                    addr = edt_addr.getText().toString();
+                    email = edt_email.getText().toString();
+
                     UserDTO user = new UserDTO();
                     user.setId(id);
                     user.setPassword(pw);
@@ -92,7 +70,6 @@ public class JoinActivity extends AppCompatActivity {
                     user.setPhoneNum(phoneNum);
                     user.setAddr(addr);
                     user.setEmail(email);
-                    user.setProfessor(professor);
                     Call<UserDTO> thumbnailCall = networkService.post_userAdd(user);
                     thumbnailCall.enqueue(new Callback<UserDTO>() {
                         @Override
@@ -109,6 +86,8 @@ public class JoinActivity extends AppCompatActivity {
                             Log.i("MyTag", "서버 onFailure 에러내용 : " + t.getMessage());
                         }
                     });
+                }else{
+                    Toast.makeText(getApplicationContext(), "모든 칸을 입력해주세요", Toast.LENGTH_LONG).show();
                 }
             }
 

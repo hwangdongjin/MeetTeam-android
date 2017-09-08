@@ -8,20 +8,18 @@ public class UserDTO {
     private String id;
     private String password;
     private String name;
-    private int idNum;
+    private String idNum;
     private String phoneNum;
     private String addr;
     private String email;
-    private boolean isProfessor;
     private String photo;
 
     public  UserDTO(){
 
     }
 
-    public UserDTO(String id, boolean isProfessor, String email, String addr, String phoneNum, int idNum, String name, String password) {
+    public UserDTO(String id,  String email, String addr, String phoneNum, String idNum, String name, String password) {
         this.id = id;
-        this.isProfessor = isProfessor;
         this.email = email;
         this.addr = addr;
         this.phoneNum = phoneNum;
@@ -36,14 +34,6 @@ public class UserDTO {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public boolean isProfessor() {
-        return isProfessor;
-    }
-
-    public void setProfessor(boolean professor) {
-        isProfessor = professor;
     }
 
     public String getEmail() {
@@ -70,11 +60,11 @@ public class UserDTO {
         this.phoneNum = phoneNum;
     }
 
-    public int getIdNum() {
+    public String getIdNum() {
         return idNum;
     }
 
-    public void setIdNum(int idNum) {
+    public void setIdNum(String idNum) {
         this.idNum = idNum;
     }
 
