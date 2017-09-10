@@ -64,7 +64,7 @@ public class TaskFragment extends Fragment {
         initButton(view);
         return view;
     }
-    public void initRecyclerView(final View view) {
+    public void  initRecyclerView(final View view) {
         String roomTitle = sessDB.getRoomTitle();
         application = ApplicationController.getInstance();
         application.buildNetworkService();
@@ -95,11 +95,13 @@ public class TaskFragment extends Fragment {
                         roAdapter.notifyItemInserted(0);
                         roAdapter.notifyDataSetChanged();
                         chatView.setAdapter(roAdapter);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                 }
 
             }

@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.inyoung.teamapp.dto.UserListDTO;
 import com.example.inyoung.teamapp.fragment.AppFragment;
-import com.example.inyoung.teamapp.fragment.ConfigureFragment;
+import com.example.inyoung.teamapp.fragment.ChattingFragment;
 import com.example.inyoung.teamapp.fragment.MemberlistFragment;
 import com.example.inyoung.teamapp.fragment.TaskFragment;
 
@@ -36,7 +36,7 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
                 fragment = MemberlistFragment.newInstance(userList,Num);
                 break;
             case 1:
-                fragment = new ConfigureFragment();
+                fragment = new ChattingFragment();
                 break;
             case 2:
                 fragment = new TaskFragment();
