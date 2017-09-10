@@ -1,11 +1,14 @@
 package com.example.inyoung.teamapp;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
@@ -25,6 +28,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -49,6 +53,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     static int year1,month1,dayOfMonth1;
     Intent intent;
 
+    Button DateSelectButton;
+    TextView DateSelectView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +66,34 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        intent = getIntent();
-        year1 = intent.getIntExtra("year",0);
-        month1=intent.getIntExtra("month",0);
-        dayOfMonth1=intent.getIntExtra("day",0);
+        DateSelectButton=(Button)findViewById(R.id.btn_mapcal);
+        DateSelectView = (TextView)findViewById(R.id.tv_mapcal);
+
+        final DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                int fix_month=month+1;
+                int last_date = dayOfMonth + 6;
+                DateSelectView.setText(year+"년 "+fix_month+"월 "+dayOfMonth+"일");
+                year1 = year;
+                month1= fix_month;
+                dayOfMonth1= dayOfMonth;
+                go();
+            }
+        };
+
+        DateSelectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                DatePickerDialog dlg = new DatePickerDialog(MapActivity.this , listener, c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
+                dlg.show();
+            }
+        });
+//        intent = getIntent();
+//        year1 = intent.getIntExtra("year",0);
+//        month1=intent.getIntExtra("month",0);
+//        dayOfMonth1=intent.getIntExtra("day",0);
 
         map_plusbutton = (Button)findViewById(R.id.mapfr_plus);
         map_plusbutton.setOnClickListener(this);
