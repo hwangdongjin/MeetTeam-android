@@ -1,6 +1,8 @@
 package com.example.inyoung.teamapp.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,10 +19,17 @@ import com.example.inyoung.teamapp.ApplicationController;
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
+import com.example.inyoung.teamapp.ViewPagerActivity;
 import com.example.inyoung.teamapp.dto.CheckAddDTO;
 import com.example.inyoung.teamapp.dto.CheckListDTO;
+import com.example.inyoung.teamapp.dto.UserListDTO;
 import com.squareup.okhttp.ResponseBody;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 import retrofit.Call;
@@ -35,6 +44,7 @@ import retrofit.Retrofit;
 public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckListRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
     private ArrayList<CheckListDTO> checkList;
     private ArrayList<CheckAddDTO> checkAddList, checkShowList;
+    private static ArrayList<UserListDTO> userList;
     private Context context;
     private AlertDialog dlg;
     int size;
@@ -155,6 +165,40 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
                             st_do = edt_do.getText().toString();
                         }
                         if (st_name != null && st_do != null) {
+                            Call<ResponseBody> call2 =networkService.post_userList(sessDB.getRoomTitle());
+                            call2.enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                                    if(response.isSuccess()){
+                                        try {
+                                            JSONArray jsonArray1= new JSONArray(response.body().string());
+                                            userList = new ArrayList<>();
+                                            for(int i=0;i<jsonArray1.length();i++){
+                                                JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
+                                                userList.add(new UserListDTO((String) jsonObject1.get("name"),(String) jsonObject1.get("phoneNum"), (String) jsonObject1.get("photo"), (String) jsonObject1.get("email")));
+                                            }
+                                            Intent intent = new Intent();
+                                            intent.setClass(context, ViewPagerActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            intent.putExtra("test",userList);
+                                            intent.putExtra("signal",1);
+                                            context.startActivity(intent);
+                                            ((Activity)context).finish();
+                                        }
+                                        catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Throwable t) {
+
+                                }
+                            });
                             Call<ResponseBody> call = networkService.post_taskClistAdd(sessDB.getRoomTitle(), checkList.get(position).getCheck_RoomName(), st_do, st_name);
                             call.enqueue(new Callback<ResponseBody>() {
                                 @Override
@@ -162,7 +206,6 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
                                     if (response.isSuccess()) {
                                         Toast.makeText(context, "성공하였습니다", Toast.LENGTH_LONG).show();
                                         initClistShow(holder,position);
-
                                         if (progressNum != 0) {
                                             holder.progressBar.incrementProgressBy(pro);
                                             holder.progressNum.setText(String.valueOf(pro));

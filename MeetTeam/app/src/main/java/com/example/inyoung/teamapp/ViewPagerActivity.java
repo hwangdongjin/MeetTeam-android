@@ -23,12 +23,14 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
     private MainPagerAdapter mainPagerAdapter;
     ArrayList<UserListDTO> userDTO;
     private Toolbar toolbar;
+    int signal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
         Intent intent = getIntent();
+        signal=(Integer)intent.getSerializableExtra("signal");
         userDTO= (ArrayList<UserListDTO>) intent.getSerializableExtra("test");
         initViewPaging();
         initToolBar();
@@ -84,6 +86,9 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                if (signal==1){
+                    mainViewPagerActivity.setCurrentItem(2);
+                }
                 mainViewPagerActivity.setCurrentItem(tab.getPosition());
             }
 
@@ -101,7 +106,7 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
     }
 
     private void initAdapter() {
-        mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tabs.getTabCount(),userDTO,Integer.valueOf(userDTO.size()));
+        mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tabs.getTabCount(),userDTO,Integer.valueOf(userDTO.size()),signal);
         mainViewPagerActivity.setAdapter(mainPagerAdapter);
     }
 }
