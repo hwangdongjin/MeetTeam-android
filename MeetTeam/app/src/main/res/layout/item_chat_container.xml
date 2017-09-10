@@ -7,12 +7,9 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="91dp"
-        android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="#f1f3f5"
-        app:cardCornerRadius="10dp"
+        android:layout_height="wrap_content"
         app:cardPreventCornerOverlap="true"
-        app:contentPadding="5dp"
+        app:cardBackgroundColor="#00000000"
         app:cardElevation="0dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -20,39 +17,30 @@
 
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/chatContainer">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+            android:id="@+id/chatContainer"
+            android:padding="5dp">
 
                 <TextView
                     android:text="TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id="@+id/txt_userName"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused" />
-            </RelativeLayout>
 
-            <RelativeLayout android:layout_height="match_parent"
-                android:layout_width="30dp">
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
 
                 <TextView
                     android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/txt_message"
+                    android:background="@drawable/chatstyle"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused" />
-            </RelativeLayout>
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
