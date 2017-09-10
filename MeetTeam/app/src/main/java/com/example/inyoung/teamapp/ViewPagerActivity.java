@@ -6,7 +6,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -31,7 +30,6 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
         setContentView(R.layout.activity_view_pager);
         Intent intent = getIntent();
         userDTO= (ArrayList<UserListDTO>) intent.getSerializableExtra("test");
-        Log.i("mytag","test"+userDTO.get(0).getName());
         initViewPaging();
         initToolBar();
     }

@@ -53,6 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
     JSONObject jsonObject;
 
 
+    ViewPagerActivity viewPagerActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +69,6 @@ public class ProfileActivity extends AppCompatActivity {
         profile_image2 = (ImageView) findViewById(R.id.profile_image2);
         profile_idNum = (TextView) findViewById(R.id.profile_idNum);
         profile_add = (EditText) findViewById(R.id.profile_add);
-
-
 
 
 
@@ -149,8 +148,11 @@ public class ProfileActivity extends AppCompatActivity {
                 thumbnail2.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                        //bbbviewPagerActivity = (ViewPagerActivity) ViewPagerActivity.viewPagerActivity;
                         intent = new Intent(getApplicationContext(), ListroomActivity.class);
                         startActivity(intent);
+                        finish();
+
                         //Fragment fr = new SettingFragment();
                         //FragmentManager fm = getFragmentManager();
                         //FragmentTransaction fragmentTransaction = fm.beginTransaction();
