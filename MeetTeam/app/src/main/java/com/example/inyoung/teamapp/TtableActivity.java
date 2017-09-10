@@ -1,5 +1,6 @@
 package com.example.inyoung.teamapp;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +22,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -32,6 +37,7 @@ public class TtableActivity extends AppCompatActivity {
     Intent intent;
     private AlertDialog.Builder dlg;
     SharedPreferenceUtil sessDB;
+    Button DateSelectButton;
     TextView DateSelectView;
     TextView text1;
     String sess,roomTitle,date;
@@ -43,26 +49,37 @@ public class TtableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ttable);
 
-        DateSelectView = (TextView) findViewById(R.id.DateSelectView);
+        DateSelectButton=(Button)findViewById(R.id.btn_ttablecal);
+        DateSelectView = (TextView)findViewById(R.id.tv_ttablecal);
 
         for(int i=0; i<28; i++){
             int timeId= getResources().getIdentifier("TableText"+i, "id", getPackageName());
             findViewById(timeId).setOnClickListener(onClick);
         }
 
-        intent = getIntent();
-        year = intent.getIntExtra("year",0);
-        month = intent.getIntExtra("month",0);
-        dayOfMonth = intent.getIntExtra("day",0);
-        date= String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(dayOfMonth);
-
-        DateSelectView.setText(year+"년 "+month+"월 "+dayOfMonth+"일");
-
         sessDB = new SharedPreferenceUtil(getApplicationContext());
         sess=sessDB.getSess();
         roomTitle=sessDB.getRoomTitle();
 
-        initTableShow(roomTitle,date);
+        final DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                int fix_month=month+1;
+                int last_date = dayOfMonth + 6;
+                DateSelectView.setText(year+"년 "+fix_month+"월 "+dayOfMonth+"일" +" ~ " + year+"년 "+fix_month+"월 "+last_date+"일");
+                date= String.valueOf(year)+"-"+String.valueOf(fix_month)+"-"+String.valueOf(dayOfMonth);
+                initTableShow(roomTitle,date);
+            }
+        };
+
+        DateSelectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                DatePickerDialog dlg = new DatePickerDialog(TtableActivity.this , listener, c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
+                dlg.show();
+            }
+        });
     }
 
     TextView.OnClickListener onClick =  new View.OnClickListener() {

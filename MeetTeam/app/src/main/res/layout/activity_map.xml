@@ -6,16 +6,42 @@
     android:layout_height="match_parent"
     tools:context="com.example.inyoung.teamapp.MapActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_mapcal"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:background="@drawable/btn_timetable" />
+
+        <TextView
+            android:id="@+id/tv_mapcal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="----년 --월 --일"
+            android:textColor="#000000"
+            android:textColorHint="#a7a9ad" />
+
+    </LinearLayout>
+
     <fragment
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
         android:layout_alignParentBottom="true"
         class="com.google.android.gms.maps.SupportMapFragment"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp">
 
         <Button
             android:layout_width="40dp"

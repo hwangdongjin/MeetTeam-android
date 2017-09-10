@@ -32,6 +32,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.util.Calendar;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -46,10 +48,10 @@ public class AppFragment extends Fragment {
     View view;
     Button btn_table,btn_map,btn_store;
     Intent intent;
-    TextView DateSelectView;
     static int year1,month1,dayOfMonth1;
     SharedPreferenceUtil sessDB;
     Button DateSelectButton;
+    TextView DateSelectView;
     private NetworkService networkService;
     private ApplicationController application;
 
@@ -67,27 +69,28 @@ public class AppFragment extends Fragment {
         sessDB = new SharedPreferenceUtil(getContext());
         DateSelectButton=(Button) view.findViewById(R.id.DateSelectButton);
         DateSelectView = (TextView) view.findViewById(R.id.DateSelectView);
+
         btn_table= (Button) view.findViewById(R.id.btn_table);
+        btn_table.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getContext(), TtableActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_map = (Button) view.findViewById(R.id.btn_map);
+        btn_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getContext(), MapActivity.class);
+                startActivity(intent);
+            }
+        });
 
         tv_decTime = (TextView) view.findViewById(R.id.tv_decTime);
         tv_decPlace = (TextView) view.findViewById(R.id.tv_decPlace);
 
-        btn_table.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                     if("".equals(DateSelectView.getText().toString())){
-                         Toast.makeText(getContext(),"날짜를 입력하세요",Toast.LENGTH_LONG).show();
-                     }
-                     else {
-                         intent = new Intent(getContext(), TtableActivity.class);
-                         intent.putExtra("year", year1);
-                         intent.putExtra("month", month1);
-                         intent.putExtra("day", dayOfMonth1);
-                         startActivity(intent);
-                     }
-
-            }
-        });
         final DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -104,23 +107,9 @@ public class AppFragment extends Fragment {
         DateSelectButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                DatePickerDialog dialog = new DatePickerDialog(getContext(),listener,2017,07,03);
+                final Calendar c = Calendar.getInstance();
+                DatePickerDialog dialog = new DatePickerDialog(getContext(), listener, c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
                 dialog.show();
-            }
-
-
-
-        });
-
-        btn_map = (Button) view.findViewById(R.id.btn_map);
-        btn_map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(getContext(), MapActivity.class);
-                intent.putExtra("year", year1);
-                intent.putExtra("month", month1);
-                intent.putExtra("day", dayOfMonth1);
-                startActivity(intent);
             }
         });
 
