@@ -92,19 +92,6 @@
         android:hint="E-mail" />
 
     <EditText
-        android:id="@+id/edt_professor"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/viewstyle"
-        android:maxLines="1"
-        android:textColor="#000000"
-        android:textSize="15dp"
-        android:textColorHint="#a7a9ad"
-        android:hint="Proffesor" />
-
-    <EditText
         android:id="@+id/edt_idNum"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
