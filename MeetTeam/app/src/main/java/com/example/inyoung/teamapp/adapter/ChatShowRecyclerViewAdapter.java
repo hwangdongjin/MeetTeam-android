@@ -45,7 +45,7 @@ public class ChatShowRecyclerViewAdapter extends RecyclerView.Adapter<ChatShowRe
 
     @Override
     public void onBindViewHolder(ChatShowRecyclerViewAdapter.ViewHolder holder, final int position) {
-        holder.userName.setText(chatShowList.get(position).getUserName() + ":");
+        holder.userName.setText(chatShowList.get(position).getUserName());
         holder.message.setText("" + "" + "" + "" + "" + "" + "" + "" + chatShowList.get(position).getMessage());
 
     }

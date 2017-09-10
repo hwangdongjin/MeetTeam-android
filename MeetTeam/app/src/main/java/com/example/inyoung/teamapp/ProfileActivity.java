@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.squareup.okhttp.ResponseBody;
@@ -24,14 +25,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -57,6 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
     JSONObject jsonObject;
 
 
+    ViewPagerActivity viewPagerActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +69,6 @@ public class ProfileActivity extends AppCompatActivity {
         profile_image2 = (ImageView) findViewById(R.id.profile_image2);
         profile_idNum = (TextView) findViewById(R.id.profile_idNum);
         profile_add = (EditText) findViewById(R.id.profile_add);
-
-
 
 
 
@@ -123,6 +118,13 @@ public class ProfileActivity extends AppCompatActivity {
                     profile_email.setText(jsonObject.get("email").toString());
                     profile_PhoneNum.setText(jsonObject.get("phoneNum").toString());
                     profile_add.setText(jsonObject.get("addr").toString());
+                    //profile_image2.setImageBitmap((Bitmap) jsonObject.get("photo"));
+                    Glide.with(getApplicationContext())
+                            .load(jsonObject.get("photo").toString())
+                            .fitCenter()
+                            .into(profile_image2);
+                    //String url = "tmp_" + jsonObject.get("photo").toString()+".jpg";
+                    //profile_image2.setImageURI(Uri.parse(url));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -146,8 +148,11 @@ public class ProfileActivity extends AppCompatActivity {
                 thumbnail2.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                        //bbbviewPagerActivity = (ViewPagerActivity) ViewPagerActivity.viewPagerActivity;
                         intent = new Intent(getApplicationContext(), ListroomActivity.class);
                         startActivity(intent);
+                        finish();
+
                         //Fragment fr = new SettingFragment();
                         //FragmentManager fm = getFragmentManager();
                         //FragmentTransaction fragmentTransaction = fm.beginTransaction();

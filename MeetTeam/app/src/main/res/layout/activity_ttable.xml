@@ -19,7 +19,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="13dp"
+            android:layout_margin="15dp"
             android:src="@drawable/title_name_white" />
 
     </android.support.v7.widget.Toolbar>
@@ -30,11 +30,19 @@
         android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/btn_ttablecal"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:background="@drawable/btn_timetable" />
+
         <TextView
-            android:id="@+id/DateSelectView"
+            android:id="@+id/tv_ttablecal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="7dp"
             android:hint="----년 --월 --일"
             android:textColor="#000000"
             android:textColorHint="#a7a9ad" />
