@@ -1,6 +1,7 @@
 package com.example.inyoung.teamapp.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.inyoung.teamapp.ApplicationController;
+import com.example.inyoung.teamapp.ListroomActivity;
 import com.example.inyoung.teamapp.R;
 import com.example.inyoung.teamapp.RetroFit.FragmentReplaceAble;
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
@@ -36,6 +38,10 @@ public class RoomAddFragment extends Fragment{
     SharedPreferenceUtil sessDB;
     private NetworkService networkService;
     private ApplicationController application;
+
+    Intent intent;
+
+
     public RoomAddFragment() {
 
     }
@@ -43,6 +49,7 @@ public class RoomAddFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.activity_listroom_fragment2, container, false);
+
         initButton(view);
         return view;
     }
@@ -98,8 +105,13 @@ public class RoomAddFragment extends Fragment{
                     public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                         if (response.isSuccess()) {
                             Toast.makeText(getContext(),"성공하였습니다",Toast.LENGTH_LONG).show();
-                            ((FragmentReplaceAble) getActivity()).replaceFragment(2);
-                            alter.cancel();
+                            intent = new Intent(getContext(), ListroomActivity.class);
+                            startActivity(intent);
+
+
+
+                            //((FragmentReplaceAble) getActivity()).replaceFragment(2);
+                            //alter.cancel();
                         }
                     }
                     @Override
@@ -121,7 +133,7 @@ public class RoomAddFragment extends Fragment{
    private void roomEnterDlg(){
        sessDB= new SharedPreferenceUtil(getContext());
        session=sessDB.getSess();
-        LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_room_enter, null, false);
         alter= new AlertDialog.Builder(getContext()).create();
         alter.setView(view);
@@ -167,6 +179,11 @@ public class RoomAddFragment extends Fragment{
        });
 
     }
+
+
+
+
+
 
 
 }

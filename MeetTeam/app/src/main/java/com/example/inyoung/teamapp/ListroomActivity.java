@@ -10,14 +10,13 @@ import com.example.inyoung.teamapp.RetroFit.FragmentReplaceAble;
 import com.example.inyoung.teamapp.RetroFit.NetworkService;
 import com.example.inyoung.teamapp.RetroFit.SharedPreferenceUtil;
 import com.example.inyoung.teamapp.adapter.ListroomAdapter;
-import com.example.inyoung.teamapp.fragment.RoomListFragment;
 import com.example.inyoung.teamapp.fragment.RoomAddFragment;
+import com.example.inyoung.teamapp.fragment.RoomListFragment;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class ListroomActivity extends AppCompatActivity implements FragmentReplaceAble{
-
     private ViewPager listroomViewPagerActivity;
     private TabLayout listroomtabs;
     private ListroomAdapter listroomAdapter;
