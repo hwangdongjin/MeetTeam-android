@@ -48,13 +48,13 @@
 
             <Button
                 android:layout_width="45dp"
-                android:layout_height="20dp"
+                android:layout_height="25dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:background="@drawable/btn_ok"
                 android:id="@+id/btn_ok"/>
             <Button
                 android:layout_width="45dp"
-                android:layout_height="20dp"
+                android:layout_height="25dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:background="@drawable/btn_cancel"
                 android:id="@+id/btn_cancel2"
