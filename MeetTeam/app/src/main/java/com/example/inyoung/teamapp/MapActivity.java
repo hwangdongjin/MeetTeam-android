@@ -13,6 +13,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -147,7 +148,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 networkService = ApplicationController.getInstance().getNetworkService();
                 sessDB = new SharedPreferenceUtil(getApplicationContext());
                 Call<ResponseBody> thumbnail = networkService.post_mapshow(sessDB.getRoomTitle(),/*sessDB.getDate()*/year1+"-"+month1+"-"+dayOfMonth1);
+
                 final ArrayList<Double> array1= new ArrayList<>();
+                final ArrayList<Double> array2= new ArrayList<>();
+
                 thumbnail.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -159,12 +163,29 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                     JSONObject place = jsonArray.getJSONObject(i);
                                     JSONObject loc = new JSONObject(place.get("loc").toString());
                                     JSONArray coordinates = new JSONArray(loc.get("coordinates").toString());
-                                    Double q = Double.parseDouble((String) coordinates.get(1));
-                                    String k = String.format("%.8f",q);
-                                    array1.add(Double.parseDouble(k));
-                                    Log.i("mytag2", "arr1:" + array1);
 
+                                    array1.add(Double.parseDouble((String) coordinates.get(1)));
+                                    array2.add(Double.parseDouble((String) coordinates.get(0)));
+                                    //Double q = Double.parseDouble((String) coordinates.get(1));
+                                    //String k = String.format("%.8f",q);
+                                    //array1.add(Double.parseDouble(k));
+                                    Log.i("mytag2", "arr1:" + array1);
                                 }
+
+                                double sum1=0;
+                                double sum2=0;
+                                for(int i=0;i<jsonArray.length();i++){
+                                    sum1 += array1.get(i);
+                                    sum2 += array2.get(i);
+                                }
+                                LatLng latLng = new LatLng(sum1/(double)jsonArray.length(), sum2/jsonArray.length());
+                                Log.i("mytag3", "arr1:" + latLng);
+                                MarkerOptions opt = new MarkerOptions();
+                                opt.title("중간지점");
+                                opt.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                                opt.position(latLng);
+                                mMap.addMarker(opt).showInfoWindow();
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
