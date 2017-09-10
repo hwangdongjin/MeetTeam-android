@@ -38,7 +38,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:background="@drawable/btn_send"
+                android:background="@drawable/btn_sendmsg"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginLeft="5dp"

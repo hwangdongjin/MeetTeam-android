@@ -7,31 +7,6 @@
     android:padding="5dp">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
-        android:orientation="horizontal"
-        android:padding="10dp">
-
-        <Button
-            android:id="@+id/DateSelectButton"
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:background="@drawable/btn_calendar" />
-
-        <TextView
-            android:id="@+id/DateSelectView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_marginLeft="15dp"
-            android:hint="----년 --월 --일"
-            android:textColor="#000000"
-            android:textColorHint="#a7a9ad" />
-
-    </LinearLayout>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -90,6 +65,32 @@
             </LinearLayout>
 
         </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/DateSelectButton"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:background="@drawable/btn_calendar" />
+
+        <TextView
+            android:id="@+id/DateSelectView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="15dp"
+            android:hint="----년 --월 --일"
+            android:textColor="#000000"
+            android:textColorHint="#a7a9ad" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
