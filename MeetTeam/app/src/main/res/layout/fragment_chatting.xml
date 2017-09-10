@@ -28,13 +28,6 @@
             android:orientation="horizontal"
             android:layout_height="40dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt_name12"
-                android:layout_weight="1"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
-
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

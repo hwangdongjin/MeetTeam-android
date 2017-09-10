@@ -31,7 +31,7 @@ public class ChatShowRecyclerViewAdapter extends RecyclerView.Adapter<ChatShowRe
 
         public ViewHolder(View itemView) {
             super(itemView);
-            userName= (TextView) itemView.findViewById(R.id.txt_userName);
+            userName = (TextView) itemView.findViewById(R.id.txt_userName);
             message = (TextView) itemView.findViewById(R.id.txt_message);
         }
     }
@@ -45,14 +45,14 @@ public class ChatShowRecyclerViewAdapter extends RecyclerView.Adapter<ChatShowRe
 
     @Override
     public void onBindViewHolder(ChatShowRecyclerViewAdapter.ViewHolder holder, final int position) {
-       holder.userName.setText(chatShowList.get(position).getUserName()+":");
-        holder.message.setText(""+""+""+""+""+""+""+""+chatShowList.get(position).getMessage());
+        holder.userName.setText(chatShowList.get(position).getUserName() + ":");
+        holder.message.setText("" + "" + "" + "" + "" + "" + "" + "" + chatShowList.get(position).getMessage());
 
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return chatShowList.size();
     }
 
     @Override
