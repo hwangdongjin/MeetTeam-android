@@ -101,8 +101,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         map_minusbutton.setOnClickListener(this);
         map_findbutton = (Button) findViewById(R.id.mapfr_find);
         map_findbutton.setOnClickListener(this);
-
-        go();
     }
 
     private void go() {

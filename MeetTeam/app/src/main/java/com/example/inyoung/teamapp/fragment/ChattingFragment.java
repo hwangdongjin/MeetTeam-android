@@ -14,7 +14,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.inyoung.teamapp.ApplicationController;
 import com.example.inyoung.teamapp.R;
@@ -131,7 +130,6 @@ public class ChattingFragment extends Fragment {
                     @Override
                     public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                         if (response.isSuccess()) {
-                            Toast.makeText(getContext(), "성공", Toast.LENGTH_SHORT).show();
                             edt_message.setText("");
                             InputMethodManager mInputMethodManager = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                             mInputMethodManager.hideSoftInputFromWindow(edt_message.getWindowToken(), 0);

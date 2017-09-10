@@ -48,7 +48,7 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
     private Context context;
     private AlertDialog dlg;
     int size;
-    CheckListAddRecyclerViewAdapter roAdapter;
+    static CheckListAddRecyclerViewAdapter roAdapter;
     private NetworkService networkService;
     ApplicationController application;
     EditText edt_do, edt_name;
@@ -59,12 +59,14 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
     static int pro;
     String st_name, st_do;
     Button btn_ok, btn_cancel;
+
     public CheckListRecyclerViewAdapter(ArrayList<CheckListDTO> checkList, ArrayList<CheckAddDTO> checkAddList, int size, Context context) {
         this.checkList = checkList;
         this.checkAddList = checkAddList;
         this.context = context;
         this.size = size;
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView checkRoom_name;
         private Button manager_Button;
@@ -91,6 +93,7 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         CheckListRecyclerViewAdapter.ViewHolder vholder = new CheckListRecyclerViewAdapter.ViewHolder(itemView);
         return vholder;
     }
+
     @Override
     public void onBindViewHolder(final CheckListRecyclerViewAdapter.ViewHolder holder, final int position) {
         sessDB = new SharedPreferenceUtil(context);
@@ -98,39 +101,51 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         application.buildNetworkService();
         networkService = ApplicationController.getInstance().getNetworkService();
         holder.checkRoom_name.setText(checkList.get(position).getCheck_RoomName());
+        holder.btn_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.checkListView.smoothScrollToPosition(1);
+            }
+        });
+        holder.btn_down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.checkListView.smoothScrollToPosition(7);
+            }
+        });
         switch (position) {
             case 0:
-                 initClistShow(holder,position);
+                initClistShow(holder, position);
                 break;
             case 1:
-                 initClistShow(holder,position);
+                initClistShow(holder, position);
                 break;
             case 2:
-                initClistShow(holder,position);
+                initClistShow(holder, position);
                 break;
             case 3:
-                initClistShow(holder,position);
+                initClistShow(holder, position);
                 break;
             case 4:
-                initClistShow(holder,position);
+                initClistShow(holder, position);
                 break;
             case 5:
-                initClistShow(holder,position);
+                initClistShow(holder, position);
                 break;
             case 6:
-                initClistShow(holder,position);
+                initClistShow(holder, position);
                 break;
             case 7:
-                initClistShow(holder,position);
+                initClistShow(holder, position);
                 break;
             case 8:
-                initClistShow(holder,position);
+                initClistShow(holder, position);
                 break;
             case 9:
-                initClistShow(holder,position);
+                initClistShow(holder, position);
                 break;
             case 10:
-                initClistShow(holder,position);
+                initClistShow(holder, position);
                 break;
         }
 
@@ -165,30 +180,28 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
                             st_do = edt_do.getText().toString();
                         }
                         if (st_name != null && st_do != null) {
-                            Call<ResponseBody> call2 =networkService.post_userList(sessDB.getRoomTitle());
+                            Call<ResponseBody> call2 = networkService.post_userList(sessDB.getRoomTitle());
                             call2.enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                                    if(response.isSuccess()){
+                                    if (response.isSuccess()) {
                                         try {
-                                            JSONArray jsonArray1= new JSONArray(response.body().string());
+                                            JSONArray jsonArray1 = new JSONArray(response.body().string());
                                             userList = new ArrayList<>();
-                                            for(int i=0;i<jsonArray1.length();i++){
+                                            for (int i = 0; i < jsonArray1.length(); i++) {
                                                 JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
-                                                userList.add(new UserListDTO((String) jsonObject1.get("name"),(String) jsonObject1.get("phoneNum"), (String) jsonObject1.get("photo"), (String) jsonObject1.get("email")));
+                                                userList.add(new UserListDTO((String) jsonObject1.get("name"), (String) jsonObject1.get("phoneNum"), (String) jsonObject1.get("photo"), (String) jsonObject1.get("email")));
                                             }
                                             Intent intent = new Intent();
                                             intent.setClass(context, ViewPagerActivity.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                            intent.putExtra("test",userList);
-                                            intent.putExtra("signal",1);
+                                            intent.putExtra("test", userList);
+                                            intent.putExtra("signal", 1);
                                             context.startActivity(intent);
-                                            ((Activity)context).finish();
-                                        }
-                                        catch (IOException e) {
+                                            ((Activity) context).finish();
+                                        } catch (IOException e) {
                                             e.printStackTrace();
-                                        }
-                                        catch (JSONException e) {
+                                        } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
                                     }
@@ -205,7 +218,7 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
                                 public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                                     if (response.isSuccess()) {
                                         Toast.makeText(context, "성공하였습니다", Toast.LENGTH_LONG).show();
-                                        initClistShow(holder,position);
+                                        initClistShow(holder, position);
                                         if (progressNum != 0) {
                                             holder.progressBar.incrementProgressBy(pro);
                                             holder.progressNum.setText(String.valueOf(pro));

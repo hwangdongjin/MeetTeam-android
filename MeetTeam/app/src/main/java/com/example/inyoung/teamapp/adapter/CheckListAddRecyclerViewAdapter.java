@@ -39,8 +39,7 @@ public class CheckListAddRecyclerViewAdapter extends RecyclerView.Adapter<CheckL
         protected TextView manager_Name,manager_Do;
         protected CheckBox checkBox;
         protected ProgressBar progressBar;
-        RecyclerView check11;
-        RecyclerView chatView;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
