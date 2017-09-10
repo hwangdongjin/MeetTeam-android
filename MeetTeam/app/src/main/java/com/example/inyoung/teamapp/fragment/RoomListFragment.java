@@ -31,6 +31,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -39,14 +41,10 @@ import retrofit.Retrofit;
 
 public class RoomListFragment extends Fragment {
     View view;
-
     private RecyclerView chatView;
     private ArrayList<RoomDTO> chatList;
     private RoomRecyclerViewAdapter roAdapter;
     private RecyclerView.LayoutManager manager;
-
-
-
     private Button btnAdd, btnSearch;
     private Toolbar toolbar;
     private ActionBarDrawerToggle mainTogle;
@@ -55,10 +53,9 @@ public class RoomListFragment extends Fragment {
     private AlertDialog.Builder dlg;
     EditText edt_title, edt_subject;
     String title, subject;
-
+    Timer timer;
+    TimerTask timerTask;
     Intent intent;
-
-
     SharedPreferenceUtil sessDB;
     private NetworkService networkService;
     private ApplicationController application;
@@ -70,8 +67,6 @@ public class RoomListFragment extends Fragment {
 
 
     }
-
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.activity_listroom_fragment1, container, false);

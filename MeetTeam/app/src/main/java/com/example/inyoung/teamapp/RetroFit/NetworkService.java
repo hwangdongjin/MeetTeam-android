@@ -62,6 +62,11 @@ public interface NetworkService {
     @FormUrlEncoded
     @POST("/user/update")
     Call<ResponseBody> post_profileup(@Field("sess")String sess, @Field("password")String password, @Field("phoneNum")String phoneNum, @Field("addr")String addr, @Field("email")String email);
-
+    @FormUrlEncoded
+    @POST("/room/addChat")
+    Call<ResponseBody> post_addChat(@Field("sess")String sess,@Field("title")String title,@Field("message")String message);
+    @FormUrlEncoded
+    @POST("/room/show")
+    Call<ResponseBody> post_roomChatShow(@Field("title")String title);
 
 }
