@@ -141,37 +141,36 @@ public class RoomAddFragment extends Fragment{
         edt_title2 = (EditText)view.findViewById(R.id.edt_title2);
         edt_ok= (Button) view.findViewById(R.id.btn_ok);
         edt_cancel= (Button) view.findViewById(R.id.btn_cancel2);
-        edt_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ("".equals(edt_title2.getText().toString())) {
-                    Toast.makeText(getContext(), "방이름을 입력하세요", Toast.LENGTH_LONG).show();
-                } else {
-                    title = edt_title2.getText().toString();
-                }
-                if (title != null){
-                    application = ApplicationController.getInstance();
-                    application.buildNetworkService();
-                    networkService = ApplicationController.getInstance().getNetworkService();
-                    Call<ResponseBody> thumnailcall = networkService.post_roomAddUser(session, search_title);
-                    thumnailcall.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                        if (response.isSuccess()) {
-                            Toast.makeText(getContext(),"성공하였습니다",Toast.LENGTH_LONG).show();
-                            ((FragmentReplaceAble) getActivity()).replaceFragment(2);
-                            alter.cancel();
-                        }
-                    }
-                        @Override
-                    public void onFailure(Throwable t) {
-
-                    }
-                });
-            }
-            }
-        });
-       edt_cancel.setOnClickListener(new View.OnClickListener() {
+       edt_ok.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               if ("".equals(edt_title2.getText().toString())) {
+                   Toast.makeText(getContext(), "방이름을 입력하세요", Toast.LENGTH_LONG).show();
+               } else {
+                   search_title = edt_title2.getText().toString();
+                   application = ApplicationController.getInstance();
+                   application.buildNetworkService();
+                   networkService = ApplicationController.getInstance().getNetworkService();
+                   Log.i("ss", session+ search_title);
+                   Call<ResponseBody> thumnailcall = networkService.post_roomAddUser(session, search_title);
+                   thumnailcall.enqueue(new Callback<ResponseBody>() {
+                       @Override
+                       public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                           if (response.isSuccess()) {
+                               Toast.makeText(getContext(),"성공하였습니다",Toast.LENGTH_LONG).show();
+                               ((FragmentReplaceAble) getActivity()).replaceFragment(2);
+                               alter.cancel();
+                           }
+                       }
+                       @Override
+                       public void onFailure(Throwable t) {
+                           Toast.makeText(getContext(), "실패하였습니다", Toast.LENGTH_LONG).show();
+                       }
+                   });
+               }
+           }
+       });
+        edt_cancel.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                alter.cancel();

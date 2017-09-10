@@ -28,7 +28,7 @@ public interface NetworkService {
     Call<ResponseBody> post_roomAdd(@Field("sess")String sess,@Field("title")String title,@Field("subject")String subject);
     @FormUrlEncoded
     @POST("/room/addUser")
-    Call<ResponseBody> post_roomAddUser(@Field("sess")String sess,@Field("title")String title);
+    Call<ResponseBody> post_roomAddUser(@Field("sess")String sess,@Field("title")String search_title);
     @FormUrlEncoded
     @POST("/user/list")
     Call<ResponseBody> post_userList(@Field("title")String title);
