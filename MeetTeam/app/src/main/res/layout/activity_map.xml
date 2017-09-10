@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.inyoung.teamapp.MapActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#6990da">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:src="@drawable/title_name_white" />
+
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center_horizontal|center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#ffffff">
 
         <Button
             android:id="@+id/btn_mapcal"
@@ -25,28 +41,28 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="----년 --월 --일"
+            android:layout_marginLeft="7dp"
             android:textColor="#000000"
             android:textColorHint="#a7a9ad" />
 
     </LinearLayout>
 
-    <fragment
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_alignParentBottom="true"
-        class="com.google.android.gms.maps.SupportMapFragment"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dp">
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            class="com.google.android.gms.maps.SupportMapFragment"/>
 
         <Button
             android:layout_width="40dp"
             android:layout_margin="5dp"
             android:layout_height="40dp"
+            android:layout_marginTop="5dp"
             android:id="@+id/mapfr_find"
             android:background="@drawable/btn_star"
             android:layout_alignParentRight="true"
@@ -73,4 +89,4 @@
 
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -23,7 +23,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Date;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -203,7 +202,8 @@ public class TtableActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"실패하였습니다",Toast.LENGTH_LONG).show();
+                    initSetTextNull();
+                    Toast.makeText(getApplicationContext(),"가능한 시간을 선택하세요.",Toast.LENGTH_LONG).show();
                 }
             }
 
