@@ -6,7 +6,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -24,14 +23,15 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
     private MainPagerAdapter mainPagerAdapter;
     ArrayList<UserListDTO> userDTO;
     private Toolbar toolbar;
+    int signal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
         Intent intent = getIntent();
+        signal=(Integer)intent.getSerializableExtra("signal");
         userDTO= (ArrayList<UserListDTO>) intent.getSerializableExtra("test");
-        Log.i("mytag","test"+userDTO.get(0).getName());
         initViewPaging();
         initToolBar();
     }
@@ -86,6 +86,9 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                if (signal==1){
+                    mainViewPagerActivity.setCurrentItem(2);
+                }
                 mainViewPagerActivity.setCurrentItem(tab.getPosition());
             }
 
@@ -103,7 +106,7 @@ public class ViewPagerActivity extends AppCompatActivity implements Serializable
     }
 
     private void initAdapter() {
-        mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tabs.getTabCount(),userDTO,Integer.valueOf(userDTO.size()));
+        mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), tabs.getTabCount(),userDTO,Integer.valueOf(userDTO.size()),signal);
         mainViewPagerActivity.setAdapter(mainPagerAdapter);
     }
 }

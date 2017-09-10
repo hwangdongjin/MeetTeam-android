@@ -104,6 +104,7 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
                                 intent.setClass(context, ViewPagerActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.putExtra("test",userList);
+                                intent.putExtra("signal",0);
                                 context.startActivity(intent);
 
                                 Log.i("my","userlist:"+userList.get(0).getName());

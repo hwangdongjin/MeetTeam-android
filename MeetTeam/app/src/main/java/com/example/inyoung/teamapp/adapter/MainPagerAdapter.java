@@ -20,18 +20,24 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
     private static ArrayList<UserListDTO> userList = null;
     private static int Num = 0;
     private int pagerNum;
+    static int signal;
 
-    public MainPagerAdapter(FragmentManager fm, int pagerNum, ArrayList<UserListDTO> userList,int Num) {
+    public MainPagerAdapter(FragmentManager fm, int pagerNum, ArrayList<UserListDTO> userList,int Num,int signal) {
         super(fm);
         this.pagerNum = pagerNum;
         this.userList=userList;
         this.Num=Num;
+        this.signal=signal;
     }
 
     public static Fragment getFragmentInstance(int pageNum){
         Fragment fragment = null;
+        if(signal==1){
+            pageNum=2;
+        }
         //pageNum은 ViewPagerActivity에서 tabs.getCount();
         switch (pageNum){
+
             case 0:
                 fragment = MemberlistFragment.newInstance(userList,Num);
                 break;

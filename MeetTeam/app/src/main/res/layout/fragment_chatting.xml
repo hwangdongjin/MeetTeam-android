@@ -34,7 +34,8 @@
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/edt_message"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
             <Button
                 android:text="Button"
