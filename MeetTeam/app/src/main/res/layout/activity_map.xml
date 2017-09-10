@@ -48,14 +48,17 @@
             android:layout_margin="5dp"
             android:layout_height="40dp"
             android:id="@+id/mapfr_find"
+            android:background="@drawable/btn_star"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
 
         <Button
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginTop="5dp"
             android:id="@+id/mapfr_plus"
             android:layout_below="@+id/mapfr_find"
+            android:background="@drawable/btn_zoomin"
             android:layout_alignLeft="@+id/mapfr_find"
             android:layout_alignStart="@+id/mapfr_find"/>
 
@@ -63,6 +66,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/mapfr_minus"
+            android:background="@drawable/btn_zoomout"
             android:layout_below="@+id/mapfr_plus"
             android:layout_alignLeft="@+id/mapfr_plus"
             android:layout_alignStart="@+id/mapfr_plus" />

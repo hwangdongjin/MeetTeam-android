@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +88,6 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
         application.buildNetworkService();
         networkService = ApplicationController.getInstance().getNetworkService();
         holder.checkRoom_name.setText(checkList.get(position).getCheck_RoomName());
-        Log.i("mytag", "position:" + position);
         switch (position) {
             case 0:
                  initClistShow(holder,position);
@@ -163,7 +161,8 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
                                 public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                                     if (response.isSuccess()) {
                                         Toast.makeText(context, "성공하였습니다", Toast.LENGTH_LONG).show();
-                                        
+                                        initClistShow(holder,position);
+
                                         if (progressNum != 0) {
                                             holder.progressBar.incrementProgressBy(pro);
                                             holder.progressNum.setText(String.valueOf(pro));
@@ -204,17 +203,6 @@ public class CheckListRecyclerViewAdapter extends RecyclerView.Adapter<CheckList
 
         }
     }
-
-   /* public void initCheckListView(CheckListRecyclerViewAdapter.ViewHolder holder, ArrayList<CheckAddDTO> checkAddList) {
-        checkListViewAdapter = new CheckListViewAdapter(checkAddList, context);
-        checkListViewAdapter.notifyDataSetChanged();
-        holder.checkListView.setAdapter(checkListViewAdapter);
-        progressNum = checkListViewAdapter.getCheckNum();
-        total = checkListViewAdapter.getCount();
-        finish = (double) progressNum / total;
-        pro = (int) (100 * finish);
-    }*/
-
 
     public void initClistShow(CheckListRecyclerViewAdapter.ViewHolder holder, final int position) {
 

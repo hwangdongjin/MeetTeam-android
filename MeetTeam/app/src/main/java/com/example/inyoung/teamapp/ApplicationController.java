@@ -14,9 +14,12 @@ import retrofit.Retrofit;
  */
 
 
-public class ApplicationController extends Application{
+public class ApplicationController extends Application {
     private static ApplicationController instance;
-    public static ApplicationController getInstance(){return instance;}
+
+    public static ApplicationController getInstance() {
+        return instance;
+    }
 
     @Override
     public void onCreate() {
@@ -25,15 +28,18 @@ public class ApplicationController extends Application{
     }
 
     private NetworkService networkService;
-    public NetworkService getNetworkService(){return networkService;}
+
+    public NetworkService getNetworkService() {
+        return networkService;
+    }
 
     private String ip = "52.78.39.253";
     private int port = 7530;
     private String baseUrl;
 
-    public void buildNetworkService(){
-        synchronized (ApplicationController.class){
-            if(networkService==null){
+    public void buildNetworkService() {
+        synchronized (ApplicationController.class) {
+            if (networkService == null) {
                 baseUrl = String.format("http://%s:%d", ip, port);
                 Gson gson = new GsonBuilder().create();
 
