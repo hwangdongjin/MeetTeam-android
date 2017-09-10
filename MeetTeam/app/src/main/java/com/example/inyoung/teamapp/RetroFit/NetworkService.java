@@ -63,5 +63,10 @@ public interface NetworkService {
     @POST("/user/update")
     Call<ResponseBody> post_profileup(@Field("sess")String sess, @Field("password")String password, @Field("phoneNum")String phoneNum, @Field("addr")String addr, @Field("email")String email);
 
-
+    @FormUrlEncoded
+    @POST("/app/show")
+    Call<ResponseBody> post_appShow(@Field("roomTitle")String roomTitle, @Field("date")String date);
+    @FormUrlEncoded
+    @POST("/app/add")
+    Call<ResponseBody> post_appAdd(@Field("sess")String sess, @Field("roomTitle")String roomTitle, @Field("date")String date, @Field("decTime")String decTime, @Field("decPlace")String decPlace);
 }
