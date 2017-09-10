@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
             android:layout_marginTop="10dp"
-            android:padding="30dp"
+            android:padding="20dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -69,6 +69,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal"
         android:padding="10dp">
@@ -120,7 +121,9 @@
                 android:layout_height="30dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:textColor="@android:color/black"
-                android:onClick = "btnApp"/>
+                android:onClick = "btnApp"
+                android:hint="미정"
+                android:textColorHint="#cecece"/>
 
         </LinearLayout>
 
@@ -145,7 +148,9 @@
                 android:layout_height="30dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:textColor="@android:color/black"
-                android:onClick = "btnApp"/>
+                android:onClick = "btnApp"
+                android:hint="미정"
+                android:textColorHint="#cecece"/>
 
         </LinearLayout>
 

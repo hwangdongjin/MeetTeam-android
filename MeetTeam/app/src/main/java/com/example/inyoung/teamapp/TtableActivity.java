@@ -202,6 +202,7 @@ public class TtableActivity extends AppCompatActivity {
                     }
                 }
                 else{
+                    initSetTextNull();
                     Toast.makeText(getApplicationContext(),"가능한 시간을 선택하세요.",Toast.LENGTH_LONG).show();
                 }
             }
